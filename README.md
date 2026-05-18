@@ -6,6 +6,7 @@ Nom\], Étudiant(e) 3 : \[Insérer Prénom Nom\]
 - [Introduction et Contexte Métier](#sec-intro)
   - [Contexte du Projet](#contexte-du-projet)
   - [Objectif Analytique](#objectif-analytique)
+- [Lancement avec Docker](#lancement-avec-docker)
 - [Acquisition et Préparation des Données (Data
   Wrangling)](#sec-wrangling)
   - [Audit de Qualité](#audit-de-qualité)
@@ -77,6 +78,31 @@ de données multi-sources et l’intégration de différents types de données
 problématique et guider les prises de décisions ?*
 
 \[Rédiger votre paragraphe d’objectifs ici\]
+
+------------------------------------------------------------------------
+
+# Lancement avec Docker
+
+Pour simplifier l'installation, vous pouvez exécuter tout le projet dans
+un conteneur Docker.
+
+1. Construire l'image
+
+  docker compose build
+
+2. Compiler les notebooks
+
+  docker compose run --rm datascience task compile
+
+3. Générer le rapport complet
+
+  docker compose run --rm datascience task render
+
+4. Prévisualiser le rapport Quarto dans le navigateur
+
+  docker compose run --rm -p 4200:4200 datascience quarto preview report/rapport.qmd --port 4200 --host 0.0.0.0
+
+Prérequis Windows : Docker Desktop doit être lancé avant ces commandes.
 
 ------------------------------------------------------------------------
 
