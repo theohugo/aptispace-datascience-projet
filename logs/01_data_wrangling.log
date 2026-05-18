@@ -1,30 +1,10 @@
 === STDOUT ===
-Libraries importées avec succès ! Prêt à démarrer le Wrangling.
-❌ Erreur lors du chargement des données : [Errno 2] No such file or directory: '../data/raw/raw_data_sample.csv'
+Raw shape: (1600, 16)
+Wrangled shape: (1600, 22)
+Model-ready shape: (1600, 25)
+Dropout rate: 8.5 %
+Saved:
+- data/processed/tp1_student_risk_wrangled.csv
+- data/processed/tp1_student_risk_model_ready.csv
 
 === STDERR ===
-Traceback (most recent call last):
-  File "/home/runner/work/aptispace-datascience-projet/aptispace-datascience-projet/src/01_data_wrangling.py", line 22, in <module>
-    df_raw = dc.load_raw_data(raw_data_path)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/aptispace-datascience-projet/aptispace-datascience-projet/src/data_clean.py", line 25, in load_raw_data
-    raise e
-  File "/home/runner/work/aptispace-datascience-projet/aptispace-datascience-projet/src/data_clean.py", line 20, in load_raw_data
-    df = pd.read_csv(file_path)
-         ^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 873, in read_csv
-    return _read(filepath_or_buffer, kwds)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 300, in _read
-    parser = TextFileReader(filepath_or_buffer, **kwds)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 1645, in __init__
-    self._engine = self._make_engine(f, self.engine)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 1904, in _make_engine
-    self.handles = get_handle(
-                   ^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/pandas/io/common.py", line 930, in get_handle
-    handle = open(
-             ^^^^^
-FileNotFoundError: [Errno 2] No such file or directory: '../data/raw/raw_data_sample.csv'

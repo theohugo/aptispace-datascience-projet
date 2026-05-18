@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 tasks:
   default:
@@ -17,6 +17,7 @@ tasks:
       - task: compile
       - quarto render report/rapport.qmd
       - cp report/README.md ./README.md
+      - python3 -c "from pathlib import Path; path = Path('README.md'); text = path.read_text(encoding='utf-8'); text = text.replace('](assets/', '](report/assets/').replace('](../src/', '](src/'); path.write_text(text, encoding='utf-8')"
 
   html:
     desc: Compile les notebooks puis génère le rapport au format HTML uniquement
@@ -36,6 +37,7 @@ tasks:
       - task: compile
       - quarto render report/rapport.qmd --to gfm
       - cp report/README.md ./README.md
+      - python3 -c "from pathlib import Path; path = Path('README.md'); text = path.read_text(encoding='utf-8'); text = text.replace('](assets/', '](report/assets/').replace('](../src/', '](src/'); path.write_text(text, encoding='utf-8')"
 
   preview:
     desc: Compile les notebooks puis démarre le serveur de prévisualisation dynamique Quarto

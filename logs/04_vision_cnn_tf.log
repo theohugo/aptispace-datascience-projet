@@ -1,59 +1,31 @@
 === STDOUT ===
-Version TensorFlow : 2.21.0
-GPU Disponible : []
-Dataset d'images généré. Dimensions : (100, 64, 64, 3)
-Taille Train : 80 images, Taille Val : 20 images
-Model: "sequential"
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
-┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
-│ conv2d (Conv2D)                 │ (None, 62, 62, 16)     │           448 │
-├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ max_pooling2d (MaxPooling2D)    │ (None, 31, 31, 16)     │             0 │
-├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ conv2d_1 (Conv2D)               │ (None, 29, 29, 32)     │         4,640 │
-├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ max_pooling2d_1 (MaxPooling2D)  │ (None, 14, 14, 32)     │             0 │
-├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ flatten (Flatten)               │ (None, 6272)           │             0 │
-├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ dense (Dense)                   │ (None, 32)             │       200,736 │
-├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ dropout (Dropout)               │ (None, 32)             │             0 │
-├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ dense_1 (Dense)                 │ (None, 1)              │            33 │
-└─────────────────────────────────┴────────────────────────┴───────────────┘
- Total params: 205,857 (804.13 KB)
- Trainable params: 205,857 (804.13 KB)
- Non-trainable params: 0 (0.00 B)
-Epoch 1/5
+Synthetic dataset shape: (120, 64, 64, 3)
+Train size: 96
+Validation size: 24
+   epoch  accuracy    loss  val_accuracy  val_loss
+0      1    0.6146  0.6436        0.9167    0.5252
+1      2    0.9688  0.4418        1.0000    0.2919
+2      3    0.9792  0.2351        1.0000    0.1284
+3      4    1.0000  0.0915        1.0000    0.0393
+4      5    1.0000  0.0300        1.0000    0.0121
+   num_samples  train_size  ...  validation_loss  validation_accuracy
+0          120          96  ...           0.0121                  1.0
 
-[1m1/3[0m [32m━━━━━━[0m[37m━━━━━━━━━━━━━━[0m [1m1s[0m 927ms/step - accuracy: 0.4688 - loss: 0.7170
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m1s[0m 100ms/step - accuracy: 0.5500 - loss: 0.6692 - val_accuracy: 0.5000 - val_loss: 0.5909
-Epoch 2/5
-
-[1m1/3[0m [32m━━━━━━[0m[37m━━━━━━━━━━━━━━[0m [1m0s[0m 36ms/step - accuracy: 0.6875 - loss: 0.5586
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 38ms/step - accuracy: 0.7750 - loss: 0.4893 - val_accuracy: 1.0000 - val_loss: 0.3308
-Epoch 3/5
-
-[1m1/3[0m [32m━━━━━━[0m[37m━━━━━━━━━━━━━━[0m [1m0s[0m 36ms/step - accuracy: 1.0000 - loss: 0.2896
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 38ms/step - accuracy: 0.9875 - loss: 0.2668 - val_accuracy: 1.0000 - val_loss: 0.1347
-Epoch 4/5
-
-[1m1/3[0m [32m━━━━━━[0m[37m━━━━━━━━━━━━━━[0m [1m0s[0m 34ms/step - accuracy: 1.0000 - loss: 0.1262
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 38ms/step - accuracy: 1.0000 - loss: 0.1238 - val_accuracy: 1.0000 - val_loss: 0.0597
-Epoch 5/5
-
-[1m1/3[0m [32m━━━━━━[0m[37m━━━━━━━━━━━━━━[0m [1m0s[0m 34ms/step - accuracy: 1.0000 - loss: 0.0582
-[1m3/3[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 38ms/step - accuracy: 1.0000 - loss: 0.0575 - val_accuracy: 1.0000 - val_loss: 0.0172
+[1 rows x 5 columns]
+Saved:
+- data/processed/tp4_cnn_history.csv
+- data/processed/tp4_cnn_metrics.csv
+- data/processed/tp4_cnn_predictions.csv
+- report/assets/tp4_cnn_samples.png
+- report/assets/tp4_cnn_history.png
 
 === STDERR ===
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1779080280.658906    2629 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
-I0000 00:00:1779080280.701069    2629 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
-To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+I0000 00:00:1779116274.075850     127 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1779116274.076273     127 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+I0000 00:00:1779116274.143576     127 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1779080282.245224    2629 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
-E0000 00:00:1779080283.653130    2629 cuda_platform.cc:52] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: UNKNOWN ERROR (303)
-/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/keras/src/layers/convolutional/base_conv.py:113: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
-  super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+I0000 00:00:1779116276.063719     127 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1779116276.064349     127 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+E0000 00:00:1779116277.627930     127 cuda_platform.cc:52] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: UNKNOWN ERROR (303)

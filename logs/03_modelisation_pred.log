@@ -1,25 +1,29 @@
 === STDOUT ===
-🎨 Charte graphique 'light' initialisée avec succès.
-Libraries de modélisation prêtes !
+Train shape: (1280, 24)
+Test shape: (320, 24)
+
+Metrics:
+                    model  accuracy  precision  recall      f1  roc_auc
+0  baseline_most_frequent    0.9156     0.0000  0.0000  0.0000      NaN
+1     logistic_regression    0.8312     0.2985  0.7407  0.4255   0.8784
+2           random_forest    0.9344     0.8000  0.2963  0.4324   0.8354
+
+Top 10 features:
+                    feature  importance
+10    continuous_assessment      0.1737
+9             prior_average      0.1366
+15         engagement_score      0.1220
+17  academic_pressure_index      0.0931
+8     assignment_delay_days      0.0652
+7           attendance_rate      0.0605
+11             stress_index      0.0576
+5      study_hours_per_week      0.0559
+16          grade_trend_gap      0.0532
+4           commute_minutes      0.0434
+
+Saved:
+- data/processed/tp3_model_metrics.csv
+- data/processed/tp3_feature_importance.csv
+- data/processed/tp3_predictions_sample.csv
 
 === STDERR ===
-Traceback (most recent call last):
-  File "/home/runner/work/aptispace-datascience-projet/aptispace-datascience-projet/src/03_modelisation_pred.py", line 26, in <module>
-    df = pd.read_csv('../data/processed/cleaned_data_sample.csv')
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 873, in read_csv
-    return _read(filepath_or_buffer, kwds)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 300, in _read
-    parser = TextFileReader(filepath_or_buffer, **kwds)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 1645, in __init__
-    self._engine = self._make_engine(f, self.engine)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 1904, in _make_engine
-    self.handles = get_handle(
-                   ^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/pandas/io/common.py", line 930, in get_handle
-    handle = open(
-             ^^^^^
-FileNotFoundError: [Errno 2] No such file or directory: '../data/processed/cleaned_data_sample.csv'

@@ -1,24 +1,82 @@
 === STDOUT ===
-🎨 Charte graphique 'light' initialisée avec succès.
+Base etudiante operationnelle. Pret pour TP2 EDA.
+Shape: (1600, 22)
+
+--- Resume numerique ---
+           age  study_hours_per_week  ...  stress_index  engagement_score
+count  1600.00               1600.00  ...       1600.00           1600.00
+mean     21.79                 14.23  ...         48.99             79.61
+std       2.34                  3.36  ...          9.47             12.35
+min      17.00                  2.90  ...         20.70             37.30
+25%      20.10                 12.10  ...         42.50             71.41
+50%      21.80                 14.20  ...         49.00             80.18
+75%      23.40                 16.40  ...         55.32             88.05
+max      29.10                 26.80  ...         81.10            118.79
+
+[8 rows x 9 columns]
+
+--- Repartition du risque ---
+dropout_risk
+False    1464
+True      136
+Name: count, dtype: int64
+
+--- Bourse x Risque (counts) ---
+dropout_risk  False  True   All
+scholarship                    
+False           865   105   970
+True            599    31   630
+All            1464   136  1600
+
+--- Bourse x Risque (rates) ---
+dropout_risk     False     True 
+scholarship                     
+False         0.891753  0.108247
+True          0.950794  0.049206
+
+--- Profil moyen par programme ---
+                    attendance_rate  ...  dropout_rate
+program                              ...              
+Business Analytics           89.704  ...         0.086
+Cybersecurity                89.797  ...         0.099
+Data Science                 91.022  ...         0.044
+Digital Design               88.891  ...         0.126
+
+[4 rows x 5 columns]
+
+--- Taux de risque par semestre ---
+semester
+1     7.55
+2    10.92
+3     6.34
+4     5.58
+5     8.91
+6    11.49
+Name: dropout_rate_pct, dtype: float64
+
+--- Correlation apprentissage ---
+                       study_hours_per_week  ...  engagement_score
+study_hours_per_week                  1.000  ...             0.782
+lms_sessions_week                     0.391  ...             0.712
+attendance_rate                       0.300  ...             0.649
+assignment_delay_days                -0.197  ...            -0.538
+prior_average                         0.389  ...             0.478
+continuous_assessment                 0.309  ...             0.411
+stress_index                         -0.244  ...            -0.389
+engagement_score                      0.782  ...             1.000
+
+[8 rows x 8 columns]
+
+Correlation la plus forte (hors diagonale):
+study_hours_per_week <-> engagement_score: 0.782
+
+Fichiers sauvegardes:
+- data/processed/tp2_student_numeric_summary.csv
+- data/processed/tp2_dropout_counts.csv
+- data/processed/tp2_scholarship_dropout_crosstab.csv
+- data/processed/tp2_scholarship_dropout_rates.csv
+- data/processed/tp2_program_profiles.csv
+- data/processed/tp2_semester_dropout_rates.csv
+- data/processed/tp2_learning_correlation.csv
 
 === STDERR ===
-Traceback (most recent call last):
-  File "/home/runner/work/aptispace-datascience-projet/aptispace-datascience-projet/src/02_eda_visualisation.py", line 25, in <module>
-    df = pd.read_csv('../data/processed/cleaned_data_sample.csv')
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 873, in read_csv
-    return _read(filepath_or_buffer, kwds)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 300, in _read
-    parser = TextFileReader(filepath_or_buffer, **kwds)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 1645, in __init__
-    self._engine = self._make_engine(f, self.engine)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 1904, in _make_engine
-    self.handles = get_handle(
-                   ^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/pandas/io/common.py", line 930, in get_handle
-    handle = open(
-             ^^^^^
-FileNotFoundError: [Errno 2] No such file or directory: '../data/processed/cleaned_data_sample.csv'

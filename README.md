@@ -1,28 +1,22 @@
 # Mon Projet Data Science
-Étudiant(e) 1 : \[Insérer Prénom Nom\], Étudiant(e) 2 : \[Insérer Prénom
-Nom\], Étudiant(e) 3 : \[Insérer Prénom Nom\]
+Étudiant(e) 1 : Hugo RAGUIN, Étudiant(e) 2 : Amine TALEB, Étudiant(e) 3
+: Elliot FIORESE
 2026-05-18
 
 - [Introduction et Contexte Métier](#sec-intro)
   - [Contexte du Projet](#contexte-du-projet)
   - [Objectif Analytique](#objectif-analytique)
-- [Lancement avec Docker](#lancement-avec-docker)
 - [Acquisition et Préparation des Données (Data
   Wrangling)](#sec-wrangling)
   - [Audit de Qualité](#audit-de-qualité)
   - [Algorithme de Nettoyage](#algorithme-de-nettoyage)
   - [Travaux Pratiques de Wrangling](#travaux-pratiques-de-wrangling)
-- [🧹 Jalon 1 : Data Wrangling & Nettoyage (Squelette
-  Étudiant)](#broom-jalon-1--data-wrangling--nettoyage-squelette-étudiant)
 - [Analyse Exploratoire des Données (EDA)](#sec-eda)
   - [Statistiques Descriptives](#statistiques-descriptives)
   - [Ingénierie de Variables (Feature
     Engineering)](#ingénierie-de-variables-feature-engineering)
   - [Travaux Pratiques d’Exploration Visuelle
     (EDA)](#travaux-pratiques-dexploration-visuelle-eda)
-- [📊 Jalon 1 : Analyse Exploratoire des Données (EDA) & Visualisation
-  (Squelette
-  Étudiant)](#bar_chart-jalon-1--analyse-exploratoire-des-données-eda--visualisation-squelette-étudiant)
 - [Visualisation Multidimensionnelle (Insights)](#sec-viz)
   - [Profils et Distributions
     Caractéristiques](#profils-et-distributions-caractéristiques)
@@ -32,13 +26,8 @@ Nom\], Étudiant(e) 3 : \[Insérer Prénom Nom\]
     Données](#schéma-global-du-pipeline-de-données)
   - [Modélisation Tabulaire (Machine
     Learning)](#modélisation-tabulaire-machine-learning)
-- [🧠 Jalon 2 : Modélisation Prédictive & Apprentissage (Squelette
-  Étudiant)](#brain-jalon-2--modélisation-prédictive--apprentissage-squelette-étudiant)
   - [Modélisation Vision / Deep Learning (Analyse d’Images ou
     Signaux)](#modélisation-vision--deep-learning-analyse-dimages-ou-signaux)
-- [📷 Jalon 2 : Brique de Vision par Ordinateur (CNN & TensorFlow)
-  (Squelette
-  Étudiant)](#camera-jalon-2--brique-de-vision-par-ordinateur-cnn--tensorflow-squelette-étudiant)
 - [Évaluation Métrique et Validation](#sec-evaluation)
   - [Stratégie de Validation](#stratégie-de-validation)
   - [Résultats et Interprétation](#résultats-et-interprétation)
@@ -52,57 +41,62 @@ Nom\], Étudiant(e) 3 : \[Insérer Prénom Nom\]
 
 [![](https://github.com/aptitek/aptispace-datascience-projet/actions/workflows/ci.yml/badge.svg)](https://github.com/aptitek/aptispace-datascience-projet/actions/workflows/ci.yml)
 
-*À rédiger par les étudiants : Présentez ici le contexte global de votre
-projet, la problématique métier que vous cherchez à résoudre, les
-questions scientifiques soulevées et les opportunités d’aide à la
-décision sur la base de vos données.*
+Le sujet principal retenu pour ce projet est la **prédiction du risque
+d’abandon scolaire ou d’échec académique**. La problématique métier
+consiste à identifier le plus tôt possible les étudiants à risque afin
+de déclencher des actions ciblées: tutorat, suivi pédagogique,
+accompagnement social ou adaptation du rythme d’apprentissage.
+
+L’enjeu n’est pas uniquement de prédire une cible binaire. Il s’agit
+aussi de construire une chaîne analytique défendable, lisible par une
+équipe pédagogique et exploitable pour l’aide à la décision. Le livrable
+final doit donc articuler nettoyage de données, exploration explicative,
+modélisation tabulaire et ouverture vers une brique vision liée à des
+copies scannées ou à de l’écriture manuscrite.
 
 ## Contexte du Projet
 
-*À rédiger par les étudiants — Pistes de réflexion :* - *Quels sont les
-objectifs globaux et le domaine d’étude de votre projet ?* - *En quoi ce
-sujet de recherche est-il pertinent et stratégique ?* - *Pourquoi
-l’analyse quantitative de ce jeu de données est-elle indispensable pour
-répondre à votre problématique ?*
+Le domaine d’étude est celui de l’**analytics éducatif**. Un
+établissement d’enseignement ou un service de réussite étudiante dispose
+souvent de données fragmentées: notes continues, absences, retard dans
+les remises, temps de connexion à une plateforme pédagogique,
+participation en classe, statut boursier, parcours antérieur ou
+indicateurs socio-économiques. Isolément, ces variables sont peu
+actionnables; combinées, elles permettent de détecter des signaux
+faibles de décrochage.
 
-\[Rédiger votre paragraphe de contexte ici\]
+Ce sujet est pertinent scientifiquement et stratégiquement. Il répond à
+un besoin réel de prévention, mobilise des variables tabulaires
+hétérogènes, soulève des questions de biais et d’équité, et se prête
+naturellement à une extension multimodale via l’analyse de copies
+numérisées, de formulaires pédagogiques ou d’écritures manuscrites.
 
 ## Objectif Analytique
 
-*À rédiger par les étudiants — Pistes de réflexion :* - *Quelles sont
-les variables cibles principales et la tâche globale de modélisation
-(classification, régression, clustering, etc.) ?* - *Comment le couplage
-de données multi-sources et l’intégration de différents types de données
-(tabulaires, images, signaux, etc.) enrichissent-ils l’analyse ?* -
-*Quels sont les livrables analytiques attendus pour répondre à votre
-problématique et guider les prises de décisions ?*
+La cible principale sera une variable de type `dropout_risk`,
+`failure_risk` ou `success_status`, selon le jeu de données final
+retenu. Le problème est donc formulé comme une **classification
+supervisée**, éventuellement complétée par une analyse de probabilité de
+risque pour prioriser les interventions pédagogiques.
 
-\[Rédiger votre paragraphe d’objectifs ici\]
+Les livrables analytiques sont les suivants:
 
-------------------------------------------------------------------------
+- un jeu de données nettoyé et un jeu de données prêt pour la
+  modélisation;
+- des indicateurs descriptifs et des visualisations métier sur
+  l’assiduité, les résultats académiques et l’engagement étudiant;
+- un modèle de classification de référence comparé à une baseline naïve
+  pour repérer les profils à risque;
+- une brique CNN documentée, pensée pour être raccordée à des copies
+  scannées, de l’écriture manuscrite ou des documents pédagogiques
+  numérisés.
 
-# Lancement avec Docker
-
-Pour simplifier l'installation, vous pouvez exécuter tout le projet dans
-un conteneur Docker.
-
-1. Construire l'image
-
-  docker compose build
-
-2. Compiler les notebooks
-
-  docker compose run --rm datascience task compile
-
-3. Générer le rapport complet
-
-  docker compose run --rm datascience task render
-
-4. Prévisualiser le rapport Quarto dans le navigateur
-
-  docker compose run --rm -p 4200:4200 datascience quarto preview report/rapport.qmd --port 4200 --host 0.0.0.0
-
-Prérequis Windows : Docker Desktop doit être lancé avant ces commandes.
+> Note de cadrage: pour assurer la reproductibilité du projet, le dépôt
+> s’appuie désormais sur un **dataset étudiant synthétique réaliste**
+> généré automatiquement. Ce choix permet d’aligner le pipeline complet,
+> les métriques et les visualisations sur le nouveau sujet métier, tout
+> en gardant la possibilité de substituer plus tard un jeu de données
+> réel anonymisé.
 
 ------------------------------------------------------------------------
 
@@ -115,64 +109,62 @@ appliquées à vos jeux de données bruts.
 
 ## Audit de Qualité
 
-*À rédiger par les étudiants : Présentez un audit critique complet de
-vos fichiers de données brutes. Indiquez la liste des anomalies
-physiques et typologiques détectées (formats de dates hétérogènes,
-outliers physiques, taux de valeurs manquantes, etc.).*
+Le jeu brut généré pour ce projet contient **1 600 étudiants** et **16
+variables**, avec une cible `dropout_risk` égale à **8,5 %** de la
+population (**136 étudiants à risque** sur 1 600). Les identifiants
+étudiants sont uniques par construction, ce qui élimine ici le risque de
+doublons d’inscription.
 
-\[Rédiger votre audit de données ici\]
+Les valeurs manquantes restent limitées mais non négligeables, ce qui
+justifie une vraie étape de wrangling. Les variables les plus touchées
+sont `attendance_rate` (**71 valeurs manquantes**, soit **4,44 %**),
+`assignment_delay_days` (**56**, soit **3,50 %**), `prior_average`,
+`study_hours_per_week` et `continuous_assessment` (**52** chacune, soit
+**3,25 %**), ainsi que `parental_education`, `lms_sessions_week` et
+`stress_index` (**49** chacune, soit **3,06 %**).
+
+Ces manques sont réalistes dans un contexte éducatif: données de
+présence incomplètes, traces LMS irrégulières, notes pas encore publiées
+ou informations administratives partielles.
+
+![Top 10 des valeurs manquantes observées dans le jeu étudiant
+brut.](report/assets/tp1_missing_values.png)
 
 ## Algorithme de Nettoyage
 
-*À rédiger par les étudiants : Justifiez et détaillez l’enchaînement de
-vos opérations de traitement (uniformisation des dates, masquage des
-outliers, imputation, etc.). Faites référence aux fonctions
-correspondantes de votre module `src/data_clean.py`.*
+Le pipeline de nettoyage est implémenté dans
+[src/student_risk_dataset.py](src/student_risk_dataset.py) et
+[src/tp1_student_wrangling.py](src/tp1_student_wrangling.py). La
+logique retenue est la suivante:
 
-\[Rédiger la justification méthodologique ici\]
+1.  génération d’un dataset brut réaliste et reproductible par graine
+    aléatoire;
+2.  normalisation des booléens et conversion robuste des colonnes
+    numériques;
+3.  création de drapeaux de non-réponse pour `attendance_rate`,
+    `prior_average` et `continuous_assessment`;
+4.  imputation médiane sur les variables quantitatives, `False` sur les
+    booléens et `Unknown` sur les catégories;
+5.  création de variables dérivées interprétables: `engagement_score`,
+    `grade_trend_gap` et `academic_pressure_index`;
+6.  encodage one-hot des variables catégorielles pour obtenir une table
+    directement exploitable par Scikit-Learn.
+
+Le pipeline ne supprime aucune ligne: la cohorte complète de **1 600
+étudiants** est conservée. La sortie wranglée contient **22 colonnes**
+et la table `model_ready` **25 colonnes**.
 
 ## Travaux Pratiques de Wrangling
 
-# 🧹 Jalon 1 : Data Wrangling & Nettoyage (Squelette Étudiant)
+Le script de wrangling génère deux sorties versionnées:
 
-Ce notebook correspond à la première étape du **Jalon 1**. L’objectif
-est d’importer le jeu de données brut (`data/raw/raw_data_sample.csv`),
-d’effectuer un audit de sa qualité (données manquantes, anomalies
-physiques, formats de dates hétérogènes) et de le nettoyer à l’aide de
-votre package personnalisé `src.data_clean`.
+- `data/processed/tp1_student_risk_wrangled.csv` pour l’analyse métier;
+- `data/processed/tp1_student_risk_model_ready.csv` pour la modélisation
+  supervisée.
 
-### 1. Importation des packages et chargement des données
-
-### 2. Audit initial des données
-
-**À faire par l’étudiant :** Explorez le dataset brut pour évaluer sa
-structure : - Quelles sont les dimensions du dataset ? - Quels sont les
-types de données par colonne ? - Reste-t-il des valeurs nulles ? Quel
-est le taux de valeurs manquantes par variable ? - Y a-t-il des doublons
-?
-
-### 3. Nettoyage et uniformisation des Dates
-
-**À faire par l’étudiant :** Appliquez la fonction `clean_dates` de
-votre module `src.data_clean` pour convertir la colonne `timestamp` en
-type Datetime uniforme.
-
-### 4. Identification et Traitement des Outliers (Anomalies physiques)
-
-**À faire par l’étudiant :** Analysez les valeurs de la colonne `value`
-et appliquez votre fonction `handle_outliers` pour filtrer les valeurs
-physiques aberrantes (inférieures à 0 ou supérieures à 100).
-
-### 5. Imputation des valeurs manquantes
-
-**À faire par l’étudiant :** Appliquez la fonction
-`impute_missing_values` pour remplir les NaNs issus du chargement
-initial ou du nettoyage des anomalies.
-
-### 6. Sauvegarde des données propres
-
-Enregistrez votre DataFrame nettoyé dans
-`data/processed/cleaned_data_sample.csv`.
+Cette séparation est particulièrement importante dans un contexte
+éducatif, car les enseignants et responsables de formation doivent
+pouvoir relire les données et comprendre les transformations appliquées.
 
 ------------------------------------------------------------------------
 
@@ -184,97 +176,100 @@ données.
 
 ## Statistiques Descriptives
 
-*À rédiger par les étudiants : Présentez une vue d’ensemble descriptive
-rapide de vos variables nettoyées.*
+Le profil moyen observé est celui d’un étudiant de **21,79 ans**,
+travaillant **14,23 heures par semaine**, se connectant **11,7 fois par
+semaine** au LMS, avec un **taux d’assiduité moyen de 89,95 %** et un
+**délai moyen de remise de 1,26 jour**. La note antérieure moyenne est
+de **17,29/20** et l’évaluation continue moyenne de **17,98/20**.
 
-\[Rédiger les statistiques descriptives ici\]
+| Programme          | Assiduité moyenne | Note antérieure moyenne | Taux de risque |
+|--------------------|------------------:|------------------------:|---------------:|
+| Data Science       |           91.02 % |                   17.96 |          4.4 % |
+| Business Analytics |           89.70 % |                   17.35 |          8.6 % |
+| Cybersecurity      |           89.80 % |                   16.95 |          9.9 % |
+| Digital Design     |           88.89 % |                   16.64 |         12.6 % |
+
+Le signal métier est déjà lisible: les étudiants de `Digital Design`
+cumulent l’assiduité la plus faible, les notes les plus basses et le
+taux de risque le plus élevé, alors que `Data Science` présente le
+profil le plus favorable.
 
 ## Ingénierie de Variables (Feature Engineering)
 
-*À rédiger par les étudiants : Expliquez l’intérêt mathématique et
-l’impact sur les modèles prédictifs d’extraire des caractéristiques
-dérivées (ex: variables cycliques temporelles, ratios financiers, ratios
-physiques, etc.).*
+L’ingénierie de variables transforme ici les traces brutes en signaux
+pédagogiques exploitables. Trois variables ont été construites
+explicitement:
 
-\[Rédiger votre explication de l’ingénierie de variables ici\]
+- `engagement_score`, qui combine assiduité, temps de travail, activité
+  LMS et retards de remise;
+- `grade_trend_gap`, qui mesure l’écart entre l’évaluation continue et
+  la moyenne antérieure;
+- `academic_pressure_index`, qui agrège stress, retards et dégradation
+  d’assiduité.
+
+Ces variables dérivées ont deux avantages. Elles améliorent la capacité
+prédictive du modèle, mais surtout elles restent compréhensibles par les
+équipes éducatives. Une alerte fondée sur la baisse des notes, la chute
+d’engagement et la hausse de pression académique est plus défendable
+qu’un score opaque.
 
 ## Travaux Pratiques d’Exploration Visuelle (EDA)
 
-# 📊 Jalon 1 : Analyse Exploratoire des Données (EDA) & Visualisation (Squelette Étudiant)
-
-Ce notebook est dédié à la découverte de relations clés et à l’analyse
-visuelle de nos données. À partir du jeu de données propre généré
-précédemment, nous allons enrichir nos variables explicatives et appeler
-les fonctions de notre module de visualisation `src.utils_viz` pour
-générer des graphiques professionnels.
-
-### 1. Importation des packages et configuration du style
-
-### 2. Ingénierie de variables temporelles
-
-**À faire par l’étudiant :** Appliquez la fonction `feature_engineering`
-de `src.data_clean` pour enrichir votre DataFrame en caractéristiques de
-temps classiques (heures, jours de la semaine).
-
-### 3. Visualisations Professionnelles
-
-#### A. Profils d’évolution et tendances
-
-**À faire par l’étudiant :** Appliquez la fonction `plot_generic_trends`
-de votre module `src.utils_viz` pour tracer l’évolution de la valeur par
-rapport au temps.
-
-#### B. Matrice de corrélation multi-variables
-
-**À faire par l’étudiant :** Appliquez la fonction
-`plot_correlation_matrix` de votre module `src.utils_viz` pour calculer
-et afficher graphiquement la carte thermique des corrélations sur les
-colonnes `['value', 'hour', 'dayofweek']`.
-
-#### C. Nuage de points bivarié
-
-**À faire par l’étudiant :** Générez un nuage de points de la relation
-heure vs valeur en colorant les points selon la variable `dayofweek`, en
-utilisant votre fonction `plot_bivariate_scatter`.
-
-### 4. Synthèse des observations clés
-
-Sur la base de vos figures, listez les **insights majeurs** observés sur
-le comportement de vos variables.
+L’exploration visuelle est calculée dans
+[src/tp2_student_eda.py](src/tp2_student_eda.py) et mise en forme
+dans
+[src/generate_report_figures.py](src/generate_report_figures.py). Les
+visuels générés dans `report/assets` sont désormais alignés sur le sujet
+étudiant du projet.
 
 ------------------------------------------------------------------------
 
 # Visualisation Multidimensionnelle (Insights)
 
-Nous présentons ici les résultats visuels clés permettant de dégager des
-insights exploitables pour les décideurs, en s’appuyant sur notre module
-`src/utils_viz.py`.
+Nous présentons ici les visualisations cibles du projet et la manière
+dont elles doivent être interprétées pour une cellule de réussite
+étudiante.
 
-*À rédiger par les étudiants : Présentez et commentez en détail vos 3 à
-5 insights majeurs découverts lors de l’exploration descriptive
-visuelle. Intégrez et justifiez les figures clés générées.*
+L’EDA montre que le risque académique n’est pas aléatoire. Il se
+concentre sur quelques dimensions stables: performance récente,
+assiduité, engagement numérique et contexte socio-éducatif.
 
 ## Profils et Distributions Caractéristiques
 
-``` python
-#| label: fig-distribution-density
-#| fig-cap: "Distribution ou profils caractéristiques de vos variables clés."
-#| echo: false
-# TODO: Utiliser vos fonctions personnalisées de votre module pour tracer la figure
-```
+![Taux de risque selon le statut boursier et évolution par
+semestre.](report/assets/tp2_student_profiles.png)
 
-\[Commenter la figure et décrire vos observations ici\]
+Trois insights ressortent immédiatement:
+
+- le statut boursier joue un rôle protecteur dans ce dataset: **10,82
+  %** des non-boursiers sont classés à risque contre **4,92 %** des
+  boursiers;
+- le risque n’est pas homogène selon les programmes: `Digital Design`
+  atteint **12,6 %** contre **4,4 %** pour `Data Science`;
+- certains semestres concentrent davantage de fragilité, avec des pics
+  de risque autour de **10,9 %** en semestre 2 et **11,5 %** en semestre
+  6.
+
+Ces contrastes justifient le recours à un score de risque multicritère,
+plutôt qu’à une lecture limitée à la moyenne générale.
 
 ## Corrélations Globales
 
-``` python
-#| label: fig-correlation
-#| fig-cap: "Matrice de corrélation de Spearman ou de Pearson entre variables."
-#| echo: false
-# TODO: Utiliser uv.plot_correlation_matrix() de votre module pour tracer la figure
-```
+![Matrice de corrélation entre engagement, notes et
+assiduité.](report/assets/tp2_learning_correlation.png)
 
-\[Commenter la figure et décrire vos observations ici\]
+La matrice de corrélation met en évidence plusieurs relations
+structurantes. La plus forte corrélation observée est celle entre
+`prior_average` et `continuous_assessment` (**0,756**), ce qui est
+cohérent avec la continuité du niveau académique. À l’inverse,
+`assignment_delay_days` est négativement corrélé à
+`continuous_assessment` (**-0,386**) et à `prior_average` (**-0,360**),
+ce qui renforce l’idée que les retards de remise sont un bon proxy de
+fragilité.
+
+L’objectif n’est donc pas seulement descriptif. Cette lecture permet
+aussi d’identifier les variables redondantes, les dépendances fortes et
+les agrégations utiles pour la modélisation.
 
 ------------------------------------------------------------------------
 
@@ -288,110 +283,98 @@ complexes (Deep Learning CNN) :
 
 ``` mermaid
 graph TD
-    A[Données Brutes Multi-Sources CSV/API] -->|Formatage & Alignement| B(data_clean.clean_dates)
-    C[Données Externes Complémentaires] -->|Imputation & Interpolation| D(data_clean.impute_missing_values)
-    B & D -->|Gestion Outliers| E[Jeu de données Propre & Fusionné]
-    E -->|Extraction Temporelle/Caractéristiques| F[Feature Engineering]
-    F -->|Splits Temporels ou Stratifiés| G[Modèle Machine Learning Tabulaire]
-    H[Flux Multimédias Réels Images/Signaux] -->|Prétraitement d'images/signaux| I[Réseau Convolutif CNN TensorFlow]
-    G -->|Prédictions de la Problématique Métier| J[Livrables & Aide à la Décision]
-    I -->|Détection de Motifs Complexes| J
+  A[Notes absences LMS contexte social] -->|Jointure et anonymisation| B[Table etudiante brute]
+  B -->|Nettoyage et harmonisation| C[Table nettoyee]
+  C -->|Feature engineering pedagogique| D[Table model-ready]
+  D -->|Split temporel ou stratifie| E[Modele tabulaire]
+  E -->|Score de risque + importances| F[Tableau de bord pedagogique]
+  G[Copies scannees / ecriture manuscrite] -->|CNN TensorFlow| H[Variables visuelles complementaires]
+  H --> F
+  F --> I[Rapport Quarto et restitution]
     
-    style E fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
-    style J fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
-    style G fill:#fef3c7,stroke:#d97706,stroke-width:2px
-    style I fill:#fef3c7,stroke:#d97706,stroke-width:2px
+  style C fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+  style I fill:#f0fdf4,stroke:#16a34a,stroke-width:2px
+  style E fill:#fef3c7,stroke:#d97706,stroke-width:2px
+  style H fill:#fef3c7,stroke:#d97706,stroke-width:2px
 ```
 
 ## Modélisation Tabulaire (Machine Learning)
 
-*À rédiger par les étudiants : Expliquez le choix de vos algorithmes
-d’apprentissage (supervisé ou non supervisé) et décrivez l’importance
-des variables explicatives.*
+La branche tabulaire est implémentée dans
+[src/tp3_student_modelisation.py](src/tp3_student_modelisation.py).
+Trois modèles sont comparés:
 
-\[Détailler votre modélisation ici\]
+- une baseline majoritaire, pour mesurer le niveau minimal de référence;
+- une régression logistique, plus adaptée à une lecture opérationnelle
+  centrée sur le rappel;
+- une forêt aléatoire, utilisée ici pour sa robustesse et pour le
+  classement des variables explicatives.
+
+Le split utilisé est ici **stratifié en 80/20**, ce qui est cohérent
+avec un dataset synthétique sans historique longitudinal détaillé par
+étudiant. Sur un dataset réel multi-semestres, un découpage
+chronologique ou par cohorte serait préférable.
+
+![Top 10 des variables explicatives du risque
+étudiant.](report/assets/tp3_feature_importance.png)
+
+Les variables les plus influentes dans la forêt aléatoire sont
+`continuous_assessment` (**0,174**), `prior_average` (**0,137**),
+`engagement_score` (**0,122**), `academic_pressure_index` (**0,093**) et
+`assignment_delay_days` (**0,065**). Le modèle capture donc un mélange
+cohérent de **performance académique**, **engagement** et **pression
+organisationnelle**.
 
 ### Travaux Pratiques de Modélisation Tabulaire
 
-# 🧠 Jalon 2 : Modélisation Prédictive & Apprentissage (Squelette Étudiant)
+La modélisation produit trois sorties clés dans `data/processed`:
 
-Dans ce notebook du **Jalon 2**, l’objectif est d’implémenter un
-pipeline complet d’apprentissage supervisé pour prédire une variable
-cible (`value`) à l’aide de Scikit-Learn.
-
-Vous devrez mettre en œuvre une stratégie de découpage train/test
-chronologique pour respecter la causalité temporelle.
-
-### 1. Préparation de l’environnement
-
-### 2. Définition des variables et split chronologique
-
-**À faire par l’étudiant :** - Identifiez vos colonnes prédictives
-(`features`) et la colonne cible (`value`). - Séparez chronologiquement
-vos données en ensembles d’entraînement (`Train`) et de test (`Test`).
-N’utilisez pas de split aléatoire !
-
-### 3. Entraînement du modèle de Forêt Aléatoire
-
-**À faire par l’étudiant :** - Instanciez et entraînez un modèle
-`RandomForestRegressor`. - Générez les prédictions `y_pred` sur
-l’ensemble de test.
-
-### 4. Évaluation métrique
-
-**À faire par l’étudiant :** Calculez et affichez les scores
-d’évaluation requis : - **MAE** (Mean Absolute Error) - **RMSE** (Root
-Mean Squared Error) - **R²** (Coefficient de détermination)
-
-### 5. Importance des variables explicatives
-
-**À faire par l’étudiant :** Extrayez et affichez l’importance relative
-de chaque caractéristique prédictive.
+- `tp3_model_metrics.csv` pour les scores comparatifs;
+- `tp3_feature_importance.csv` pour le classement des variables;
+- `tp3_predictions_sample.csv` pour un échantillon de prédictions
+  individuelles.
 
 ## Modélisation Vision / Deep Learning (Analyse d’Images ou Signaux)
 
-*À rédiger par les étudiants : Expliquez l’intérêt de la brique de Deep
-Learning (images, signaux ou traitement de données structurées
-complexes) pour classifier ou enrichir vos prédictions. Détaillez
-l’architecture de votre réseau de neurones convolutif (CNN) conçu sous
-TensorFlow/Keras (conv, pooling, dense, dropout, activation) et
-commentez les courbes d’apprentissage obtenues.*
+La branche Deep Learning est implémentée dans
+[src/tp4_synthetic_cnn.py](src/tp4_synthetic_cnn.py). À ce stade,
+elle sert de **preuve de faisabilité technique** pour l’intégration
+d’une chaîne vision dans le même environnement reproductible que la
+branche tabulaire.
 
-\[Détailler votre architecture CNN et analyse ici\]
+Le script génère aujourd’hui **120 images RGB synthétiques** de taille
+$64 \times 64$ réparties en deux classes simples. Cette approche n’est
+pas la finalité métier du projet; elle prépare plutôt l’étape suivante,
+dans laquelle le CNN pourra être appliqué à des copies scannées, à de
+l’écriture manuscrite, à des formulaires pédagogiques ou à des traces
+visuelles issues d’un environnement d’apprentissage.
+
+L’architecture CNN reste volontairement compacte:
+
+- bloc `Conv2D(16)` + `MaxPooling2D`;
+- bloc `Conv2D(32)` + `MaxPooling2D`;
+- `Flatten`, `Dense(32)`, `Dropout(0.2)`, puis sortie sigmoïde.
+
+![Exemples d’images synthétiques générées pour la brique
+CNN.](report/assets/tp4_cnn_samples.png)
+
+![Courbes d’apprentissage du CNN sur 5
+époques.](report/assets/tp4_cnn_history.png)
+
+Le modèle est entraîné sur **96 images** et validé sur **24 images**. Il
+atteint une **accuracy de validation de 1,00** et une `validation_loss`
+finale très faible lors des exécutions Docker du projet. Ce score est
+cohérent avec la simplicité du problème visuel utilisé comme
+démonstrateur. Il valide la chaîne TensorFlow, mais ne constitue pas
+encore un résultat métier sur des documents éducatifs réels.
 
 ### Travaux Pratiques de Vision par Ordinateur (CNN)
 
-# 📷 Jalon 2 : Brique de Vision par Ordinateur (CNN & TensorFlow) (Squelette Étudiant)
-
-Ce notebook est dédié à la brique d’analyse d’images du **Jalon 2**.
-L’objectif est de concevoir un Réseau de Neurones Convolutif (CNN) sous
-TensorFlow/Keras pour classifier des motifs géométriques simples (Classe
-0: Cercle vs Classe 1: Multiples Rectangles).
-
-### 1. Préparation de l’environnement
-
-### 2. Génération du jeu d’images synthétiques
-
-Pour travailler de manière autonome sans importer de lourdes bases
-d’images externes, cette fonction utilitaire génère des images simulées
-en $64 \times 64$ pixels de formes simples (Cercle vs Rectangles).
-
-### 3. Split d’évaluation (Entraînement / Validation)
-
-**À faire par l’étudiant :** Divisez vos données d’images `X_images` et
-`y_labels` en $80\%$ pour l’entraînement et $20\%$ pour la validation.
-
-### 4. Conception de l’architecture du CNN
-
-**À faire par l’étudiant :** Instanciez un réseau convolutif séquentiel
-Keras comprenant des couches `Conv2D`, `MaxPooling2D`, `Flatten`,
-`Dense` et un `Dropout` pour classifier nos deux formes géométriques.
-
-### 5. Compilation et Entraînement
-
-**À faire par l’étudiant :** - Compilez le modèle avec l’optimiseur
-`'adam'` et la fonction de perte binaire. - Entraînez votre CNN sur
-environ 5 époques.
+Les sorties de cette branche sont exportées dans
+`data/processed/tp4_cnn_history.csv`,
+`data/processed/tp4_cnn_metrics.csv` et
+`data/processed/tp4_cnn_predictions.csv`, ainsi que dans deux figures du
+dossier `report/assets`.
 
 ------------------------------------------------------------------------
 
@@ -399,24 +382,42 @@ environ 5 époques.
 
 ## Stratégie de Validation
 
-*À rédiger par les étudiants : Expliquez pourquoi le découpage
-d’évaluation choisi (ex: validation temporelle, stratifiée ou par
-groupe) est adapté à la structure de vos données pour éviter les fuites
-de données.*
+La validation de la branche tabulaire devra être pensée pour éviter les
+fuites d’information. Si les données sont organisées par semestre, il
+faudra privilégier un découpage chronologique. Si plusieurs lignes
+décrivent un même étudiant, un split par groupe ou par cohorte sera plus
+défendable qu’un simple tirage aléatoire.
 
-\[Rédiger la section de validation ici\]
+Pour la branche CNN, le démonstrateur actuel repose sur un hold-out
+80/20. Dans un contexte éducatif réel, cette brique devra être évaluée
+soit par validation croisée, soit sur un jeu de documents réellement
+séparé par session, matière ou promotion.
 
 ## Résultats et Interprétation
 
-*À rédiger par les étudiants : Complétez le tableau d’évaluation
-ci-dessous en reportant vos résultats de modélisation.*
+Les métriques prioritaires sont la **précision**, le **rappel**, le
+**F1-score** et le **ROC-AUC**, car le coût d’une erreur n’est pas
+symétrique. Un faux négatif signifie qu’un étudiant à risque n’est pas
+détecté; un faux positif signifie qu’un étudiant reçoit un suivi
+inutile.
 
-| Modèle | Métrique 1 (ex: MAE / Précision) | Métrique 2 (ex: RMSE / F1-Score) | R² / Score (%) |
-|----|----|----|----|
-| Baseline (ex: Naïve / Moyenne) | \[À compléter\] | \[À compléter\] | \[À compléter\] |
-| **Modèle Choisi** | **\[À compléter\]** | **\[À compléter\]** | **\[À compléter\]** |
+| Modèle                | Accuracy | Rappel | F1-score | ROC-AUC |
+|-----------------------|---------:|-------:|---------:|--------:|
+| Baseline majoritaire  |    0.916 |  0.000 |    0.000 |     N/A |
+| Régression logistique |    0.831 |  0.741 |    0.426 |   0.878 |
+| Random Forest         |    0.934 |  0.296 |    0.432 |   0.835 |
 
-\[Interpréter et comparer les métriques d’erreur calculées ici\]
+Le résultat clé est que **la régression logistique est le meilleur choix
+opérationnel** pour un système d’alerte précoce. Elle offre le meilleur
+rappel (**0,741**) et le meilleur ROC-AUC (**0,878**), ce qui signifie
+qu’elle détecte davantage d’étudiants à risque, au prix d’une précision
+plus faible. La forêt aléatoire est plus précise (**0,800**), mais son
+rappel (**0,296**) est trop faible pour un usage de prévention.
+
+Ce compromis est cohérent avec le métier: un système d’alerte précoce
+supporte souvent un rappel élevé, quitte à assumer davantage de faux
+positifs, parce que le coût d’une intervention pédagogique légère reste
+inférieur au coût d’un abandon non détecté.
 
 ------------------------------------------------------------------------
 
@@ -424,20 +425,41 @@ ci-dessous en reportant vos résultats de modélisation.*
 
 ## Recommandations Stratégiques / Métier
 
-*À rédiger par les étudiants : Formulez des recommandations
-stratégiques, opérationnelles et innovantes basées sur vos découvertes
-analytiques et prédictives pour guider les décideurs.*
+Les résultats suggèrent plusieurs pistes opérationnelles:
 
-\[Rédiger vos recommandations ici\]
+- construire un score d’alerte précoce fondé sur les absences, les notes
+  récentes, la participation et les retards de remise;
+- segmenter les actions de prévention par profil étudiant afin de
+  distinguer les difficultés académiques, sociales et
+  organisationnelles;
+- privilégier des modèles explicables et des tableaux de bord simples,
+  pour que les équipes pédagogiques puissent justifier les
+  interventions;
+- relier l’analyse prédictive à des actions concrètes: tutorat,
+  rendez-vous de suivi, aide méthodologique, soutien social ou
+  adaptation de charge.
 
 ## Limites et Perspectives
 
-*À rédiger par les étudiants : Identifiez honnêtement les biais ou
-limites de votre approche et proposez des pistes d’amélioration futures
-(ex: intégration de données externes réelles, modélisation plus
-poussée).*
+Le projet conserve plusieurs limites explicites:
 
-\[Rédiger les limites et perspectives ici\]
+- le dataset utilisé est **synthétique** et non issu d’une base
+  étudiante réelle anonymisée;
+- les questions d’équité, de confidentialité et de biais
+  socio-économiques devront être traitées explicitement avant tout usage
+  réel;
+- le modèle tabulaire n’a pas encore bénéficié d’une recherche
+  systématique d’hyperparamètres ni d’une comparaison avec des modèles
+  de boosting;
+- la branche CNN repose pour l’instant sur un jeu d’images synthétiques
+  simple, avant intégration de documents pédagogiques réels.
+
+Les prolongements naturels sont donc l’intégration d’un dataset réel
+anonymisé, la création de variables dynamiques par semestre ou par
+période d’évaluation, la comparaison entre régression logistique, Random
+Forest et gradient boosting, la mise en place d’une validation croisée
+robuste et l’ajout d’une source visuelle réelle pour remplacer la
+démonstration synthétique.
 
 Ce document dynamique a été compilé en Quarto ([Team
 2024](#ref-quarto2024)).
@@ -446,7 +468,8 @@ Ce document dynamique a été compilé en Quarto ([Team
 
 # Bibliographie
 
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
 
 <div id="ref-pandas2020" class="csl-entry">
 
@@ -458,7 +481,7 @@ Pandas, NumPy, and IPython*. O’Reilly Media.
 <div id="ref-quarto2024" class="csl-entry">
 
 Team, Quarto Development. 2024. “Quarto Dynamic Publishing System:
-Collaborative Scientific and Technical Publishing.”
+Collaborative Scientific and Technical Publishing.” 2024.
 <https://quarto.org/>.
 
 </div>
