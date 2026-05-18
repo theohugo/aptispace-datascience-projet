@@ -6,6 +6,7 @@
 - [Aperçu de la Boîte à Outils](#aperçu-de-la-boîte-à-outils)
 - [🚀 Installation Automatisée
   (Recommandé)](#rocket-installation-automatisée-recommandé)
+- [🐳 Option Docker (le plus simple)](#whale-option-docker-le-plus-simple)
 - [🛠️ Configuration Manuelle
   (Alternative)](#hammer_and_wrench-configuration-manuelle-alternative)
   - [1. Python 3 (3.12 ou 3.14)](#1-python-3-312-ou-314)
@@ -90,6 +91,46 @@ chmod +x ./tools/install_linux.sh
 installer Typst, Quarto et Go-Task.*
 
 </div>
+
+------------------------------------------------------------------------
+
+# 🐳 Option Docker (le plus simple)
+
+Si vous voulez éviter toute installation locale (Python, Quarto, Typst,
+Task), vous pouvez exécuter le projet dans Docker.
+
+Sur Windows, vérifiez que Docker Desktop est bien lancé avant
+d'exécuter les commandes (sinon vous aurez l'erreur "docker daemon is
+not running").
+
+Depuis la racine du projet :
+
+``` bash
+docker compose build
+```
+
+Puis lancez les commandes utiles :
+
+- Compiler les notebooks :
+
+  ``` bash
+  docker compose run --rm datascience task compile
+  ```
+
+- Générer le rapport complet :
+
+  ``` bash
+  docker compose run --rm datascience task render
+  ```
+
+- Prévisualisation Quarto :
+
+  ``` bash
+  docker compose run --rm -p 4200:4200 datascience quarto preview report/rapport.qmd --port 4200 --host 0.0.0.0
+  ```
+
+Les volumes Docker sont configurés pour refléter les fichiers générés
+directement dans votre dossier de projet local.
 
 ------------------------------------------------------------------------
 

@@ -1,0 +1,11 @@
+services:
+  datascience:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: aptispace-datascience:local
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    stdin_open: true
+    tty: true
