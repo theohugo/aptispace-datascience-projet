@@ -3,13 +3,13 @@ Synthetic dataset shape: (120, 64, 64, 3)
 Train size: 96
 Validation size: 24
    epoch  accuracy    loss  val_accuracy  val_loss
-0      1    0.7292  0.6208           1.0    0.4215
-1      2    0.9792  0.3427           1.0    0.1544
-2      3    1.0000  0.1167           1.0    0.0395
-3      4    1.0000  0.0373           1.0    0.0094
-4      5    1.0000  0.0099           1.0    0.0025
+0      1    0.8021  0.5984           1.0    0.3941
+1      2    1.0000  0.2963           1.0    0.1461
+2      3    1.0000  0.0875           1.0    0.0366
+3      4    1.0000  0.0312           1.0    0.0080
+4      5    1.0000  0.0074           1.0    0.0021
    num_samples  train_size  ...  validation_loss  validation_accuracy
-0          120          96  ...           0.0025                  1.0
+0          120          96  ...           0.0021                  1.0
 
 [1 rows x 5 columns]
 Saved:
@@ -21,11 +21,11 @@ Saved:
 
 === STDERR ===
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1779185001.172900     126 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
-I0000 00:00:1779185001.173349     126 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
-I0000 00:00:1779185001.226042     126 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+I0000 00:00:1779194112.825980     377 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1779194112.826337     377 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+I0000 00:00:1779194112.872208     377 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
 To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1779185003.453447     126 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
-I0000 00:00:1779185003.454043     126 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
-E0000 00:00:1779185005.476279     126 cuda_platform.cc:52] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: UNKNOWN ERROR (303)
+I0000 00:00:1779194114.731482     377 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1779194114.731905     377 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+E0000 00:00:1779194116.309401     377 cuda_platform.cc:52] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: UNKNOWN ERROR (303)

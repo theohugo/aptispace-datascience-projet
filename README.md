@@ -33,8 +33,10 @@
     Signaux)](#modélisation-vision--deep-learning-analyse-dimages-ou-signaux)
 - [Évaluation Métrique et Validation](#sec-evaluation)
   - [Stratégie de Validation](#stratégie-de-validation)
+  - [Validation Croisée Stratifiée](#validation-croisée-stratifiée)
   - [Résultats et Interprétation](#résultats-et-interprétation)
 - [Data Storytelling et Communication](#sec-storytelling)
+  - [Tableau de Bord Interactif](#tableau-de-bord-interactif)
   - [Matrice d’Action Pédagogique](#matrice-daction-pédagogique)
   - [Recommandations Stratégiques /
     Métier](#recommandations-stratégiques--métier)
@@ -352,10 +354,14 @@ Trois modèles sont comparés:
 - une forêt aléatoire, utilisée ici pour sa robustesse et pour le
   classement des variables explicatives.
 
-Le split utilisé est ici **stratifié en 80/20**, ce qui est cohérent
-avec un dataset synthétique sans historique longitudinal détaillé par
-étudiant. Sur un dataset réel multi-semestres, un découpage
-chronologique ou par cohorte serait préférable.
+Le protocole retenu combine désormais deux niveaux d’évaluation
+complémentaires. Un **split stratifié en 80/20** est conservé pour
+estimer la performance finale sur un jeu de test indépendant. En
+parallèle, une **validation croisée stratifiée à 5 plis** est réalisée
+sur l’échantillon d’entraînement afin de comparer les modèles sur
+plusieurs sous-échantillons et de réduire la dépendance à un découpage
+unique. Sur un dataset réel multi-semestres, ce protocole devrait
+ensuite évoluer vers un découpage chronologique ou par cohorte.
 
 ![Top 10 des variables explicatives du risque
 étudiant.](report/assets/tp3_feature_importance.png)
@@ -372,6 +378,8 @@ organisationnelle**.
 La modélisation produit trois sorties clés dans `data/processed`:
 
 - `tp3_model_metrics.csv` pour les scores comparatifs;
+- `tp3_cross_validation_metrics.csv` pour la synthèse de validation
+  croisée stratifiée;
 - `tp3_feature_importance.csv` pour le classement des variables;
 - `tp3_predictions_sample.csv` pour un échantillon de prédictions
   individuelles.
@@ -424,16 +432,40 @@ dossier `report/assets`.
 
 ## Stratégie de Validation
 
-La validation de la branche tabulaire devra être pensée pour éviter les
-fuites d’information. Si les données sont organisées par semestre, il
-faudra privilégier un découpage chronologique. Si plusieurs lignes
-décrivent un même étudiant, un split par groupe ou par cohorte sera plus
-défendable qu’un simple tirage aléatoire.
+La validation de la branche tabulaire repose ici sur un protocole en
+deux temps. D’abord, les modèles sont comparés par **validation croisée
+stratifiée à 5 plis** sur l’échantillon d’entraînement, ce qui permet
+d’observer la stabilité des métriques sur plusieurs découpages. Ensuite,
+le modèle retenu est réévalué sur un **jeu de test hold-out stratifié
+80/20**, conservé à l’écart de la phase de sélection.
+
+Ce choix est cohérent avec la structure du dataset synthétique actuel,
+qui ne contient pas d’historique longitudinal détaillé par étudiant.
+Dans un cadre réel, il faudrait néanmoins renforcer encore le protocole
+en privilégiant un découpage chronologique, par cohorte ou par groupe
+pédagogique afin d’éviter toute fuite d’information entre périodes
+d’observation.
 
 Pour la branche CNN, le démonstrateur actuel repose sur un hold-out
 80/20. Dans un contexte éducatif réel, cette brique devra être évaluée
 soit par validation croisée, soit sur un jeu de documents réellement
 séparé par session, matière ou promotion.
+
+## Validation Croisée Stratifiée
+
+| Modèle                | Accuracy CV | Recall CV | F1 CV | ROC-AUC CV |
+|-----------------------|------------:|----------:|------:|-----------:|
+| Baseline majoritaire  |       0.915 |     0.000 | 0.000 |      0.500 |
+| Régression logistique |       0.845 |     0.835 | 0.480 |      0.902 |
+| Random Forest         |       0.920 |     0.212 | 0.307 |      0.903 |
+
+La validation croisée confirme le diagnostic posé sur le jeu de test: la
+régression logistique reste le modèle le plus adapté à une logique
+d’alerte précoce, car elle maintient un **rappel moyen de 0,835** tout
+en conservant un **ROC-AUC de 0,902**. La forêt aléatoire présente une
+accuracy moyenne plus élevée, mais son rappel moyen demeure trop faible
+pour un usage de prévention. Le protocole plus robuste ne modifie donc
+pas la recommandation métier; il la renforce.
 
 ## Résultats et Interprétation
 
@@ -464,6 +496,17 @@ inférieur au coût d’un abandon non détecté.
 ------------------------------------------------------------------------
 
 # Data Storytelling et Communication
+
+## Tableau de Bord Interactif
+
+Pour compléter les figures statiques du rapport, un tableau de bord
+interactif autonome a été ajouté au projet. Il rassemble dans une même
+interface les métriques du jeu de test, les résultats de validation
+croisée, les variables explicatives dominantes, les profils de risque
+par programme et une liste prioritaire d’étudiants à suivre.
+
+Le tableau de bord interactif est disponible dans le fichier suivant:
+[Dashboard interactif](report/assets/tp3_student_dashboard.html).
 
 ## Matrice d’Action Pédagogique
 
@@ -517,10 +560,11 @@ La restitution finale s’appuie sur plusieurs supports complémentaires.
 Le rapport Quarto constitue le document central de synthèse et
 d’interprétation. Il est complété par un schéma Mermaid du pipeline de
 données, par des jeux intermédiaires et finaux exportés dans
-`data/processed`, ainsi que par un ensemble de figures produites dans
-`report/assets`. Cet agencement vise à assurer à la fois la lisibilité
-du raisonnement, la traçabilité des transformations et la cohérence
-entre les résultats chiffrés et leur interprétation métier.
+`data/processed`, par un ensemble de figures produites dans
+`report/assets`, ainsi que par un tableau de bord interactif HTML dédié
+à l’exploration métier. Cet agencement vise à assurer à la fois la
+lisibilité du raisonnement, la traçabilité des transformations et la
+cohérence entre les résultats chiffrés et leur interprétation métier.
 
 Ce document dynamique a été compilé en Quarto ([Team
 2024](#ref-quarto2024)).

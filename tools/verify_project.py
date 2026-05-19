@@ -38,6 +38,15 @@ CORE_CSVS: dict[str, ColumnExpectation] = {
         "f1",
         "roc_auc",
     },
+    "data/processed/tp3_cross_validation_metrics.csv": {
+        "model",
+        "cv_strategy",
+        "n_splits",
+        "accuracy_mean",
+        "recall_mean",
+        "f1_mean",
+        "roc_auc_mean",
+    },
     "data/processed/tp3_feature_importance.csv": {
         "feature",
         "importance",
@@ -50,6 +59,7 @@ CORE_FILES = [
     "report/assets/tp2_learning_correlation.png",
     "report/assets/tp2_program_profiles.png",
     "report/assets/tp3_feature_importance.png",
+    "report/assets/tp3_student_dashboard.html",
 ]
 
 CNN_CSVS: dict[str, ColumnExpectation] = {
