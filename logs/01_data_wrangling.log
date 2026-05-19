@@ -1,8 +1,8 @@
 === STDOUT ===
-Raw shape: (1600, 16)
-Wrangled shape: (1600, 22)
-Model-ready shape: (1600, 25)
-Dropout rate: 8.5 %
+Raw shape: (4424, 16)
+Wrangled shape: (4424, 22)
+Model-ready shape: (4424, 37)
+Dropout rate: 32.12 %
 Saved:
 - data/processed/tp1_student_risk_wrangled.csv
 - data/processed/tp1_student_risk_model_ready.csv

@@ -22,6 +22,8 @@
   - [4. Configurer le noyau Jupyter
     (Kernel)](#4-configurer-le-noyau-jupyter-kernel)
 - [⚙️ Utilisation du Taskfile](#gear-utilisation-du-taskfile)
+  - [Source de donnees tabulaire: public ou
+    synthétique](#source-de-donnees-tabulaire-public-ou-synthétique)
 
 # Introduction
 
@@ -251,3 +253,35 @@ lancer le validateur d’artefacts directement:
 ``` bash
 python tools/verify_project.py
 ```
+
+## Source de donnees tabulaire: public ou synthétique
+
+Le projet privilegie desormais par defaut le jeu UCI *Predict Students’
+Dropout and Academic Success*. Si la source publique n’est pas
+joignable, le pipeline revient automatiquement au generateur local pour
+conserver une execution reproductible.
+
+Execution nominale par defaut:
+
+``` bash
+python src/tp1_student_wrangling.py
+```
+
+Sous Bash:
+
+``` bash
+STUDENT_DATA_SOURCE=synthetic python src/tp1_student_wrangling.py
+```
+
+Sous PowerShell:
+
+``` powershell
+$env:STUDENT_DATA_SOURCE = "synthetic"
+python src/tp1_student_wrangling.py
+```
+
+Le projet accepte `STUDENT_DATA_SOURCE=auto|uci|synthetic`. Le mode par
+defaut est maintenant `auto`, ce qui signifie: essayer UCI d’abord, puis
+revenir au mode synthétique si besoin. Vous pouvez aussi utiliser
+`STUDENT_DATA_URL` pour rediriger le telechargement vers un autre miroir
+de l’archive UCI.

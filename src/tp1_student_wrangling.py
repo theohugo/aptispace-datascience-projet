@@ -2,10 +2,9 @@ from pathlib import Path
 
 import pandas as pd
 
-from student_risk_dataset import ensure_student_dataset
+from student_risk_dataset import RAW_PATH, ensure_student_dataset
 
 PROCESSED_DIR = Path("data/processed")
-RAW_PATH = Path("data/raw/student_risk/student_dropout_synthetic.csv")
 WRANGLED_OUTPUT = PROCESSED_DIR / "tp1_student_risk_wrangled.csv"
 MODEL_READY_OUTPUT = PROCESSED_DIR / "tp1_student_risk_model_ready.csv"
 

@@ -98,12 +98,12 @@ Les livrables analytiques sont les suivants:
   scannées, de l’écriture manuscrite ou des documents pédagogiques
   numérisés.
 
-> Note de cadrage: pour assurer la reproductibilité du projet, le dépôt
-> s’appuie désormais sur un **dataset étudiant synthétique réaliste**
-> généré automatiquement. Ce choix permet d’aligner le pipeline complet,
-> les métriques et les visualisations sur le nouveau sujet métier, tout
-> en gardant la possibilité de substituer plus tard un jeu de données
-> réel anonymisé.
+> Note de cadrage: le dépôt s’appuie désormais **par défaut** sur le jeu
+> UCI *Predict Students’ Dropout and Academic Success*, harmonisé vers
+> le schéma du projet. Pour conserver une exécution robuste en toute
+> circonstance, le projet garde aussi un **générateur synthétique
+> local** utilisé en repli automatique si la source publique n’est plus
+> accessible.
 
 ## Synthèse
 
@@ -120,8 +120,8 @@ Les principaux résultats obtenus peuvent être résumés ainsi:
 - l’analyse exploratoire met en évidence des contrastes nets selon les
   programmes, le statut boursier et la dynamique semestrielle;
 - la régression logistique constitue le meilleur compromis pour une
-  logique d’alerte précoce, avec un rappel de **0,741** et un ROC-AUC de
-  **0,878**;
+  logique d’alerte précoce, avec un rappel de **0,806** et un ROC-AUC de
+  **0,909** sur le jeu de test;
 - la branche CNN, encore démonstrative, confirme la faisabilité
   technique d’une extension future vers des documents pédagogiques
   numérisés.
@@ -132,7 +132,7 @@ Les principaux résultats obtenus peuvent être résumés ainsi:
 |----|----|----|
 | Préparation des données | Audit des manques, imputation, création de variables dérivées et encodage pour la modélisation | [src/student_risk_dataset.py](src/student_risk_dataset.py), [src/tp1_student_wrangling.py](src/tp1_student_wrangling.py) |
 | Analyse exploratoire | Statistiques descriptives, profils par programme, distributions et corrélations | [src/tp2_student_eda.py](src/tp2_student_eda.py), tableaux de `data/processed` |
-| Visualisation | Figures synthétiques centrées sur les signaux pédagogiques majeurs | [src/generate_report_figures.py](src/generate_report_figures.py), figures du dossier `report/assets` |
+| Visualisation | Figures métier générées à partir du schéma harmonisé du projet | [src/generate_report_figures.py](src/generate_report_figures.py), figures du dossier `report/assets` |
 | Modélisation | Comparaison entre baseline, régression logistique et Random Forest | [src/tp3_student_modelisation.py](src/tp3_student_modelisation.py) |
 | Évaluation | Lecture conjointe de l’accuracy, du rappel, du F1-score et du ROC-AUC | `data/processed/tp3_model_metrics.csv` |
 | Restitution | Interprétation métier, matrice d’action pédagogique et discussion des limites | sections d’analyse et de storytelling du présent rapport |
@@ -153,23 +153,21 @@ appliquées à vos jeux de données bruts.
 
 ## Audit de Qualité
 
-Le jeu brut généré pour ce projet contient **1 600 étudiants** et **16
-variables**, avec une cible `dropout_risk` égale à **8,5 %** de la
-population (**136 étudiants à risque** sur 1 600). Les identifiants
-étudiants sont uniques par construction, ce qui élimine ici le risque de
-doublons d’inscription.
+Le jeu brut harmonisé retenu par défaut contient **4 424 étudiants** et
+**16 variables**, avec une cible `dropout_risk` égale à **32,1 %** de la
+population (**1 421 étudiants à risque** sur 4 424). Les identifiants du
+projet sont reconstruits lors de l’harmonisation afin de garantir
+l’unicité locale et la traçabilité du pipeline.
 
-Les valeurs manquantes restent limitées mais non négligeables, ce qui
-justifie une vraie étape de wrangling. Les variables les plus touchées
-sont `attendance_rate` (**71 valeurs manquantes**, soit **4,44 %**),
-`assignment_delay_days` (**56**, soit **3,50 %**), `prior_average`,
-`study_hours_per_week` et `continuous_assessment` (**52** chacune, soit
-**3,25 %**), ainsi que `parental_education`, `lms_sessions_week` et
-`stress_index` (**49** chacune, soit **3,06 %**).
+Sur les variables retenues dans ce schéma harmonisé, aucune valeur
+manquante structurante n’est observée. Le contrôle de complétude
+confirme que les colonnes tabulaires conservées sont renseignées sur
+l’ensemble de la cohorte.
 
-Ces manques sont réalistes dans un contexte éducatif: données de
-présence incomplètes, traces LMS irrégulières, notes pas encore publiées
-ou informations administratives partielles.
+Le wrangling reste néanmoins indispensable. Il stabilise les types,
+normalise les booléens, prépare les variables dérivées et conserve une
+logique d’imputation compatible avec le dataset synthétique de secours
+ou avec d’autres sources qui seraient moins propres que l’archive UCI.
 
 ![Top 10 des valeurs manquantes observées dans le jeu étudiant
 brut.](report/assets/tp1_missing_values.png)
@@ -181,8 +179,9 @@ Le pipeline de nettoyage est implémenté dans
 [src/tp1_student_wrangling.py](src/tp1_student_wrangling.py). La
 logique retenue est la suivante:
 
-1.  génération d’un dataset brut réaliste et reproductible par graine
-    aléatoire;
+1.  harmonisation d’un dataset public existant quand il est demandé,
+    avec repli automatique vers un dataset brut réaliste généré
+    localement;
 2.  normalisation des booléens et conversion robuste des colonnes
     numériques;
 3.  création de drapeaux de non-réponse pour `attendance_rate`,
@@ -194,9 +193,9 @@ logique retenue est la suivante:
 6.  encodage one-hot des variables catégorielles pour obtenir une table
     directement exploitable par Scikit-Learn.
 
-Le pipeline ne supprime aucune ligne: la cohorte complète de **1 600
+Le pipeline ne supprime aucune ligne: la cohorte complète de **4 424
 étudiants** est conservée. La sortie wranglée contient **22 colonnes**
-et la table `model_ready` **25 colonnes**.
+et la table `model_ready` **37 colonnes**.
 
 ## Travaux Pratiques de Wrangling
 
@@ -220,23 +219,24 @@ données.
 
 ## Statistiques Descriptives
 
-Le profil moyen observé est celui d’un étudiant de **21,79 ans**,
-travaillant **14,23 heures par semaine**, se connectant **11,7 fois par
-semaine** au LMS, avec un **taux d’assiduité moyen de 89,95 %** et un
-**délai moyen de remise de 1,26 jour**. La note antérieure moyenne est
-de **17,29/20** et l’évaluation continue moyenne de **17,98/20**.
+Le profil moyen observé est celui d’un étudiant de **23,27 ans**,
+travaillant **17,01 heures par semaine**, se connectant **14,77 fois par
+semaine** au LMS, avec un **taux d’assiduité moyen de 78,74 %** et un
+**délai moyen de remise de 1,42 jour**. La note antérieure moyenne est
+de **13,26/20** et l’évaluation continue moyenne de **10,75/20**.
 
-| Programme          | Assiduité moyenne | Note antérieure moyenne | Taux de risque |
-|--------------------|------------------:|------------------------:|---------------:|
-| Data Science       |           91.02 % |                   17.96 |          4.4 % |
-| Business Analytics |           89.70 % |                   17.35 |          8.6 % |
-| Cybersecurity      |           89.80 % |                   16.95 |          9.9 % |
-| Digital Design     |           88.89 % |                   16.64 |         12.6 % |
+| Programme (exemples contrastés) | Assiduité moyenne | Évaluation continue moyenne | Taux de risque |
+|----|---:|---:|---:|
+| Nursing | 86.24 % | 12.52 | 15.4 % |
+| Social Service | 83.93 % | 11.35 | 18.3 % |
+| Informatics Engineering | 66.57 % | 9.38 | 54.1 % |
+| Biofuel Production Technologies | 66.63 % | 10.19 | 66.7 % |
 
-Le signal métier est déjà lisible: les étudiants de `Digital Design`
-cumulent l’assiduité la plus faible, les notes les plus basses et le
-taux de risque le plus élevé, alors que `Data Science` présente le
-profil le plus favorable.
+Le contraste métier est net: `Nursing` et `Social Service` restent
+relativement protégés, alors que `Informatics Engineering` et surtout
+`Biofuel Production Technologies` concentrent les niveaux de risque les
+plus élevés. Cette hétérogénéité plaide pour une lecture segmentée par
+programme, et non pour une politique uniforme de prévention.
 
 ## Ingénierie de Variables (Feature Engineering)
 
@@ -285,14 +285,15 @@ semestre.](report/assets/tp2_student_profiles.png)
 
 Trois insights ressortent immédiatement:
 
-- le statut boursier joue un rôle protecteur dans ce dataset: **10,82
-  %** des non-boursiers sont classés à risque contre **4,92 %** des
-  boursiers;
-- le risque n’est pas homogène selon les programmes: `Digital Design`
-  atteint **12,6 %** contre **4,4 %** pour `Data Science`;
-- certains semestres concentrent davantage de fragilité, avec des pics
-  de risque autour de **10,9 %** en semestre 2 et **11,5 %** en semestre
-  6.
+- le statut boursier joue un rôle protecteur marqué dans ce dataset:
+  **38,71 %** des non-boursiers sont classés à risque contre **12,19 %**
+  des boursiers;
+- le risque n’est pas homogène selon les programmes:
+  `Biofuel Production Technologies` atteint **66,7 %** contre **15,4 %**
+  pour `Nursing`;
+- la structure du jeu UCI met surtout en évidence les deux premiers
+  semestres observés, avec **42,78 %** de risque au semestre 1 contre
+  **31,67 %** au semestre 2.
 
 Ces contrastes justifient le recours à un score de risque multicritère,
 plutôt qu’à une lecture limitée à la moyenne générale.
@@ -309,7 +310,16 @@ cohérent avec la continuité du niveau académique. À l’inverse,
 `assignment_delay_days` est négativement corrélé à
 `continuous_assessment` (**-0,386**) et à `prior_average` (**-0,360**),
 ce qui renforce l’idée que les retards de remise sont un bon proxy de
-fragilité.
+fragilité. La matrice de corrélation met en évidence plusieurs relations
+structurantes. La plus forte corrélation observée est logiquement celle
+entre `study_hours_per_week` et `engagement_score` (**0,920**), puisque
+ce score intègre explicitement le volume de travail. Parmi les relations
+plus interprétables, `attendance_rate` est fortement corrélée à
+`continuous_assessment` (**0,771**) et négativement à `stress_index`
+(**-0,776**). À l’inverse, `assignment_delay_days` reste négativement
+corrélé à `attendance_rate` (**-0,387**) et à `engagement_score`
+(**-0,424**), ce qui renforce l’idée que les retards de remise capturent
+une fragilité organisationnelle.
 
 L’objectif n’est donc pas seulement descriptif. Cette lecture permet
 aussi d’identifier les variables redondantes, les dépendances fortes et
@@ -367,11 +377,11 @@ ensuite évoluer vers un découpage chronologique ou par cohorte.
 étudiant.](report/assets/tp3_feature_importance.png)
 
 Les variables les plus influentes dans la forêt aléatoire sont
-`continuous_assessment` (**0,174**), `prior_average` (**0,137**),
-`engagement_score` (**0,122**), `academic_pressure_index` (**0,093**) et
-`assignment_delay_days` (**0,065**). Le modèle capture donc un mélange
-cohérent de **performance académique**, **engagement** et **pression
-organisationnelle**.
+`attendance_rate` (**0,167**), `academic_pressure_index` (**0,145**),
+`engagement_score` (**0,112**), `stress_index` (**0,099**) et
+`study_hours_per_week` (**0,081**). Le modèle capture donc un mélange
+cohérent d’**assiduité**, de **pression académique** et d’**engagement
+pédagogique**.
 
 ### Travaux Pratiques de Modélisation Tabulaire
 
@@ -439,10 +449,11 @@ d’observer la stabilité des métriques sur plusieurs découpages. Ensuite,
 le modèle retenu est réévalué sur un **jeu de test hold-out stratifié
 80/20**, conservé à l’écart de la phase de sélection.
 
-Ce choix est cohérent avec la structure du dataset synthétique actuel,
-qui ne contient pas d’historique longitudinal détaillé par étudiant.
-Dans un cadre réel, il faudrait néanmoins renforcer encore le protocole
-en privilégiant un découpage chronologique, par cohorte ou par groupe
+Ce choix est cohérent avec le jeu UCI harmonisé par défaut, qui agrège
+des informations d’inscription et de performance sur les deux premiers
+semestres au sein d’un même établissement. Dans un cadre réel
+multi-cohortes, il faudrait néanmoins renforcer encore le protocole en
+privilégiant un découpage chronologique, par cohorte ou par groupe
 pédagogique afin d’éviter toute fuite d’information entre périodes
 d’observation.
 
@@ -455,17 +466,18 @@ séparé par session, matière ou promotion.
 
 | Modèle                | Accuracy CV | Recall CV | F1 CV | ROC-AUC CV |
 |-----------------------|------------:|----------:|------:|-----------:|
-| Baseline majoritaire  |       0.915 |     0.000 | 0.000 |      0.500 |
-| Régression logistique |       0.845 |     0.835 | 0.480 |      0.902 |
-| Random Forest         |       0.920 |     0.212 | 0.307 |      0.903 |
+| Baseline majoritaire  |       0.679 |     0.000 | 0.000 |      0.500 |
+| Régression logistique |       0.849 |     0.806 | 0.774 |      0.903 |
+| Random Forest         |       0.855 |     0.703 | 0.757 |      0.900 |
 
-La validation croisée confirme le diagnostic posé sur le jeu de test: la
-régression logistique reste le modèle le plus adapté à une logique
-d’alerte précoce, car elle maintient un **rappel moyen de 0,835** tout
-en conservant un **ROC-AUC de 0,902**. La forêt aléatoire présente une
-accuracy moyenne plus élevée, mais son rappel moyen demeure trop faible
-pour un usage de prévention. Le protocole plus robuste ne modifie donc
-pas la recommandation métier; il la renforce.
+La validation croisée confirme un arbitrage plus serré que sur la
+version synthétique du projet. La régression logistique reste la mieux
+alignée avec une logique d’alerte précoce, car elle maintient un
+**rappel moyen de 0,806** tout en conservant un **ROC-AUC de 0,903**. La
+forêt aléatoire est compétitive en accuracy moyenne (**0,855** contre
+**0,849**), mais son rappel moyen descend à **0,703**, ce qui reste
+moins favorable si l’objectif prioritaire est de détecter le maximum
+d’étudiants fragiles.
 
 ## Résultats et Interprétation
 
@@ -477,16 +489,17 @@ inutile.
 
 | Modèle                | Accuracy | Rappel | F1-score | ROC-AUC |
 |-----------------------|---------:|-------:|---------:|--------:|
-| Baseline majoritaire  |    0.916 |  0.000 |    0.000 |     N/A |
-| Régression logistique |    0.831 |  0.741 |    0.426 |   0.878 |
-| Random Forest         |    0.934 |  0.296 |    0.432 |   0.835 |
+| Baseline majoritaire  |    0.679 |  0.000 |    0.000 |     N/A |
+| Régression logistique |    0.851 |  0.806 |    0.776 |   0.909 |
+| Random Forest         |    0.856 |  0.715 |    0.762 |   0.909 |
 
-Le résultat clé est que **la régression logistique est le meilleur choix
-opérationnel** pour un système d’alerte précoce. Elle offre le meilleur
-rappel (**0,741**) et le meilleur ROC-AUC (**0,878**), ce qui signifie
-qu’elle détecte davantage d’étudiants à risque, au prix d’une précision
-plus faible. La forêt aléatoire est plus précise (**0,800**), mais son
-rappel (**0,296**) est trop faible pour un usage de prévention.
+Le résultat clé est que **la régression logistique reste le meilleur
+choix opérationnel** pour un système d’alerte précoce. Elle offre le
+meilleur rappel (**0,806**) tout en conservant un **ROC-AUC de 0,909**,
+ce qui signifie qu’elle détecte davantage d’étudiants à risque. La forêt
+aléatoire obtient une accuracy légèrement supérieure (**0,856**) ainsi
+qu’une précision plus élevée (**0,815**), mais son rappel (**0,715**)
+laisse échapper davantage d’étudiants fragiles.
 
 Ce compromis est cohérent avec le métier: un système d’alerte précoce
 supporte souvent un rappel élevé, quitte à assumer davantage de faux
@@ -536,8 +549,12 @@ Les résultats suggèrent plusieurs pistes opérationnelles:
 
 Le projet conserve plusieurs limites explicites:
 
-- le dataset utilisé est **synthétique** et non issu d’une base
-  étudiante réelle anonymisée;
+- le dataset tabulaire principal est désormais public et réel, mais il
+  reste **mono-institutionnel** et déjà agrégé, ce qui limite la
+  généralisation immédiate à d’autres établissements;
+- le schéma harmonisé du projet simplifie certaines variables originales
+  de la source UCI afin de conserver une chaîne cohérente avec le
+  fallback synthétique;
 - les questions d’équité, de confidentialité et de biais
   socio-économiques devront être traitées explicitement avant tout usage
   réel;
@@ -547,12 +564,12 @@ Le projet conserve plusieurs limites explicites:
 - la branche CNN repose pour l’instant sur un jeu d’images synthétiques
   simple, avant intégration de documents pédagogiques réels.
 
-Les prolongements naturels sont donc l’intégration d’un dataset réel
-anonymisé, la création de variables dynamiques par semestre ou par
-période d’évaluation, la comparaison entre régression logistique, Random
-Forest et gradient boosting, la mise en place d’une validation croisée
-robuste et l’ajout d’une source visuelle réelle pour remplacer la
-démonstration synthétique.
+Les prolongements naturels sont donc la validation externe sur d’autres
+établissements ou cohortes, l’ajout de variables longitudinales par
+semestre ou par période d’évaluation, la comparaison entre régression
+logistique, Random Forest et gradient boosting, la mise en place d’un
+découpage plus strict par cohorte et l’ajout d’une source visuelle
+réelle pour remplacer la démonstration synthétique du CNN.
 
 ## Supports de Restitution
 
