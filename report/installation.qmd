@@ -27,6 +27,27 @@ Ce guide vous accompagne pas à pas dans l'installation de la chaîne d'outils n
 
 ---
 
+# Démarrage Rapide
+
+Si vous voulez simplement vérifier le projet avant de retravailler le rapport, utilisez ce parcours minimal depuis la racine du dépôt:
+
+1. `task smoke` pour rejouer la branche tabulaire, régénérer les figures principales et contrôler les artefacts essentiels.
+2. `task verify` pour ajouter la brique CNN et valider l'ensemble des sorties produites.
+3. `task render` pour reconstruire le rendu final Quarto en HTML, PDF et Markdown.
+
+Si vous préférez éviter toute configuration locale, le même flux est disponible via Docker:
+
+```bash
+docker compose build
+docker compose run --rm datascience task smoke
+docker compose run --rm datascience task verify
+docker compose run --rm datascience task render
+```
+
+Ce flux couvre le besoin le plus courant du projet: tester rapidement la chaîne analytique, puis régénérer le rendu final.
+
+---
+
 # Aperçu de la Boîte à Outils
 
 Voici la description des outils requis pour votre projet :
@@ -103,6 +124,8 @@ Si vous préférez installer chaque outil individuellement, suivez les instructi
 * **macOS :** `brew install go-task`.
 * **Linux :** Installez en une commande : `sudo sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin`.
 
+Le `Taskfile.yml` du projet est maintenant pensé pour rester portable entre Windows, macOS et Linux: il repose sur `python` et sur des scripts utilitaires du dépôt plutôt que sur des commandes shell spécifiques à Unix.
+
 ---
 
 # 🏃 Initialisation du Projet
@@ -111,7 +134,7 @@ Une fois l'ensemble des outils installés, ouvrez votre terminal dans le répert
 
 ## 1. Créer l'environnement virtuel Python
 ```bash
-python3 -m venv venv
+python -m venv venv
 ```
 
 ## 2. Activer l'environnement virtuel
@@ -136,6 +159,18 @@ python -m ipykernel install --user --name=venv-projet --display-name="Python (Pr
 
 Votre environnement est désormais entièrement opérationnel ! Vous pouvez lancer les commandes suivantes avec `task` depuis la racine du projet :
 
+* **Test rapide du pipeline tabulaire :**
+  ```bash
+  task smoke
+  ```
+  *(Rejoue wrangling, EDA, modélisation tabulaire, génération des figures et contrôle les artefacts clés.)*
+
+* **Vérification complète du projet :**
+  ```bash
+  task verify
+  ```
+  *(Ajoute la brique CNN et vérifie aussi les sorties TensorFlow.)*
+
 * **Compiler les notebooks uniquement :**
   ```bash
   task compile
@@ -151,3 +186,39 @@ Votre environnement est désormais entièrement opérationnel ! Vous pouvez lanc
   ```bash
   task preview
   ```
+
+* **Contrôler uniquement les artefacts déjà générés :**
+  ```bash
+  task check
+  ```
+
+Si `task` n'est pas encore disponible localement, vous pouvez toujours lancer le validateur d'artefacts directement:
+
+```bash
+python tools/verify_project.py
+```
+
+## Source de donnees tabulaire: public ou synthétique
+
+Le projet privilegie desormais par defaut le jeu UCI *Predict Students' Dropout and Academic Success*. Si la source publique n'est pas joignable, le pipeline revient automatiquement au generateur local pour conserver une execution reproductible.
+
+Execution nominale par defaut:
+
+```bash
+python src/tp1_student_wrangling.py
+```
+
+Sous Bash:
+
+```bash
+STUDENT_DATA_SOURCE=synthetic python src/tp1_student_wrangling.py
+```
+
+Sous PowerShell:
+
+```powershell
+$env:STUDENT_DATA_SOURCE = "synthetic"
+python src/tp1_student_wrangling.py
+```
+
+Le projet accepte `STUDENT_DATA_SOURCE=auto|uci|synthetic`. Le mode par defaut est maintenant `auto`, ce qui signifie: essayer UCI d'abord, puis revenir au mode synthétique si besoin. Vous pouvez aussi utiliser `STUDENT_DATA_URL` pour rediriger le telechargement vers un autre miroir de l'archive UCI.

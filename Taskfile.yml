@@ -1,52 +1,94 @@
 version: "3"
 
+vars:
+  PYTHON: python
+
 tasks:
   default:
     desc: Lance la compilation des notebooks et le rendu complet du rapport (HTML, PDF, GFM README.md)
     cmds:
       - task: render
 
+  sync-readme:
+    desc: Met a jour le README racine a partir du rendu GFM de Quarto avec des liens compatibles depot
+    cmds:
+      - "{{.PYTHON}} tools/sync_project_docs.py readme"
+
+  sync-install:
+    desc: Met a jour INSTALL.md a la racine a partir du rendu Quarto du guide d'installation
+    cmds:
+      - "{{.PYTHON}} tools/sync_project_docs.py install"
+
+  pipeline:
+    desc: Execute le pipeline Data Science principal sans Quarto pour verifier rapidement les artefacts du projet
+    cmds:
+      - "{{.PYTHON}} src/tp1_student_wrangling.py"
+      - "{{.PYTHON}} src/tp2_student_eda.py"
+      - "{{.PYTHON}} src/tp3_student_modelisation.py"
+      - "{{.PYTHON}} src/generate_report_figures.py"
+
+  smoke:
+    desc: Lance un test rapide du pipeline tabulaire et verifie les fichiers generes
+    cmds:
+      - task: pipeline
+      - task: check
+
+  check:
+    desc: Controle la presence et la structure minimale des artefacts du pipeline tabulaire
+    cmds:
+      - "{{.PYTHON}} tools/verify_project.py"
+
+  verify:
+    desc: Lance une verification plus complete incluant la brique CNN et les controles d'artefacts
+    cmds:
+      - task: smoke
+      - "{{.PYTHON}} src/tp4_synthetic_cnn.py"
+      - "{{.PYTHON}} tools/verify_project.py --include-cnn"
+
   compile:
     desc: "Compile les notebooks (.ipynb) en 3 fichiers : .qmd (Quarto), .py (Script), .log (Journal d'exécution)"
     cmds:
-      - python3 tools/compile_notebooks.py
+      - "{{.PYTHON}} tools/compile_notebooks.py"
 
   render:
     desc: Compile d'abord les notebooks puis génère le rapport complet dans tous les formats déclarés
     cmds:
       - task: compile
+      - task: check
       - quarto render report/rapport.qmd
-      - cp report/README.md ./README.md
-      - python3 -c "from pathlib import Path; path = Path('README.md'); text = path.read_text(encoding='utf-8'); text = text.replace('](assets/', '](report/assets/').replace('](../src/', '](src/'); path.write_text(text, encoding='utf-8')"
+      - task: sync-readme
 
   html:
     desc: Compile les notebooks puis génère le rapport au format HTML uniquement
     cmds:
       - task: compile
+      - task: check
       - quarto render report/rapport.qmd --to html
 
   pdf:
     desc: Compile les notebooks puis génère le rapport au format PDF (via Typst) uniquement
     cmds:
       - task: compile
+      - task: check
       - quarto render report/rapport.qmd --to typst
 
   gfm:
     desc: Compile les notebooks puis génère le rapport en GFM (Markdown) pour mettre à jour le README.md
     cmds:
       - task: compile
+      - task: check
       - quarto render report/rapport.qmd --to gfm
-      - cp report/README.md ./README.md
-      - python3 -c "from pathlib import Path; path = Path('README.md'); text = path.read_text(encoding='utf-8'); text = text.replace('](assets/', '](report/assets/').replace('](../src/', '](src/'); path.write_text(text, encoding='utf-8')"
+      - task: sync-readme
 
   preview:
     desc: Compile les notebooks puis démarre le serveur de prévisualisation dynamique Quarto
     cmds:
       - task: compile
+      - task: check
       - quarto preview report/rapport.qmd
 
   install-guide:
     desc: Génère le guide d'installation sous tous les formats (HTML, PDF, Markdown) et met à jour INSTALL.md à la racine
     cmds:
       - quarto render report/installation.qmd
-      - cp report/INSTALL.md ./INSTALL.md
+      - task: sync-install

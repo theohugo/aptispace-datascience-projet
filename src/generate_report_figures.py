@@ -4,9 +4,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 
-from student_risk_dataset import ensure_student_dataset
+from student_risk_dataset import RAW_PATH, ensure_student_dataset
 
-RAW_PATH = Path("data/raw/student_risk/student_dropout_synthetic.csv")
 PROCESSED_DIR = Path("data/processed")
 ASSETS_DIR = Path("report/assets")
 
@@ -33,6 +32,32 @@ def save_missing_values_figure(raw_df: pd.DataFrame) -> None:
     )
 
     figure, axis = plt.subplots(figsize=(9, 4.5))
+    if int(missing["missing_count"].max()) == 0:
+        axis.axis("off")
+        axis.text(
+            0.5,
+            0.55,
+            "Aucune valeur manquante\nobservée sur le schéma tabulaire retenu.",
+            ha="center",
+            va="center",
+            fontsize=15,
+            weight="bold",
+        )
+        axis.text(
+            0.5,
+            0.25,
+            "Le pipeline conserve toutefois la logique de contrôle et\n"
+            "d'imputation pour rester compatible avec les autres sources.",
+            ha="center",
+            va="center",
+            fontsize=11,
+            color="#475569",
+        )
+        figure.tight_layout()
+        figure.savefig(ASSETS_DIR / "tp1_missing_values.png", bbox_inches="tight")
+        plt.close(figure)
+        return
+
     sns.barplot(
         data=missing,
         x="column",
