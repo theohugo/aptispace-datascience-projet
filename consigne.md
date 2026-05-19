@@ -1,0 +1,104 @@
+# 🎓 Projet Fil Rouge Data Science : Sujet Libre {.unnumbered}
+
+### 📋 Présentation du Projet Fil Rouge
+
+**Contexte :** Le projet fil rouge est un travail d'application pratique majeur réalisé en équipe de 2 à 3 étudiants. Contrairement aux Travaux Pratiques guidés, il s'agit d'un **sujet libre** : votre groupe d'étudiants est entièrement libre de choisir sa propre problématique métier et son propre jeu de données d'intérêt (provenant de plateformes comme Kaggle, de portails Open Data, ou d'APIs publiques).
+
+L'objectif est de concevoir un pipeline de Data Science complet de bout en bout, depuis l'acquisition et la préparation des données brutes jusqu'à la modélisation prédictive avancée (combinant Machine Learning tabulaire et Deep Learning d'images ou signaux) et la communication interactive des insights.
+
+**Votre mission :** Rédiger un dossier de recherche complet (au format Quarto) documentant l'ensemble de votre démarche scientifique. Le projet est structuré en deux jalons progressifs pour vous guider pas à pas dans votre avancée.
+
+---
+
+### 📍 Jalon 1 : Acquisition, Nettoyage et Exploration (Évaluation Intermédiaire)
+
+1. **Acquisition & Data Wrangling (Chapitres 1 & 2) :**
+* Sélection, justification et récupération de votre jeu de données principal et de données secondaires complémentaires (multi-sources).
+* Nettoyage rigoureux des données brutes : détection et traitement des valeurs manquantes, uniformisation des formats (ex: formats de dates, types numériques), détection des outliers et encodage des caractéristiques qualitatives.
+
+2. **Analyse Exploratoire (EDA) & Visualisation (Chapitres 3 & 4) :**
+* Statistiques descriptives globales et analyse statistique approfondie des corrélations et relations de causalité.
+* Création de graphiques multidimensionnels percutants pour mettre en évidence les insights majeurs de vos données.
+
+**🛑 LIVRABLE JALON 1 :** Un premier rapport justifiant vos choix de préparation de la donnée et présentant un résumé visuel des 3 à 5 insights majeurs découverts lors de l'EDA.
+
+---
+
+### 📍 Jalon 2 : Modélisation, Évaluation et Restitution (Évaluation Finale)
+
+3. **Modélisation & Apprentissage (Chapitre 5) :**
+* **Analyse tabulaire (Machine Learning) :** Entraînement de modèles (supervisés ou non supervisés) adaptés à votre problématique (ex: régression, classification ou clustering).
+* **Deep Learning (Vision ou Signaux) :** Intégration d'une brique de Deep Learning (traitement d'images ou de signaux) à l'aide de réseaux de neurones convolutifs (CNN) sous TensorFlow pour classifier ou enrichir vos prédictions.
+
+4. **Évaluation & Robustesse (Chapitre 6) :**
+* Choix rigoureux et motivé des métriques d'erreur ou de classification.
+* Mise en place d'un protocole de validation croisée rigoureux (respectant la structure temporelle ou groupée de vos données).
+
+5. **Data Storytelling & Communication (Chapitre 7) :**
+* Restitution interactive des résultats de vos modèles sous forme de dashboard (Dash, Plotly ou OJS) et discussion transparente des limites de votre étude.
+
+**🛑 LIVRABLE JALON 2 :** Le dossier global finalisé, intégrant les retours du Jalon 1 et la nouvelle partie prédictive.
+
+---
+
+## ⚖️ Grille de Notation (Barème total sur 20)
+
+### 📊 Évaluation Jalon 1 - L'Exploration (sur 8 points)
+
+| Critère d'Évaluation | Indicateurs de Réussite | Points |
+| --- | --- | --- |
+| **Data Wrangling** | Propreté des manipulations Pandas, pertinence de l'imputation et de l'encodage. | /3 |
+| **Rigueur de l'EDA** | Profondeur de l'analyse, identification correcte des biais dans le jeu de données. | /3 |
+| **Pertinence Visuelle** | Lisibilité des graphiques, choix adaptés au type de données, axes et légendes clairs. | /2 |
+
+### 🧠 Évaluation Jalon 2 - La Prédiction (sur 12 points)
+
+| Critère d'Évaluation | Indicateurs de Réussite | Points |
+| --- | --- | --- |
+| **Architecture Modèle** | Split train/test pertinent, maîtrise technique des algorithmes (et des couches de convolution si traitement d'images/signaux). | /4 |
+| **Rigueur d'Évaluation** | Interprétation correcte des métriques d'erreur (RMSE, MAE, etc.) ou de classification (Précision, F1-Score). | /3 |
+| **Data Storytelling** | Capacité à vulgariser les résultats métier (dashboards interactifs/OJS). | /3 |
+| **Qualité Transverse** | Clarté des schémas d'architecture des flux de données (Mermaid) et précision du vocabulaire technique final. | /2 |
+
+## 🛠️ Livrables finaux attendus
+
+* Un **Document Quarto (.qmd)** compilé en PDF ou HTML interactif contenant l'ensemble du code, des textes et des visualisations.
+* Un **Schéma de pipeline Data** (illustrant le cycle de vie de la donnée, de la source brute à la prédiction).
+* Un code structuré et commenté de manière professionnelle.
+
+---
+
+## 📁 Structure du Squelette de Départ
+
+Pour démarrer sereinement le projet, un dépôt de base pré-configuré est fourni par l'équipe pédagogique. Vous y trouverez toute l'arborescence standardisée d'un projet de Science des Données moderne, y compris les scripts d'installation automatique et les notebooks des jalons.
+
+Explorez l'arborescence ci-dessous et téléchargez l'archive complète pour démarrer votre travail :
+
+::: {.filetree title="Squelette du Projet" zip="lab/projet.zip"}
+- [README.md](lab/projet/README.md) (Rapport final à compléter)
+- [INSTALL.md](lab/projet/INSTALL.md) (Guide d'installation et d'initialisation)
+- [Taskfile.yml](lab/projet/Taskfile.yml) (Fichier d'automatisation des tâches)
+- [requirements.txt](lab/projet/requirements.txt) (Dépendances Python du projet)
+- notebooks/ (Les notebooks guidés des jalons)
+    - [01_acquisition.ipynb](lab/projet/notebooks/01_acquisition.ipynb)
+    - [02_wrangling.ipynb](lab/projet/notebooks/02_wrangling.ipynb)
+    - [03_visualisation.ipynb](lab/projet/notebooks/03_visualisation.ipynb)
+    - [04_eda.ipynb](lab/projet/notebooks/04_eda.ipynb)
+    - [05_modelisation.ipynb](lab/projet/notebooks/05_modelisation.ipynb)
+    - [06_evaluation.ipynb](lab/projet/notebooks/06_evaluation.ipynb)
+    - [07_communication.ipynb](lab/projet/notebooks/07_communication.ipynb)
+- src/ (Les modules Python réutilisables du pipeline)
+    - [data_clean.py](lab/projet/src/data_clean.py) (Fonctions de nettoyage et d'imputation)
+    - [utils_viz.py](lab/projet/src/utils_viz.py) (Fonctions de tracés de graphiques)
+- tools/ (Scripts de configuration système automatique)
+    - [install_linux.sh](lab/projet/tools/install_linux.sh)
+    - [install_macos.sh](lab/projet/tools/install_macos.sh)
+    - [install_windows.ps1](lab/projet/tools/install_windows.ps1)
+:::
+
+### ⚙️ Automatisation avec Taskfile
+Le projet inclut un outil de productivité nommé `go-task` (ou `task`). À la racine du projet, vous pouvez ouvrir votre terminal et utiliser les commandes suivantes pour simplifier votre flux de travail :
+
+- `task compile` : Extrait et compile vos notebooks et prépare les documents Quarto de jalon.
+- `task render` : Compile l'ensemble de votre rapport final en HTML, PDF (via Typst) et Markdown (README.md).
+- `task preview` : Lance un serveur local Quarto de prévisualisation en temps réel pour rédiger confortablement.
