@@ -6,6 +6,9 @@
 - [Introduction et Contexte Métier](#sec-intro)
   - [Contexte du Projet](#contexte-du-projet)
   - [Objectif Analytique](#objectif-analytique)
+  - [Synthèse](#synthèse)
+  - [Positionnement par Rapport au Cahier des
+    Charges](#positionnement-par-rapport-au-cahier-des-charges)
 - [Acquisition et Préparation des Données (Data
   Wrangling)](#sec-wrangling)
   - [Audit de Qualité](#audit-de-qualité)
@@ -32,9 +35,11 @@
   - [Stratégie de Validation](#stratégie-de-validation)
   - [Résultats et Interprétation](#résultats-et-interprétation)
 - [Data Storytelling et Communication](#sec-storytelling)
+  - [Matrice d’Action Pédagogique](#matrice-daction-pédagogique)
   - [Recommandations Stratégiques /
     Métier](#recommandations-stratégiques--métier)
   - [Limites et Perspectives](#limites-et-perspectives)
+  - [Supports de Restitution](#supports-de-restitution)
 - [Bibliographie](#bibliographie)
 
 # Introduction et Contexte Métier
@@ -97,6 +102,43 @@ Les livrables analytiques sont les suivants:
 > les métriques et les visualisations sur le nouveau sujet métier, tout
 > en gardant la possibilité de substituer plus tard un jeu de données
 > réel anonymisé.
+
+## Synthèse
+
+Le travail mené couvre les deux jalons du projet autour d’un même cas
+d’usage: la détection précoce du risque de décrochage étudiant.
+L’ensemble de la démarche articule préparation de données, analyse
+exploratoire, modélisation supervisée et ouverture vers une composante
+vision par ordinateur.
+
+Les principaux résultats obtenus peuvent être résumés ainsi:
+
+- le pipeline aboutit à une base étudiante cohérente, nettoyée et
+  enrichie par des variables dérivées interprétables;
+- l’analyse exploratoire met en évidence des contrastes nets selon les
+  programmes, le statut boursier et la dynamique semestrielle;
+- la régression logistique constitue le meilleur compromis pour une
+  logique d’alerte précoce, avec un rappel de **0,741** et un ROC-AUC de
+  **0,878**;
+- la branche CNN, encore démonstrative, confirme la faisabilité
+  technique d’une extension future vers des documents pédagogiques
+  numérisés.
+
+## Positionnement par Rapport au Cahier des Charges
+
+| Dimension attendue | Traitement retenu dans ce rapport | Supports mobilisés |
+|----|----|----|
+| Préparation des données | Audit des manques, imputation, création de variables dérivées et encodage pour la modélisation | [src/student_risk_dataset.py](src/student_risk_dataset.py), [src/tp1_student_wrangling.py](src/tp1_student_wrangling.py) |
+| Analyse exploratoire | Statistiques descriptives, profils par programme, distributions et corrélations | [src/tp2_student_eda.py](src/tp2_student_eda.py), tableaux de `data/processed` |
+| Visualisation | Figures synthétiques centrées sur les signaux pédagogiques majeurs | [src/generate_report_figures.py](src/generate_report_figures.py), figures du dossier `report/assets` |
+| Modélisation | Comparaison entre baseline, régression logistique et Random Forest | [src/tp3_student_modelisation.py](src/tp3_student_modelisation.py) |
+| Évaluation | Lecture conjointe de l’accuracy, du rappel, du F1-score et du ROC-AUC | `data/processed/tp3_model_metrics.csv` |
+| Restitution | Interprétation métier, matrice d’action pédagogique et discussion des limites | sections d’analyse et de storytelling du présent rapport |
+
+Cette structuration permet de maintenir une continuité entre les
+attendus pédagogiques du cours et la progression réelle de l’étude, sans
+dissocier artificiellement les phases exploratoires, prédictives et de
+communication.
 
 ------------------------------------------------------------------------
 
@@ -423,6 +465,14 @@ inférieur au coût d’un abandon non détecté.
 
 # Data Storytelling et Communication
 
+## Matrice d’Action Pédagogique
+
+| Niveau de risque | Signaux dominants | Action recommandée | Indicateur de suivi |
+|----|----|----|----|
+| Élevé | Assiduité en baisse, retard de remise, chute du contrôle continu | Entretien sous 7 jours, tutorat ciblé, revue du plan de charge | Retour d’assiduité, remise des travaux, évolution du contrôle continu |
+| Modéré | Engagement LMS irrégulier, stress élevé, notes encore récupérables | Coaching méthodologique, point hebdomadaire, soutien organisationnel | Reprise des connexions, stabilisation des retards |
+| Faible | Bon engagement et résultats stables | Suivi léger et prévention standard | Maintien de la dynamique académique |
+
 ## Recommandations Stratégiques / Métier
 
 Les résultats suggèrent plusieurs pistes opérationnelles:
@@ -460,6 +510,17 @@ période d’évaluation, la comparaison entre régression logistique, Random
 Forest et gradient boosting, la mise en place d’une validation croisée
 robuste et l’ajout d’une source visuelle réelle pour remplacer la
 démonstration synthétique.
+
+## Supports de Restitution
+
+La restitution finale s’appuie sur plusieurs supports complémentaires.
+Le rapport Quarto constitue le document central de synthèse et
+d’interprétation. Il est complété par un schéma Mermaid du pipeline de
+données, par des jeux intermédiaires et finaux exportés dans
+`data/processed`, ainsi que par un ensemble de figures produites dans
+`report/assets`. Cet agencement vise à assurer à la fois la lisibilité
+du raisonnement, la traçabilité des transformations et la cohérence
+entre les résultats chiffrés et leur interprétation métier.
 
 Ce document dynamique a été compilé en Quarto ([Team
 2024](#ref-quarto2024)).

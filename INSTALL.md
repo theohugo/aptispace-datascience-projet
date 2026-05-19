@@ -1,12 +1,12 @@
 # Guide d’Installation de l’Environnement de Data Science
 Équipe Pédagogique - Aptispace
-2026-05-18
+2026-05-19
 
 - [Introduction](#introduction)
+- [Démarrage Rapide](#démarrage-rapide)
 - [Aperçu de la Boîte à Outils](#aperçu-de-la-boîte-à-outils)
 - [🚀 Installation Automatisée
   (Recommandé)](#rocket-installation-automatisée-recommandé)
-- [🐳 Option Docker (le plus simple)](#whale-option-docker-le-plus-simple)
 - [🛠️ Configuration Manuelle
   (Alternative)](#hammer_and_wrench-configuration-manuelle-alternative)
   - [1. Python 3 (3.12 ou 3.14)](#1-python-3-312-ou-314)
@@ -29,6 +29,33 @@ Ce guide vous accompagne pas à pas dans l’installation de la chaîne
 d’outils nécessaire pour exécuter le pipeline de Data Science, éditer
 vos notebooks et générer vos livrables de communication dynamique
 (rapports PDF et HTML).
+
+------------------------------------------------------------------------
+
+# Démarrage Rapide
+
+Si vous voulez simplement vérifier le projet avant de retravailler le
+rapport, utilisez ce parcours minimal depuis la racine du dépôt:
+
+1.  `task smoke` pour rejouer la branche tabulaire, régénérer les
+    figures principales et contrôler les artefacts essentiels.
+2.  `task verify` pour ajouter la brique CNN et valider l’ensemble des
+    sorties produites.
+3.  `task render` pour reconstruire le rendu final Quarto en HTML, PDF
+    et Markdown.
+
+Si vous préférez éviter toute configuration locale, le même flux est
+disponible via Docker:
+
+``` bash
+docker compose build
+docker compose run --rm datascience task smoke
+docker compose run --rm datascience task verify
+docker compose run --rm datascience task render
+```
+
+Ce flux couvre le besoin le plus courant du projet: tester rapidement la
+chaîne analytique, puis régénérer le rendu final.
 
 ------------------------------------------------------------------------
 
@@ -94,46 +121,6 @@ installer Typst, Quarto et Go-Task.*
 
 ------------------------------------------------------------------------
 
-# 🐳 Option Docker (le plus simple)
-
-Si vous voulez éviter toute installation locale (Python, Quarto, Typst,
-Task), vous pouvez exécuter le projet dans Docker.
-
-Sur Windows, vérifiez que Docker Desktop est bien lancé avant
-d'exécuter les commandes (sinon vous aurez l'erreur "docker daemon is
-not running").
-
-Depuis la racine du projet :
-
-``` bash
-docker compose build
-```
-
-Puis lancez les commandes utiles :
-
-- Compiler les notebooks :
-
-  ``` bash
-  docker compose run --rm datascience task compile
-  ```
-
-- Générer le rapport complet :
-
-  ``` bash
-  docker compose run --rm datascience task render
-  ```
-
-- Prévisualisation Quarto :
-
-  ``` bash
-  docker compose run --rm -p 4200:4200 datascience quarto preview report/rapport.qmd --port 4200 --host 0.0.0.0
-  ```
-
-Les volumes Docker sont configurés pour refléter les fichiers générés
-directement dans votre dossier de projet local.
-
-------------------------------------------------------------------------
-
 # 🛠️ Configuration Manuelle (Alternative)
 
 Si vous préférez installer chaque outil individuellement, suivez les
@@ -169,6 +156,11 @@ instructions ci-dessous :
 - **Linux :** Installez en une commande :
   `sudo sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin`.
 
+Le `Taskfile.yml` du projet est maintenant pensé pour rester portable
+entre Windows, macOS et Linux: il repose sur `python` et sur des scripts
+utilitaires du dépôt plutôt que sur des commandes shell spécifiques à
+Unix.
+
 ------------------------------------------------------------------------
 
 # 🏃 Initialisation du Projet
@@ -179,7 +171,7 @@ répertoire `projet/` et suivez les étapes d’initialisation suivantes :
 ## 1. Créer l’environnement virtuel Python
 
 ``` bash
-python3 -m venv venv
+python -m venv venv
 ```
 
 ## 2. Activer l’environnement virtuel
@@ -209,6 +201,23 @@ python -m ipykernel install --user --name=venv-projet --display-name="Python (Pr
 Votre environnement est désormais entièrement opérationnel ! Vous pouvez
 lancer les commandes suivantes avec `task` depuis la racine du projet :
 
+- **Test rapide du pipeline tabulaire :**
+
+  ``` bash
+  task smoke
+  ```
+
+  *(Rejoue wrangling, EDA, modélisation tabulaire, génération des
+  figures et contrôle les artefacts clés.)*
+
+- **Vérification complète du projet :**
+
+  ``` bash
+  task verify
+  ```
+
+  *(Ajoute la brique CNN et vérifie aussi les sorties TensorFlow.)*
+
 - **Compiler les notebooks uniquement :**
 
   ``` bash
@@ -229,3 +238,16 @@ lancer les commandes suivantes avec `task` depuis la racine du projet :
   ``` bash
   task preview
   ```
+
+- **Contrôler uniquement les artefacts déjà générés :**
+
+  ``` bash
+  task check
+  ```
+
+Si `task` n’est pas encore disponible localement, vous pouvez toujours
+lancer le validateur d’artefacts directement:
+
+``` bash
+python tools/verify_project.py
+```
