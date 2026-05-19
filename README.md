@@ -98,12 +98,11 @@ Les livrables analytiques sont les suivants:
   scannées, de l’écriture manuscrite ou des documents pédagogiques
   numérisés.
 
-> Note de cadrage: le dépôt s’appuie désormais **par défaut** sur le jeu
-> UCI *Predict Students’ Dropout and Academic Success*, harmonisé vers
-> le schéma du projet. Pour conserver une exécution robuste en toute
-> circonstance, le projet garde aussi un **générateur synthétique
-> local** utilisé en repli automatique si la source publique n’est plus
-> accessible.
+> Note méthodologique: le pipeline tabulaire repose sur le jeu UCI
+> *Predict Students’ Dropout and Academic Success*, harmonisé vers le
+> schéma analytique du projet. Un générateur synthétique local est
+> conservé comme solution de repli afin d’assurer l’exécution du
+> pipeline si la source publique devient indisponible.
 
 ## Synthèse
 
@@ -263,8 +262,8 @@ L’exploration visuelle est calculée dans
 [src/tp2_student_eda.py](src/tp2_student_eda.py) et mise en forme
 dans
 [src/generate_report_figures.py](src/generate_report_figures.py). Les
-visuels générés dans `report/assets` sont désormais alignés sur le sujet
-étudiant du projet.
+visuels générés dans `report/assets` documentent le cas d’étude étudiant
+retenu dans ce rapport.
 
 ------------------------------------------------------------------------
 
@@ -364,14 +363,14 @@ Trois modèles sont comparés:
 - une forêt aléatoire, utilisée ici pour sa robustesse et pour le
   classement des variables explicatives.
 
-Le protocole retenu combine désormais deux niveaux d’évaluation
-complémentaires. Un **split stratifié en 80/20** est conservé pour
-estimer la performance finale sur un jeu de test indépendant. En
-parallèle, une **validation croisée stratifiée à 5 plis** est réalisée
-sur l’échantillon d’entraînement afin de comparer les modèles sur
-plusieurs sous-échantillons et de réduire la dépendance à un découpage
-unique. Sur un dataset réel multi-semestres, ce protocole devrait
-ensuite évoluer vers un découpage chronologique ou par cohorte.
+Le protocole retenu combine deux niveaux d’évaluation complémentaires.
+Un **split stratifié en 80/20** est conservé pour estimer la performance
+finale sur un jeu de test indépendant. En parallèle, une **validation
+croisée stratifiée à 5 plis** est réalisée sur l’échantillon
+d’entraînement afin de comparer les modèles sur plusieurs
+sous-échantillons et de réduire la dépendance à un découpage unique. Sur
+un dataset réel multi-semestres, ce protocole devrait ensuite évoluer
+vers un découpage chronologique ou par cohorte.
 
 ![Top 10 des variables explicatives du risque
 étudiant.](report/assets/tp3_feature_importance.png)
@@ -549,8 +548,8 @@ Les résultats suggèrent plusieurs pistes opérationnelles:
 
 Le projet conserve plusieurs limites explicites:
 
-- le dataset tabulaire principal est désormais public et réel, mais il
-  reste **mono-institutionnel** et déjà agrégé, ce qui limite la
+- le dataset tabulaire principal est public et réel, mais il reste
+  **mono-institutionnel** et déjà agrégé, ce qui limite la
   généralisation immédiate à d’autres établissements;
 - le schéma harmonisé du projet simplifie certaines variables originales
   de la source UCI afin de conserver une chaîne cohérente avec le
