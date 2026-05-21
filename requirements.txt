@@ -11,6 +11,7 @@ matplotlib>=3.7.0
 seaborn>=0.12.0
 plotnine>=0.12.0
 plotly>=5.24.0
+bokeh>=3.4.0
 
 # Outils de développement
 ipykernel

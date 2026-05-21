@@ -60,6 +60,7 @@ CORE_FILES = [
     "report/assets/tp2_program_profiles.png",
     "report/assets/tp3_feature_importance.png",
     "report/assets/tp3_student_dashboard.html",
+    "report/presentation.html",
 ]
 
 CNN_CSVS: dict[str, ColumnExpectation] = {

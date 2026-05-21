@@ -9,3 +9,21 @@ services:
       - ./:/workspace
     stdin_open: true
     tty: true
+
+  presentation:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: aptispace-datascience:local
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    ports:
+      - "8000:8000"
+    command:
+      - python
+      - -m
+      - http.server
+      - "8000"
+      - --directory
+      - /workspace
