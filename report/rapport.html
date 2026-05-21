@@ -250,7 +250,7 @@ window.Quarto = {
 <li>une brique CNN documentée, pensée pour être raccordée à des copies scannées, de l’écriture manuscrite ou des documents pédagogiques numérisés.</li>
 </ul>
 <blockquote class="blockquote">
-<p>Note de cadrage: le dépôt s’appuie désormais <strong>par défaut</strong> sur le jeu UCI <em>Predict Students’ Dropout and Academic Success</em>, harmonisé vers le schéma du projet. Pour conserver une exécution robuste en toute circonstance, le projet garde aussi un <strong>générateur synthétique local</strong> utilisé en repli automatique si la source publique n’est plus accessible.</p>
+<p>Note méthodologique: le pipeline tabulaire repose sur le jeu UCI <em>Predict Students’ Dropout and Academic Success</em>, harmonisé vers le schéma analytique du projet. Un générateur synthétique local est conservé comme solution de repli afin d’assurer l’exécution du pipeline si la source publique devient indisponible.</p>
 </blockquote>
 </section>
 <section id="synthèse" class="level2" data-number="1.3">
@@ -412,7 +412,7 @@ window.Quarto = {
 </section>
 <section id="travaux-pratiques-dexploration-visuelle-eda" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="travaux-pratiques-dexploration-visuelle-eda"><span class="header-section-number">3.3</span> Travaux Pratiques d’Exploration Visuelle (EDA)</h2>
-<p>L’exploration visuelle est calculée dans <a href="../src/tp2_student_eda.py">src/tp2_student_eda.py</a> et mise en forme dans <a href="../src/generate_report_figures.py">src/generate_report_figures.py</a>. Les visuels générés dans <code>report/assets</code> sont désormais alignés sur le sujet étudiant du projet.</p>
+<p>L’exploration visuelle est calculée dans <a href="../src/tp2_student_eda.py">src/tp2_student_eda.py</a> et mise en forme dans <a href="../src/generate_report_figures.py">src/generate_report_figures.py</a>. Les visuels générés dans <code>report/assets</code> documentent le cas d’étude étudiant retenu dans ce rapport.</p>
 <hr>
 </section>
 </section>
@@ -477,7 +477,7 @@ window.Quarto = {
 <li>une régression logistique, plus adaptée à une lecture opérationnelle centrée sur le rappel;</li>
 <li>une forêt aléatoire, utilisée ici pour sa robustesse et pour le classement des variables explicatives.</li>
 </ul>
-<p>Le protocole retenu combine désormais deux niveaux d’évaluation complémentaires. Un <strong>split stratifié en 80/20</strong> est conservé pour estimer la performance finale sur un jeu de test indépendant. En parallèle, une <strong>validation croisée stratifiée à 5 plis</strong> est réalisée sur l’échantillon d’entraînement afin de comparer les modèles sur plusieurs sous-échantillons et de réduire la dépendance à un découpage unique. Sur un dataset réel multi-semestres, ce protocole devrait ensuite évoluer vers un découpage chronologique ou par cohorte.</p>
+<p>Le protocole retenu combine deux niveaux d’évaluation complémentaires. Un <strong>split stratifié en 80/20</strong> est conservé pour estimer la performance finale sur un jeu de test indépendant. En parallèle, une <strong>validation croisée stratifiée à 5 plis</strong> est réalisée sur l’échantillon d’entraînement afin de comparer les modèles sur plusieurs sous-échantillons et de réduire la dépendance à un découpage unique. Sur un dataset réel multi-semestres, ce protocole devrait ensuite évoluer vers un découpage chronologique ou par cohorte.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="assets/tp3_feature_importance.png" class="img-fluid figure-img"></p>
@@ -675,7 +675,7 @@ window.Quarto = {
 <h2 data-number="7.4" class="anchored" data-anchor-id="limites-et-perspectives"><span class="header-section-number">7.4</span> Limites et Perspectives</h2>
 <p>Le projet conserve plusieurs limites explicites:</p>
 <ul>
-<li>le dataset tabulaire principal est désormais public et réel, mais il reste <strong>mono-institutionnel</strong> et déjà agrégé, ce qui limite la généralisation immédiate à d’autres établissements;</li>
+<li>le dataset tabulaire principal est public et réel, mais il reste <strong>mono-institutionnel</strong> et déjà agrégé, ce qui limite la généralisation immédiate à d’autres établissements;</li>
 <li>le schéma harmonisé du projet simplifie certaines variables originales de la source UCI afin de conserver une chaîne cohérente avec le fallback synthétique;</li>
 <li>les questions d’équité, de confidentialité et de biais socio-économiques devront être traitées explicitement avant tout usage réel;</li>
 <li>le modèle tabulaire n’a pas encore bénéficié d’une recherche systématique d’hyperparamètres ni d’une comparaison avec des modèles de boosting;</li>
@@ -1211,7 +1211,7 @@ Team, Quarto Development. 2024. <span>“Quarto Dynamic Publishing System: Colla
 <span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>un modèle de classification de référence comparé à une baseline naïve pour repérer les profils à risque;</span>
 <span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>une brique CNN documentée, pensée pour être raccordée à des copies scannées, de l'écriture manuscrite ou des documents pédagogiques numérisés.</span>
 <span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Note de cadrage: le dépôt s'appuie désormais **par défaut** sur le jeu UCI *Predict Students' Dropout and Academic Success*, harmonisé vers le schéma du projet. Pour conserver une exécution robuste en toute circonstance, le projet garde aussi un **générateur synthétique local** utilisé en repli automatique si la source publique n'est plus accessible.</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Note méthodologique: le pipeline tabulaire repose sur le jeu UCI *Predict Students' Dropout and Academic Success*, harmonisé vers le schéma analytique du projet. Un générateur synthétique local est conservé comme solution de repli afin d'assurer l'exécution du pipeline si la source publique devient indisponible.</span></span>
 <span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="fu">## Synthèse</span></span>
 <span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>Le travail mené couvre les deux jalons du projet autour d'un même cas d'usage: la détection précoce du risque de décrochage étudiant. L'ensemble de la démarche articule préparation de données, analyse exploratoire, modélisation supervisée et ouverture vers une composante vision par ordinateur.</span>
@@ -1299,7 +1299,7 @@ Team, Quarto Development. 2024. <span>“Quarto Dynamic Publishing System: Colla
 <span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a>Ces variables dérivées ont deux avantages. Elles améliorent la capacité prédictive du modèle, mais surtout elles restent compréhensibles par les équipes éducatives. Une alerte fondée sur la baisse des notes, la chute d'engagement et la hausse de pression académique est plus défendable qu'un score opaque.</span>
 <span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a><span class="fu">## Travaux Pratiques d'Exploration Visuelle (EDA)</span></span>
-<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a>L'exploration visuelle est calculée dans <span class="co">[</span><span class="ot">src/tp2_student_eda.py</span><span class="co">](../src/tp2_student_eda.py)</span> et mise en forme dans <span class="co">[</span><span class="ot">src/generate_report_figures.py</span><span class="co">](../src/generate_report_figures.py)</span>. Les visuels générés dans <span class="in">`report/assets`</span> sont désormais alignés sur le sujet étudiant du projet.</span>
+<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a>L'exploration visuelle est calculée dans <span class="co">[</span><span class="ot">src/tp2_student_eda.py</span><span class="co">](../src/tp2_student_eda.py)</span> et mise en forme dans <span class="co">[</span><span class="ot">src/generate_report_figures.py</span><span class="co">](../src/generate_report_figures.py)</span>. Les visuels générés dans <span class="in">`report/assets`</span> documentent le cas d'étude étudiant retenu dans ce rapport.</span>
 <span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a>---</span>
 <span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a></span>
@@ -1359,7 +1359,7 @@ Team, Quarto Development. 2024. <span>“Quarto Dynamic Publishing System: Colla
 <span id="cb2-201"><a href="#cb2-201" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>une régression logistique, plus adaptée à une lecture opérationnelle centrée sur le rappel;</span>
 <span id="cb2-202"><a href="#cb2-202" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>une forêt aléatoire, utilisée ici pour sa robustesse et pour le classement des variables explicatives.</span>
 <span id="cb2-203"><a href="#cb2-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-204"><a href="#cb2-204" aria-hidden="true" tabindex="-1"></a>Le protocole retenu combine désormais deux niveaux d'évaluation complémentaires. Un **split stratifié en 80/20** est conservé pour estimer la performance finale sur un jeu de test indépendant. En parallèle, une **validation croisée stratifiée à 5 plis** est réalisée sur l'échantillon d'entraînement afin de comparer les modèles sur plusieurs sous-échantillons et de réduire la dépendance à un découpage unique. Sur un dataset réel multi-semestres, ce protocole devrait ensuite évoluer vers un découpage chronologique ou par cohorte.</span>
+<span id="cb2-204"><a href="#cb2-204" aria-hidden="true" tabindex="-1"></a>Le protocole retenu combine deux niveaux d'évaluation complémentaires. Un **split stratifié en 80/20** est conservé pour estimer la performance finale sur un jeu de test indépendant. En parallèle, une **validation croisée stratifiée à 5 plis** est réalisée sur l'échantillon d'entraînement afin de comparer les modèles sur plusieurs sous-échantillons et de réduire la dépendance à un découpage unique. Sur un dataset réel multi-semestres, ce protocole devrait ensuite évoluer vers un découpage chronologique ou par cohorte.</span>
 <span id="cb2-205"><a href="#cb2-205" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-206"><a href="#cb2-206" aria-hidden="true" tabindex="-1"></a><span class="al">![Top 10 des variables explicatives du risque étudiant.](assets/tp3_feature_importance.png)</span></span>
 <span id="cb2-207"><a href="#cb2-207" aria-hidden="true" tabindex="-1"></a></span>
@@ -1468,7 +1468,7 @@ Team, Quarto Development. 2024. <span>“Quarto Dynamic Publishing System: Colla
 <span id="cb2-310"><a href="#cb2-310" aria-hidden="true" tabindex="-1"></a><span class="fu">## Limites et Perspectives</span></span>
 <span id="cb2-311"><a href="#cb2-311" aria-hidden="true" tabindex="-1"></a>Le projet conserve plusieurs limites explicites:</span>
 <span id="cb2-312"><a href="#cb2-312" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-313"><a href="#cb2-313" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>le dataset tabulaire principal est désormais public et réel, mais il reste **mono-institutionnel** et déjà agrégé, ce qui limite la généralisation immédiate à d'autres établissements;</span>
+<span id="cb2-313"><a href="#cb2-313" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>le dataset tabulaire principal est public et réel, mais il reste **mono-institutionnel** et déjà agrégé, ce qui limite la généralisation immédiate à d'autres établissements;</span>
 <span id="cb2-314"><a href="#cb2-314" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>le schéma harmonisé du projet simplifie certaines variables originales de la source UCI afin de conserver une chaîne cohérente avec le fallback synthétique;</span>
 <span id="cb2-315"><a href="#cb2-315" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>les questions d'équité, de confidentialité et de biais socio-économiques devront être traitées explicitement avant tout usage réel;</span>
 <span id="cb2-316"><a href="#cb2-316" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>le modèle tabulaire n'a pas encore bénéficié d'une recherche systématique d'hyperparamètres ni d'une comparaison avec des modèles de boosting;</span>
