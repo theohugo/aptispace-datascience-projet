@@ -30,6 +30,88 @@ bibliography: references.bib
 link-citations: true
 ---
 
+# Exécution avec Docker {#sec-docker}
+
+Si vous ne souhaitez rien installer localement, tout le projet peut être exécuté avec Docker Compose depuis la racine du dépôt. Le dépôt est monté dans le conteneur via `./:/workspace`, donc les fichiers générés restent directement disponibles dans votre copie locale.
+
+## Parcours recommandé
+
+1. Construire l'image Docker:
+
+  ```bash
+  docker compose build
+  ```
+
+2. Rejouer rapidement le pipeline tabulaire et vérifier les artefacts principaux:
+
+  ```bash
+  docker compose run --rm datascience task smoke
+  ```
+
+3. Lancer la vérification complète, y compris la brique CNN:
+
+  ```bash
+  docker compose run --rm datascience task verify
+  ```
+
+4. Régénérer le rapport Quarto et mettre à jour le README:
+
+  ```bash
+  docker compose run --rm datascience task render
+  ```
+
+5. Servir les livrables HTML sur `http://localhost:8000`:
+
+  ```bash
+  docker compose up presentation
+  ```
+
+## Exécution détaillée étape par étape
+
+Si vous préférez lancer chaque phase séparément, utilisez les commandes suivantes:
+
+1. Wrangling des données:
+
+  ```bash
+  docker compose run --rm datascience python src/tp1_student_wrangling.py
+  ```
+
+2. Analyse exploratoire:
+
+  ```bash
+  docker compose run --rm datascience python src/tp2_student_eda.py
+  ```
+
+3. Modélisation tabulaire:
+
+  ```bash
+  docker compose run --rm datascience python src/tp3_student_modelisation.py
+  ```
+
+4. Génération des figures du rapport:
+
+  ```bash
+  docker compose run --rm datascience python src/generate_report_figures.py
+  ```
+
+5. Exécution de la démonstration CNN:
+
+  ```bash
+  docker compose run --rm datascience python src/tp4_synthetic_cnn.py
+  ```
+
+6. Vérification finale des artefacts produits:
+
+  ```bash
+  docker compose run --rm datascience python tools/verify_project.py --include-cnn
+  ```
+
+7. Mise à jour du README uniquement au format Markdown:
+
+  ```bash
+  docker compose run --rm datascience task gfm
+  ```
+
 # Introduction et Contexte Métier {#sec-intro}
 
 [![CI Compilation Pipeline](https://github.com/aptitek/aptispace-datascience-projet/actions/workflows/ci.yml/badge.svg)](https://github.com/aptitek/aptispace-datascience-projet/actions/workflows/ci.yml)
