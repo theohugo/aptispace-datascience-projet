@@ -37,13 +37,13 @@ Si vous voulez éviter toute installation locale, le parcours recommandé depuis
 docker compose up --build
 ```
 
-Ce lancement déclenche automatiquement le flux Docker principal décrit dans `tools/docker_bootstrap.py`. La console détaille chaque étape, explique quel fichier porte la logique, indique où trouver les sorties produites et écrit le journal complet dans le fichier racine `log`.
+Ce lancement déclenche automatiquement le flux Docker principal décrit dans `tools/docker_bootstrap.py`. La console détaille chaque étape, explique quel fichier porte la logique, indique où trouver les sorties produites et écrit le journal complet dans le fichier racine `log.md`.
 
 Une fois la génération terminée, le serveur statique est disponible sur `http://localhost:8000`.
 
 Les sorties les plus utiles sont ensuite disponibles dans:
 
-- `log`
+- `log.md`
 - `report/assets/tp3_student_dashboard.html`
 - `report/presentation.html`
 - `report/rapport.html`

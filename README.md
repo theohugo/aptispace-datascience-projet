@@ -72,7 +72,7 @@ Ce lancement fait automatiquement les actions suivantes:
   principal de logique et l’emplacement des résultats.
 - Le fetch du dataset original est rappelé avec le fichier de logique,
   le lien source UCI et l’emplacement local du brut.
-- Le journal complet est écrit à la racine dans le fichier `log`.
+- Le journal complet est écrit à la racine dans le fichier `log.md`.
 - Une fois la génération terminée, le service `presentation` sert les
   livrables sur `http://localhost:8000`.
 
@@ -86,7 +86,7 @@ Le dataset public d’origine est celui de l’UCI:
 
 Les résultats principaux se trouvent ici:
 
-- `log`
+- `log.md`
 - `report/assets/tp3_student_dashboard.html`
 - `report/presentation.html`
 - `report/rapport.html`

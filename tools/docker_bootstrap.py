@@ -9,15 +9,15 @@ from datetime import datetime
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
-LOG_PATH = ROOT_DIR / "log"
+LOG_PATH = ROOT_DIR / "log.md"
 SOURCE_INFO_PATH = ROOT_DIR / "data/raw/student_risk/student_dropout_source.json"
 
 STEPS = [
     {
-        "title": "Fetch et preparation des donnees",
+        "title": "Fetch et préparation des données",
         "summary": (
-            "Recupere ou regenere la source brute, puis nettoie, impute et "
-            "prepare les tables tabulaires du projet."
+            "Récupère ou régénère la source brute, puis nettoie, impute et "
+            "prépare les tables tabulaires du projet."
         ),
         "logic": [
             "src/student_risk_dataset.py",
@@ -47,10 +47,10 @@ STEPS = [
         "commands": [[sys.executable, "src/tp2_student_eda.py"]],
     },
     {
-        "title": "Modelisation et dashboard",
+        "title": "Modélisation et dashboard",
         "summary": (
-            "Entraine les modeles tabulaires, calcule les metriques, puis "
-            "genere le dashboard interactif et le mini-deck associe."
+            "Entraîne les modèles tabulaires, calcule les métriques, puis "
+            "génère le dashboard interactif et le mini-deck associé."
         ),
         "logic": ["src/tp3_student_modelisation.py"],
         "outputs": [
@@ -62,10 +62,10 @@ STEPS = [
         "commands": [[sys.executable, "src/tp3_student_modelisation.py"]],
     },
     {
-        "title": "Figures et controle des artefacts",
+        "title": "Figures et contrôle des artefacts",
         "summary": (
-            "Genere les figures statiques du rapport puis verifie que les "
-            "sorties tabulaires et HTML principales sont presentes."
+            "Génère les figures statiques du rapport puis vérifie que les "
+            "sorties tabulaires et HTML principales sont présentes."
         ),
         "logic": [
             "src/generate_report_figures.py",
@@ -86,7 +86,7 @@ STEPS = [
         "title": "Rendu du rapport principal",
         "summary": (
             "Rend le rapport Quarto principal, puis resynchronise le README "
-            "racine du depot."
+            "racine du dépôt."
         ),
         "logic": [
             "report/rapport.qmd",
@@ -105,8 +105,8 @@ STEPS = [
     {
         "title": "Guide d'installation",
         "summary": (
-            "Rend le guide d'installation Docker-first, puis met a jour "
-            "INSTALL.md a la racine."
+            "Rend le guide d'installation Docker-first, puis met à jour "
+            "INSTALL.md à la racine."
         ),
         "logic": [
             "report/installation.qmd",
@@ -129,9 +129,10 @@ def emit(message: str = "") -> None:
 
 def reset_log() -> None:
     header = [
-        "Docker bootstrap log",
-        f"Started: {datetime.now().isoformat(timespec='seconds')}",
-        f"Workspace: {ROOT_DIR}",
+        "# Journal du flux Docker",
+        "",
+        f"- Démarré : {datetime.now().isoformat(timespec='seconds')}",
+        f"- Espace de travail : {ROOT_DIR}",
         "",
     ]
     LOG_PATH.write_text("\n".join(header), encoding="utf-8")
@@ -139,6 +140,21 @@ def reset_log() -> None:
 
 def format_command(command: list[str]) -> str:
     return " ".join(command)
+
+
+def normalize_french_text(text: str) -> str:
+    replacements = {
+        " harmonise ": " harmonisé ",
+        " schema ": " schéma ",
+        " generateur ": " générateur ",
+        " Harmonise ": " Harmonisé ",
+        " Schema ": " Schéma ",
+        " Generateur ": " Générateur ",
+    }
+    normalized = f" {text} "
+    for source, target in replacements.items():
+        normalized = normalized.replace(source, target)
+    return normalized.strip()
 
 
 def tail_lines(output: str, limit: int = 12) -> list[str]:
@@ -173,15 +189,16 @@ def describe_step(
     total_steps: int,
     step: dict[str, object],
 ) -> None:
-    emit("=" * 78)
-    emit(f"STEP {step_index}/{total_steps} - {step['title']}")
-    emit(f"Resume : {step['summary']}")
+    emit(f"## Étape {step_index}/{total_steps} - {step['title']}")
+    emit("")
+    emit(f"Résumé : {step['summary']}")
+    emit("")
     emit("Logique :")
     for logic_path in step["logic"]:
-        emit(f"  - {logic_path}")
+        emit(f"- {logic_path}")
     emit("Sorties :")
     for output_path in step["outputs"]:
-        emit(f"  - {output_path}")
+        emit(f"- {output_path}")
 
 
 def write_source_runtime_details() -> None:
@@ -190,9 +207,9 @@ def write_source_runtime_details() -> None:
 
     payload = json.loads(SOURCE_INFO_PATH.read_text(encoding="utf-8"))
     emit("Source active :")
-    emit(f"  - preference : {payload.get('preferred_source', 'n/a')}")
-    emit(f"  - source utilisee : {payload.get('active_source', 'n/a')}")
-    emit(f"  - note : {payload.get('note', 'n/a')}")
+    emit(f"- préférence : {payload.get('preferred_source', 'n/a')}")
+    emit(f"- source utilisée : {payload.get('active_source', 'n/a')}")
+    emit(f"- note : {normalize_french_text(payload.get('note', 'n/a'))}")
 
 
 def write_dataset_source_details() -> None:
@@ -205,42 +222,42 @@ def write_dataset_source_details() -> None:
         UCI_ARCHIVE_URL,
     )
 
-    emit("SOURCE DES DONNEES")
-    emit(f"  - dataset original : {UCI_ARCHIVE_URL}")
-    emit("  - logique du fetch : src/student_risk_dataset.py")
-    emit("  - logique de preparation : src/tp1_student_wrangling.py")
-    emit(f"  - brut local : {RAW_PATH.as_posix()}")
-    emit(f"  - trace de source : {SOURCE_INFO_PATH.as_posix()}")
+    emit("## Source des données")
+    emit("")
+    emit(f"- Dataset original : {UCI_ARCHIVE_URL}")
+    emit("- logique du fetch : src/student_risk_dataset.py")
+    emit("- logique de préparation : src/tp1_student_wrangling.py")
+    emit(f"- brut local : {RAW_PATH.as_posix()}")
+    emit(f"- trace de source : {SOURCE_INFO_PATH.as_posix()}")
     emit(
-        "  - si la source publique est indisponible, le pipeline bascule "
-        "automatiquement sur le generateur synthetique local."
+        "- si la source publique est indisponible, le pipeline bascule "
+        "automatiquement sur le générateur synthétique local."
     )
     emit("")
 
 
 def write_summary() -> None:
     emit("")
-    emit("=" * 78)
-    emit("FIN DU FLUX DOCKER")
-    emit("Resultats principaux :")
-    emit("  - log")
-    emit("  - data/processed/tp1_student_risk_wrangled.csv")
-    emit("  - data/processed/tp3_model_metrics.csv")
+    emit("## Fin du flux Docker")
+    emit("")
+    emit("Résultats principaux :")
+    emit("- log.md")
+    emit("- data/processed/tp1_student_risk_wrangled.csv")
+    emit("- data/processed/tp3_model_metrics.csv")
     emit(
-        "  - Dashboard interactif principal : "
-        "report/assets/tp3_student_dashboard.html"
+        "- Dashboard interactif principal : " "report/assets/tp3_student_dashboard.html"
     )
-    emit("  - Slides du dashboard : report/presentation.html")
-    emit("  - Rapport HTML complet : report/rapport.html")
-    emit("  - Guide d'installation HTML : report/installation.html")
-    emit("  - README.md")
-    emit("  - INSTALL.md")
+    emit("- Slides du dashboard : report/presentation.html")
+    emit("- Rapport HTML complet : report/rapport.html")
+    emit("- Guide d'installation HTML : report/installation.html")
+    emit("- README.md")
+    emit("- INSTALL.md")
     emit("")
     emit("URLs utiles :")
-    emit("  - http://localhost:8000/report/assets/tp3_student_dashboard.html")
-    emit("  - http://localhost:8000/report/presentation.html")
-    emit("  - http://localhost:8000/report/rapport.html")
-    emit("  - http://localhost:8000/report/installation.html")
+    emit("- http://localhost:8000/report/assets/tp3_student_dashboard.html")
+    emit("- http://localhost:8000/report/presentation.html")
+    emit("- http://localhost:8000/report/rapport.html")
+    emit("- http://localhost:8000/report/installation.html")
 
 
 def parse_args() -> argparse.Namespace:
@@ -259,8 +276,9 @@ def main() -> int:
     args = parse_args()
     reset_log()
 
-    emit("Flux Docker du projet")
-    emit("Ordre suivi : source -> preparation -> analyse -> modeles -> rendu.")
+    emit("## Flux Docker du projet")
+    emit("")
+    emit("Ordre suivi : source -> préparation -> analyse -> modèles -> rendu.")
     emit("")
     write_dataset_source_details()
 
@@ -269,7 +287,7 @@ def main() -> int:
         for step_index, step in enumerate(STEPS, start=1):
             describe_step(step_index, total_steps, step)
             if args.dry_run:
-                emit("Mode dry-run: commande non executee.")
+                emit("Statut : mode dry-run, commande non exécutée.")
                 emit("")
                 continue
 
@@ -281,7 +299,8 @@ def main() -> int:
             emit("")
     except subprocess.CalledProcessError as error:
         emit("")
-        emit("ECHEC DU FLUX DOCKER")
+        emit("## Échec du flux Docker")
+        emit("")
         emit(f"Commande : {format_command(error.cmd)}")
         emit(f"Code retour : {error.returncode}")
         if error.output:
