@@ -3,6 +3,9 @@
 : Elliot FIORESE
 2026-05-18
 
+- [Vue d’ensemble du dépôt](#sec-overview)
+  - [Ce que contient le projet](#ce-que-contient-le-projet)
+  - [Structure rapide du dépôt](#structure-rapide-du-dépôt)
 - [Exécution avec Docker](#sec-docker)
   - [Parcours recommandé](#parcours-recommandé)
   - [Exécution détaillée étape par
@@ -47,6 +50,36 @@
   - [Limites et Perspectives](#limites-et-perspectives)
   - [Supports de Restitution](#supports-de-restitution)
 - [Bibliographie](#bibliographie)
+
+# Vue d’ensemble du dépôt
+
+Ce dépôt regroupe un projet fil rouge de Data Science centré sur la
+**prédiction du risque d’abandon scolaire ou d’échec académique**. Il
+combine un pipeline tabulaire reproductible, une brique de démonstration
+CNN, des livrables HTML pour la restitution et une exécution complète en
+environnement Docker.
+
+## Ce que contient le projet
+
+- un pipeline reproductible de préparation, EDA, modélisation et
+  évaluation sur un jeu étudiant harmonisé;
+- une source publique UCI avec repli automatique vers un générateur
+  synthétique local si nécessaire;
+- un rapport Quarto complet, un dashboard HTML et une mini-présentation
+  pour la restitution;
+- des scripts Python réutilisables dans `src/` et des contrôles
+  d’artefacts dans `tools/`.
+
+## Structure rapide du dépôt
+
+| Emplacement | Rôle |
+|----|----|
+| `src/` | Scripts de préparation, EDA, modélisation tabulaire, génération de figures et démonstration CNN |
+| `data/raw/` | Sources brutes du projet, dont le dataset étudiant harmonisé |
+| `data/processed/` | Exports tabulaires générés par les différentes étapes du pipeline |
+| `report/` | Rapport Quarto, assets HTML, présentation et documents de restitution |
+| `tools/` | Automatisation du bootstrap Docker, vérifications d’artefacts et synchronisation documentaire |
+| `docker-compose.yml` / `Dockerfile` | Environnement d’exécution reproductible pour lancer le projet sans installation locale lourde |
 
 # Exécution avec Docker
 
