@@ -833,7 +833,7 @@ summary.text = "<div class='metric-story'><strong>"
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Présentation du dashboard - Projet Data Science</title>
+<title>Présentation du projet - Projet Data Science</title>
 $bokeh_resources
 <style>
 :root {
@@ -1083,6 +1083,7 @@ body::before {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
+    margin-top: 6px;
 }
 
 .hero-tags span,
@@ -1111,8 +1112,50 @@ body::before {
 }
 
 .hero-link {
-    color: #ecf8ff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 220px;
+    padding: 14px 22px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 18px;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: #08131f;
     text-decoration: none;
+    box-shadow: 0 18px 34px rgba(0, 0, 0, 0.24);
+    transition:
+        transform 220ms ease,
+        box-shadow 220ms ease,
+        background 220ms ease,
+        border-color 220ms ease,
+        color 220ms ease;
+}
+
+.hero-link:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 26px 44px rgba(0, 0, 0, 0.3);
+}
+
+.hero-link.report-link {
+    background: linear-gradient(135deg, #f6d19b 0%, #efbd79 100%);
+    border-color: rgba(246, 209, 155, 0.56);
+}
+
+.hero-link.report-link:hover {
+    background: linear-gradient(135deg, #f9ddb2 0%, #f2c98c 100%);
+}
+
+.hero-link.dashboard-link {
+    background: rgba(10, 32, 54, 0.86);
+    border-color: rgba(146, 203, 255, 0.34);
+    color: #e9f6ff;
+}
+
+.hero-link.dashboard-link:hover {
+    background: rgba(14, 43, 72, 0.98);
+    border-color: rgba(173, 218, 255, 0.5);
 }
 
 .stat-grid {
@@ -1506,16 +1549,17 @@ body::before {
     <section class="slide is-active fit-slide" data-title="Ouverture">
         <div class="slide-shell hero-shell">
             <article class="hero-panel">
-                <span class="kicker">Guide de lecture</span>
-                <h1>Présentation du dashboard du risque étudiant</h1>
-                <p class="lede">Le support principal est le dashboard. Cette page en résume les vues utiles pour présenter les résultats et montrer comment utiliser les filtres.</p>
+                <span class="kicker">Projet fil rouge</span>
+                <h1>Prédiction du risque étudiant</h1>
+                <p class="lede">Cette présentation résume le problème métier, la démarche analytique et les principaux résultats obtenus sur le risque de décrochage étudiant.</p>
                 <div class="hero-tags">
-                    <span>Support principal : dashboard HTML</span>
-                    <span>Support complémentaire : présentation synthétique</span>
-                    <span>Filtres disponibles : programme, métrique, seuil</span>
+                    <span>Source : dataset UCI harmonisé</span>
+                    <span>Objectif : repérer les profils à risque</span>
+                    <span>Livrables : rapport, dashboard, présentation</span>
                 </div>
                 <div class="hero-actions">
-                    <a class="chip hero-link" href="assets/tp3_student_dashboard.html" target="_blank" rel="noreferrer">Ouvrir le dashboard</a>
+                    <a class="hero-link report-link" href="rapport.html" target="_blank" rel="noreferrer">Ouvrir le rapport</a>
+                    <a class="hero-link dashboard-link" href="assets/tp3_student_dashboard.html" target="_blank" rel="noreferrer">Ouvrir le dashboard</a>
                 </div>
             </article>
             <section class="stat-grid">
@@ -1543,27 +1587,27 @@ body::before {
         <div class="slide-shell">
             <div class="section-head">
                 <span class="kicker">Vue d'ensemble</span>
-                <h2>Comment lire le dashboard</h2>
-                <p>La lecture conseillée est simple : partir de la cohorte, comparer les modèles, puis finir par la liste des étudiants à suivre.</p>
+                <h2>Du problème métier à la priorisation</h2>
+                <p>Le fil conducteur est simple : préparer les données, comprendre les facteurs de risque, comparer les modèles, puis produire une liste de suivi exploitable.</p>
             </div>
             <div class="story-grid">
                 <article class="story-card">
-                    <h3>1. Comprendre</h3>
-                    <p>Commencer par la cohorte, les taux de risque et les contrastes entre segments pour cadrer la lecture métier.</p>
+                    <h3>1. Préparer</h3>
+                    <p>Partir d'une cohorte harmonisée et de variables dérivées lisibles pour stabiliser l'analyse.</p>
                 </article>
                 <article class="story-card">
-                    <h3>2. Explorer</h3>
-                    <p>Changer la métrique, comparer test et validation croisée, puis revenir aux variables explicatives pour justifier les choix.</p>
+                    <h3>2. Analyser</h3>
+                    <p>Observer les écarts entre segments, puis comparer les modèles avec des métriques adaptées au contexte pédagogique.</p>
                 </article>
                 <article class="story-card">
-                    <h3>3. Décider</h3>
-                    <p>Filtrer par programme et seuil pour transformer les scores en file de priorités réellement exploitable par l'équipe pédagogique.</p>
+                    <h3>3. Prioriser</h3>
+                    <p>Transformer les scores en une liste d'étudiants à suivre, avec un seuil et des filtres ajustables.</p>
                 </article>
             </div>
             <div class="insight-row">
-                <span class="chip">Cohorte et segments</span>
+                <span class="chip">Préparation des données</span>
                 <span class="chip">Comparaison des modèles</span>
-                <span class="chip">Liste prioritaire</span>
+                <span class="chip">Suivi priorisé</span>
             </div>
         </div>
     </section>
@@ -1571,9 +1615,9 @@ body::before {
     <section class="slide fit-slide" data-title="Parcours">
         <div class="slide-shell">
             <div class="section-head">
-                <span class="kicker">Ordre conseillé</span>
-                <h2>Observer, comparer, puis prioriser</h2>
-                <p>Cette séquence évite de commenter les graphes séparément. Chaque vue répond à une question et prépare la suivante.</p>
+                <span class="kicker">Ordre de présentation</span>
+                <h2>Contexte, résultats, puis usages</h2>
+                <p>Cette séquence permet de présenter d'abord le cadre de l'étude, ensuite les performances du modèle, puis les usages concrets des sorties produites.</p>
             </div>
             <div class="story-grid">
                 <article class="story-card">
@@ -1590,9 +1634,9 @@ body::before {
                 </article>
             </div>
             <div class="insight-row">
-                <span class="chip">Le dashboard reste le support principal</span>
-                <span class="chip">Les slides résument la lecture</span>
-                <span class="chip">Chaque vue répond à une question</span>
+                <span class="chip">Cadre métier</span>
+                <span class="chip">Résultats quantifiés</span>
+                <span class="chip">Usages opérationnels</span>
             </div>
         </div>
     </section>
