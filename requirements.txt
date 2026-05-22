@@ -16,4 +16,3 @@ bokeh>=3.4.0
 # Outils de développement
 ipykernel
 jupyter
-quarto

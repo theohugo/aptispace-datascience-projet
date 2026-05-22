@@ -55,7 +55,47 @@ exécuté avec Docker Compose depuis la racine du dépôt. Le dépôt est
 monté dans le conteneur via `./:/workspace`, donc les fichiers générés
 restent directement disponibles dans votre copie locale.
 
+Dans cette configuration, le seul prérequis local est Docker avec le
+plugin Compose: Python, Quarto, Typst et Go-Task sont déjà fournis dans
+l’image du projet.
+
+Le parcours recommandé est maintenant simplement:
+
+``` bash
+docker compose up --build
+```
+
+Ce lancement fait automatiquement les actions suivantes:
+
+- Le service `datascience` exécute `tools/docker_bootstrap.py`.
+- Chaque étape est affichée dans la console avec son rôle, le fichier
+  principal de logique et l’emplacement des résultats.
+- Le fetch du dataset original est rappelé avec le fichier de logique,
+  le lien source UCI et l’emplacement local du brut.
+- Le journal complet est écrit à la racine dans le fichier `log`.
+- Une fois la génération terminée, le service `presentation` sert les
+  livrables sur `http://localhost:8000`.
+
+Le dataset public d’origine est celui de l’UCI:
+
+- `https://archive.ics.uci.edu/static/public/697/predict+students+dropout+and+academic+success.zip`
+- logique de fetch: `src/student_risk_dataset.py`
+- copie brute locale: `data/raw/student_risk/student_dropout_source.csv`
+- trace de la source active:
+  `data/raw/student_risk/student_dropout_source.json`
+
+Les résultats principaux se trouvent ici:
+
+- `log`
+- `report/assets/tp3_student_dashboard.html`
+- `report/presentation.html`
+- `report/rapport.html`
+- `report/installation.html`
+
 ## Parcours recommandé
+
+Si vous préférez piloter les étapes une par une, utilisez les commandes
+suivantes.
 
 1.  Construire l’image Docker:
 
@@ -86,6 +126,13 @@ docker compose run --rm datascience task render
 
 ``` bash
 docker compose up presentation
+```
+
+6.  Prévisualiser le rapport Quarto en direct sur
+    `http://localhost:4200`:
+
+``` bash
+docker compose --profile preview up preview
 ```
 
 ## Exécution détaillée étape par étape
@@ -602,14 +649,17 @@ inférieur au coût d’un abandon non détecté.
 
 ## Tableau de Bord Interactif
 
-Pour compléter les figures statiques du rapport, un tableau de bord
-interactif autonome a été ajouté au projet. Il rassemble dans une même
-interface les métriques du jeu de test, les résultats de validation
-croisée, les variables explicatives dominantes, les profils de risque
-par programme et une liste prioritaire d’étudiants à suivre.
+Le livrable principal de restitution est un tableau de bord interactif
+autonome. Il rassemble dans une même interface les métriques du jeu de
+test, les résultats de validation croisée, les variables explicatives
+dominantes, les profils de risque par programme et une liste prioritaire
+d’étudiants à suivre.
 
-Le tableau de bord interactif est disponible dans le fichier suivant:
+Le dashboard principal est disponible dans le fichier suivant:
 [Dashboard interactif](report/assets/tp3_student_dashboard.html).
+
+Un mini-deck complémentaire sert de guide de lecture du dashboard et
+reste disponible dans [Slides du dashboard](presentation.html).
 
 ## Matrice d’Action Pédagogique
 
@@ -664,14 +714,15 @@ réelle pour remplacer la démonstration synthétique du CNN.
 ## Supports de Restitution
 
 La restitution finale s’appuie sur plusieurs supports complémentaires.
-Le rapport Quarto constitue le document central de synthèse et
-d’interprétation. Il est complété par un schéma Mermaid du pipeline de
+Le tableau de bord interactif HTML constitue le livrable principal
+d’exploration métier. Il est accompagné par le rapport Quarto, qui joue
+le rôle de document de synthèse et d’interprétation, par un mini-deck
+HTML de lecture du dashboard, par un schéma Mermaid du pipeline de
 données, par des jeux intermédiaires et finaux exportés dans
-`data/processed`, par un ensemble de figures produites dans
-`report/assets`, ainsi que par un tableau de bord interactif HTML dédié
-à l’exploration métier. Cet agencement vise à assurer à la fois la
-lisibilité du raisonnement, la traçabilité des transformations et la
-cohérence entre les résultats chiffrés et leur interprétation métier.
+`data/processed`, ainsi que par un ensemble de figures produites dans
+`report/assets`. Cet agencement vise à assurer à la fois la lisibilité
+du raisonnement, la traçabilité des transformations et la cohérence
+entre les résultats chiffrés et leur interprétation métier.
 
 Ce document dynamique a été compilé en Quarto ([Team
 2024](#ref-quarto2024)).

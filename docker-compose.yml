@@ -7,8 +7,33 @@ services:
     working_dir: /workspace
     volumes:
       - ./:/workspace
+    command:
+      - python
+      - tools/docker_bootstrap.py
     stdin_open: true
     tty: true
+
+  preview:
+    profiles:
+      - preview
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: aptispace-datascience:local
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    ports:
+      - "4200:4200"
+    command:
+      - quarto
+      - preview
+      - report/rapport.qmd
+      - --host
+      - 0.0.0.0
+      - --port
+      - "4200"
+      - --no-browser
 
   presentation:
     build:
@@ -18,6 +43,9 @@ services:
     working_dir: /workspace
     volumes:
       - ./:/workspace
+    depends_on:
+      datascience:
+        condition: service_completed_successfully
     ports:
       - "8000:8000"
     command:

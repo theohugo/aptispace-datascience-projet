@@ -10,6 +10,10 @@ src/01_data_wrangling.py
 src/02_eda_visualisation.py
 src/03_modelisation_pred.py
 src/04_vision_cnn_tf.py
+src/02_wrangling.py
+src/03_visualisation.py
+src/04_eda.py
+src/05_modelisation.py
 
 # Journaux d'exécution des notebooks
 logs/*.log

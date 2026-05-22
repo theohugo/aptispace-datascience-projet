@@ -1,12 +1,15 @@
 # Guide d’Installation de l’Environnement de Data Science
 Équipe Pédagogique - Aptispace
-2026-05-19
+2026-05-22
 
 - [Introduction](#introduction)
 - [Démarrage Rapide](#démarrage-rapide)
 - [Aperçu de la Boîte à Outils](#aperçu-de-la-boîte-à-outils)
 - [🚀 Installation Automatisée
   (Recommandé)](#rocket-installation-automatisée-recommandé)
+  - [Windows (PowerShell)](#windows-powershell)
+  - [macOS (Homebrew)](#macos-homebrew)
+  - [Linux (Debian/Ubuntu)](#linux-debianubuntu)
 - [🛠️ Configuration Manuelle
   (Alternative)](#hammer_and_wrench-configuration-manuelle-alternative)
   - [1. Python 3 (3.12 ou 3.14)](#1-python-3-312-ou-314)
@@ -32,12 +35,62 @@ d’outils nécessaire pour exécuter le pipeline de Data Science, éditer
 vos notebooks et générer vos livrables de communication dynamique
 (rapports PDF et HTML).
 
+Si vous souhaitez éviter toute installation locale de Python, Quarto,
+Typst ou Go-Task, vous pouvez utiliser directement le flux Docker du
+projet. Dans ce cas, le seul prérequis local devient Docker avec le
+plugin Compose.
+
 ------------------------------------------------------------------------
 
 # Démarrage Rapide
 
+Si vous voulez éviter toute installation locale, le parcours recommandé
+depuis la racine du dépôt est maintenant simplement:
+
+``` bash
+docker compose up --build
+```
+
+Ce lancement déclenche automatiquement le flux Docker principal décrit
+dans `tools/docker_bootstrap.py`. La console détaille chaque étape,
+explique quel fichier porte la logique, indique où trouver les sorties
+produites et écrit le journal complet dans le fichier racine `log`.
+
+Une fois la génération terminée, le serveur statique est disponible sur
+`http://localhost:8000`.
+
+Les sorties les plus utiles sont ensuite disponibles dans:
+
+- `log`
+- `report/assets/tp3_student_dashboard.html`
+- `report/presentation.html`
+- `report/rapport.html`
+- `report/installation.html`
+
+Si vous préférez piloter manuellement chaque étape dans Docker, utilisez
+ce parcours détaillé:
+
+``` bash
+docker compose build
+docker compose run --rm datascience task smoke
+docker compose run --rm datascience task verify
+docker compose run --rm datascience task render
+docker compose up presentation
+```
+
+Si vous préférez la prévisualisation Quarto dynamique dans Docker,
+utilisez aussi:
+
+``` bash
+docker compose --profile preview up preview
+```
+
+La prévisualisation Quarto est alors disponible sur
+`http://localhost:4200`.
+
 Si vous voulez simplement vérifier le projet avant de retravailler le
-rapport, utilisez ce parcours minimal depuis la racine du dépôt:
+rapport avec une installation locale, utilisez ce parcours minimal
+depuis la racine du dépôt:
 
 1.  `task smoke` pour rejouer la branche tabulaire, régénérer les
     figures principales et contrôler les artefacts essentiels.
@@ -45,16 +98,6 @@ rapport, utilisez ce parcours minimal depuis la racine du dépôt:
     sorties produites.
 3.  `task render` pour reconstruire le rendu final Quarto en HTML, PDF
     et Markdown.
-
-Si vous préférez éviter toute configuration locale, le même flux est
-disponible via Docker:
-
-``` bash
-docker compose build
-docker compose run --rm datascience task smoke
-docker compose run --rm datascience task verify
-docker compose run --rm datascience task render
-```
 
 Ce flux couvre le besoin le plus courant du projet: tester rapidement la
 chaîne analytique, puis régénérer le rendu final.
@@ -79,8 +122,6 @@ Voici la description des outils requis pour votre projet :
 
 Pour vous simplifier la tâche, des scripts d’installation automatisés
 sont à votre disposition dans le dossier `tools/` de votre projet.
-
-<div class="panel-tabset">
 
 ## Windows (PowerShell)
 
@@ -118,8 +159,6 @@ chmod +x ./tools/install_linux.sh
 
 *Ce script utilise `apt` et récupère les binaires officiels pour
 installer Typst, Quarto et Go-Task.*
-
-</div>
 
 ------------------------------------------------------------------------
 
@@ -202,6 +241,23 @@ python -m ipykernel install --user --name=venv-projet --display-name="Python (Pr
 
 Votre environnement est désormais entièrement opérationnel ! Vous pouvez
 lancer les commandes suivantes avec `task` depuis la racine du projet :
+
+Si vous ne voulez rien installer localement en dehors de Docker, les
+équivalents suivants sont disponibles:
+
+- **Test rapide du pipeline tabulaire :**
+  `docker compose run --rm datascience task smoke`
+
+- **Vérification complète du projet :**
+  `docker compose run --rm datascience task verify`
+
+- **Rendu complet du rapport :**
+  `docker compose run --rm datascience task render`
+
+- **Prévisualisation Quarto dynamique :** `docker compose up preview`
+
+- **Serveur HTML statique pour les livrables :**
+  `docker compose up presentation`
 
 - **Test rapide du pipeline tabulaire :**
 

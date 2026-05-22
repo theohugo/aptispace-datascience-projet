@@ -17,17 +17,17 @@ os.makedirs(logs_dir, exist_ok=True)
 os.makedirs(report_notebooks_dir, exist_ok=True)
 
 notebook_files = [
-    "01_data_wrangling.ipynb",
-    "02_eda_visualisation.ipynb",
-    "03_modelisation_pred.ipynb",
-    "04_vision_cnn_tf.ipynb",
+    "02_wrangling.ipynb",
+    "04_eda.ipynb",
+    "05_modelisation.ipynb",
+    "03_visualisation.ipynb",
 ]
 
 execution_overrides = {
-    "01_data_wrangling.ipynb": os.path.join(src_dir, "tp1_student_wrangling.py"),
-    "02_eda_visualisation.ipynb": os.path.join(src_dir, "tp2_student_eda.py"),
-    "03_modelisation_pred.ipynb": os.path.join(src_dir, "tp3_student_modelisation.py"),
-    "04_vision_cnn_tf.ipynb": os.path.join(src_dir, "tp4_synthetic_cnn.py"),
+    "02_wrangling.ipynb": os.path.join(src_dir, "tp1_student_wrangling.py"),
+    "04_eda.ipynb": os.path.join(src_dir, "tp2_student_eda.py"),
+    "05_modelisation.ipynb": os.path.join(src_dir, "tp3_student_modelisation.py"),
+    "03_visualisation.ipynb": os.path.join(src_dir, "generate_report_figures.py"),
 }
 
 print("🚀 Début de la compilation des notebooks...")

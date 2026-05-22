@@ -314,10 +314,10 @@ def build_closing_slide() -> str:
                 "<div class='slide-shell final-shell'>",
                 "<div class='section-head'>",
                 "<span class='kicker'>Conclusion</span>",
-                "<h2>Ce que le jury doit retenir</h2>",
+                "<h2>Ce que le dashboard permet de piloter</h2>",
                 (
-                    "<p>Le projet combine un pipeline reproductible, un support "
-                    "d'oral interactif et une extension vision déjà raccordée.</p>"
+                    "<p>Le projet combine un pipeline reproductible, un dashboard "
+                    "interactif actionnable et une extension vision déjà raccordée.</p>"
                 ),
                 "</div>",
                 "<div class='stat-grid compact'>",
@@ -336,7 +336,7 @@ def build_closing_slide() -> str:
                 "</div>",
                 "<div class='insight-row'>",
                 "<span class='chip'>Pipeline reproductible</span>",
-                "<span class='chip'>Support oral interactif</span>",
+                "<span class='chip'>Dashboard interactif</span>",
                 "<span class='chip'>Extension vision déjà connectée</span>",
                 "</div>",
                 "<div class='closing-banner'>",
@@ -358,11 +358,11 @@ def build_closing_slide() -> str:
             "<div class='slide-shell final-shell'>",
             "<div class='section-head'>",
             "<span class='kicker'>Conclusion</span>",
-            "<h2>Ce que la présentation doit laisser au jury</h2>",
+            "<h2>Ce que ce deck laisse après la visite du dashboard</h2>",
             (
-                "<p>Un pipeline complet, des résultats défendables et un "
-                "support de restitution qui permet de passer du constat à "
-                "l'action.</p>"
+                "<p>Un pipeline complet, un dashboard interactif autonome et "
+                "un mini-deck qui sert de guide de lecture pour passer du "
+                "constat à l'action.</p>"
             ),
             "</div>",
             "<div class='insight-row'>",
@@ -510,7 +510,7 @@ def write_interactive_presentation(
     )
     metric_catalog_source = ColumnDataSource(metric_catalog)
     metric_select = Select(
-        title="Métrique pilotée pendant l'oral",
+        title="Métrique à explorer dans le dashboard",
         value="recall",
         options=[
             ("accuracy", "Accuracy"),
@@ -835,7 +835,7 @@ summary.text = "<div class='metric-story'><strong>"
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Présentation interactive - Projet Data Science</title>
+<title>Slides du dashboard - Projet Data Science</title>
 $bokeh_resources
 <style>
 :root {
@@ -1081,6 +1081,12 @@ body::before {
     gap: 12px;
 }
 
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
 .hero-tags span,
 .legend-row span,
 .chip {
@@ -1104,6 +1110,11 @@ body::before {
     transform: translateY(-3px);
     background: rgba(255, 255, 255, 0.14);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+}
+
+.hero-link {
+    color: #ecf8ff;
+    text-decoration: none;
 }
 
 .stat-grid {
@@ -1497,13 +1508,16 @@ body::before {
     <section class="slide is-active fit-slide" data-title="Ouverture">
         <div class="slide-shell hero-shell">
             <article class="hero-panel">
-                <span class="kicker">Présentation interactive</span>
-                <h1>Repérer tôt le risque de décrochage pour mieux accompagner</h1>
-                <p class="lede">Problématique : repérer assez tôt les étudiants susceptibles d'échouer ou de décrocher. Objectif : produire un score de risque lisible, défendable et exploitable pour prioriser l'accompagnement pédagogique.</p>
+                <span class="kicker">Slides du dashboard</span>
+                <h1>Visite guidée du dashboard du risque étudiant</h1>
+                <p class="lede">Le livrable principal est un dashboard interactif autonome. Cette page sert à parcourir ses vues clés et à montrer comment passer d'un score de risque à une décision pédagogique.</p>
                 <div class="hero-tags">
-                    <span>Problématique : détecter tôt sans saturer l'alerte</span>
-                    <span>Objectif : prioriser l'accompagnement pédagogique</span>
-                    <span>Support : slides interactives et graphiques Bokeh</span>
+                    <span>Livrable principal : dashboard interactif autonome</span>
+                    <span>Support secondaire : slides de lecture du dashboard</span>
+                    <span>Filtres : programme, métrique, seuil de risque</span>
+                </div>
+                <div class="hero-actions">
+                    <a class="chip hero-link" href="assets/tp3_student_dashboard.html" target="_blank" rel="noreferrer">Ouvrir le dashboard complet</a>
                 </div>
             </article>
             <section class="stat-grid">
@@ -1527,60 +1541,60 @@ body::before {
         </div>
     </section>
 
-    <section class="slide fit-slide" data-title="Pipeline">
+    <section class="slide fit-slide" data-title="Vue d'ensemble">
         <div class="slide-shell">
             <div class="section-head">
-                <span class="kicker">Problématique et démarche</span>
-                <h2>La question centrale : qui risque de décrocher, quand, et sur quels signaux agir ?</h2>
-                <p>Le projet ne cherche pas seulement à prédire. Il transforme des données étudiantes dispersées en une aide à la décision pédagogique, lisible pour un jury, une direction de programme ou une équipe de suivi.</p>
+                <span class="kicker">Livrable principal</span>
+                <h2>Le deck sert à lire le dashboard et à guider sa prise en main</h2>
+                <p>Le dashboard concentre les vues utiles pour comprendre le risque, comparer les modèles et prioriser le suivi. Ces slides servent de parcours guidé quand il faut expliquer rapidement comment utiliser l'interface.</p>
             </div>
             <div class="story-grid">
                 <article class="story-card">
-                    <h3>1. Problématique</h3>
-                    <p>Les signaux faibles d'échec ou de décrochage apparaissent tôt, mais ils sont dispersés entre assiduité, contrôle continu, engagement et contexte social.</p>
+                    <h3>1. Comprendre</h3>
+                    <p>Commencer par la cohorte, les taux de risque et les contrastes entre segments pour cadrer la lecture métier.</p>
                 </article>
                 <article class="story-card">
-                    <h3>2. Objectif</h3>
-                    <p>Construire un score de risque interprétable pour repérer les profils fragiles assez tôt et mieux cibler l'accompagnement pédagogique.</p>
+                    <h3>2. Explorer</h3>
+                    <p>Changer la métrique, comparer test et validation croisée, puis revenir aux variables explicatives pour justifier les choix.</p>
                 </article>
                 <article class="story-card">
-                    <h3>3. Démarche</h3>
-                    <p>Nettoyer les données, comparer plusieurs modèles, puis convertir la prédiction en liste d'action exploitable.</p>
+                    <h3>3. Décider</h3>
+                    <p>Filtrer par programme et seuil pour transformer les scores en file de priorités réellement exploitable par l'équipe pédagogique.</p>
                 </article>
             </div>
             <div class="insight-row">
-                <span class="chip">Détection précoce</span>
-                <span class="chip">Score interprétable</span>
-                <span class="chip">Décision pédagogique</span>
+                <span class="chip">Panorama</span>
+                <span class="chip">Comparaison des modèles</span>
+                <span class="chip">Priorisation actionnable</span>
             </div>
         </div>
     </section>
 
-    <section class="slide fit-slide" data-title="Restitution">
+    <section class="slide fit-slide" data-title="Parcours">
         <div class="slide-shell">
             <div class="section-head">
-                <span class="kicker">Support oral</span>
-                <h2>Le support montre comment on passe du diagnostic à l'action</h2>
-                <p>L'oral doit faire comprendre à la fois la qualité du modèle et l'utilité métier du projet : qui suivre, pourquoi, et à partir de quels signaux.</p>
+                <span class="kicker">Parcours conseillé</span>
+                <h2>Le dashboard se lit comme une chaîne courte: observer, comparer, prioriser</h2>
+                <p>Cette séquence évite de présenter les graphes comme des vignettes isolées. Elle montre comment chaque vue prépare la suivante jusqu'à la liste d'actions.</p>
             </div>
             <div class="story-grid">
                 <article class="story-card">
-                    <h3>4. Segmenter les risques</h3>
-                    <p>Filtrer les profils à suivre selon le programme et le seuil de risque pour passer d'un score brut à une liste d'action.</p>
+                    <h3>4. Situer les segments</h3>
+                    <p>Repérer les programmes les plus exposés et les plus protégés avant toute interprétation du modèle.</p>
                 </article>
                 <article class="story-card">
-                    <h3>5. Étayer le discours</h3>
-                    <p>Comparer les métriques et les variables explicatives pour justifier les choix de modélisation devant un jury ou un client.</p>
+                    <h3>5. Tester les arbitrages</h3>
+                    <p>Comparer rappel, précision et robustesse pour montrer qu'un bon modèle dépend du coût métier des faux négatifs.</p>
                 </article>
                 <article class="story-card">
-                    <h3>6. Garder une ouverture vision</h3>
-                    <p>La brique CNN reste exploratoire, mais elle montre comment prolonger le projet vers des données visuelles pédagogiques.</p>
+                    <h3>6. Finir par l'action</h3>
+                    <p>Descendre jusqu'à la table prioritaire pour rendre la restitution immédiatement opérationnelle.</p>
                 </article>
             </div>
             <div class="insight-row">
-                <span class="chip">Questions du jury -> filtre en direct</span>
-                <span class="chip">Transitions animées</span>
-                <span class="chip">Aucune slide surchargée</span>
+                <span class="chip">Le dashboard reste le centre du livrable</span>
+                <span class="chip">Les slides servent de guide rapide</span>
+                <span class="chip">Chaque vue mène à une action</span>
             </div>
         </div>
     </section>
@@ -1622,8 +1636,8 @@ body::before {
         <div class="slide-shell">
             <div class="section-head">
                 <span class="kicker">Moment interactif</span>
-                <h2>Quelle métrique voulez-vous piloter pendant l'oral ?</h2>
-                <p>Changez la métrique pour montrer que le meilleur modèle dépend de l'objectif : maximiser la détection, la robustesse ou l'équilibre global.</p>
+                <h2>Quelle métrique voulez-vous piloter dans le dashboard ?</h2>
+                <p>Changez la métrique pour montrer que le meilleur modèle dépend de l'objectif: maximiser la détection, la robustesse ou l'équilibre global.</p>
             </div>
             <div class="two-col swap">
                 <div class="stack">
@@ -1664,7 +1678,7 @@ body::before {
             <div class="section-head">
                 <span class="kicker">Moment interactif</span>
                 <h2>Qui faut-il traiter en priorité selon le segment ?</h2>
-                <p>Choisissez un programme et faites varier le seuil de risque pour obtenir une liste de suivi crédible en direct, sans quitter le support de présentation.</p>
+                <p>Choisissez un programme et faites varier le seuil de risque pour obtenir une liste de suivi crédible, sans quitter la visite guidée du dashboard.</p>
             </div>
             <div class="control-card">$priority_controls_div</div>
             <div class="legend-row">
@@ -1681,7 +1695,7 @@ body::before {
             <div class="section-head">
                 <span class="kicker">Liste d'actions</span>
                 <h2>Le score devient une file de priorités exploitable</h2>
-                <p>Ce slide sert à terminer l'oral sur des décisions : combien de profils traiter, qui regarder en premier et quelle logique d'intervention assumer.</p>
+                <p>Ce slide résume la sortie la plus opérationnelle du dashboard: combien de profils traiter, qui regarder en premier et quelle logique d'intervention assumer.</p>
             </div>
             <div class="story-grid">
                 <article class="story-card compact-card">
