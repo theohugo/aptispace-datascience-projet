@@ -270,10 +270,10 @@ def write_summary() -> None:
     emit("- INSTALL.md")
     emit("")
     emit("URLs utiles :")
-    emit("- http://localhost:8000/report/assets/tp3_student_dashboard.html")
-    emit("- http://localhost:8000/report/presentation.html")
-    emit("- http://localhost:8000/report/rapport.html")
-    emit("- http://localhost:8000/report/installation.html")
+    emit("- http://localhost:8000/assets/tp3_student_dashboard.html")
+    emit("- http://localhost:8000/presentation.html")
+    emit("- http://localhost:8000/rapport.html")
+    emit("- http://localhost:8000/installation.html")
 
 
 def parse_args() -> argparse.Namespace:

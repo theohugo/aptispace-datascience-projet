@@ -314,10 +314,10 @@ def build_closing_slide() -> str:
                 "<div class='slide-shell final-shell'>",
                 "<div class='section-head'>",
                 "<span class='kicker'>Conclusion</span>",
-                "<h2>Ce que le dashboard permet de piloter</h2>",
+                "<h2>Points de sortie du projet</h2>",
                 (
-                    "<p>Le projet combine un pipeline reproductible, un dashboard "
-                    "interactif actionnable et une extension vision déjà raccordée.</p>"
+                    "<p>Le projet fournit un pipeline reproductible, un tableau "
+                    "de bord de lecture et une extension vision documentée.</p>"
                 ),
                 "</div>",
                 "<div class='stat-grid compact'>",
@@ -336,15 +336,14 @@ def build_closing_slide() -> str:
                 "</div>",
                 "<div class='insight-row'>",
                 "<span class='chip'>Pipeline reproductible</span>",
-                "<span class='chip'>Dashboard interactif</span>",
-                "<span class='chip'>Extension vision déjà connectée</span>",
+                "<span class='chip'>Dashboard HTML</span>",
+                "<span class='chip'>Extension vision</span>",
                 "</div>",
                 "<div class='closing-banner'>",
                 (
-                    "<strong>Message final :</strong> le cœur de valeur reste "
-                    "la priorisation pédagogique interprétable, avec une "
-                    "extension vision déjà opérationnelle pour une prochaine "
-                    "itération."
+                    "<strong>À retenir :</strong> le support principal reste la "
+                    "priorisation des étudiants à suivre, avec des résultats "
+                    "lisibles et réutilisables."
                 ),
                 "</div>",
                 "</div>",
@@ -358,17 +357,16 @@ def build_closing_slide() -> str:
             "<div class='slide-shell final-shell'>",
             "<div class='section-head'>",
             "<span class='kicker'>Conclusion</span>",
-            "<h2>Ce que ce deck laisse après la visite du dashboard</h2>",
+            "<h2>Synthèse finale</h2>",
             (
-                "<p>Un pipeline complet, un dashboard interactif autonome et "
-                "un mini-deck qui sert de guide de lecture pour passer du "
-                "constat à l'action.</p>"
+                "<p>Un pipeline complet, un tableau de bord exploitable et "
+                "une logique de priorisation directement lisible.</p>"
             ),
             "</div>",
             "<div class='insight-row'>",
             "<span class='chip'>Détection précoce</span>",
             "<span class='chip'>Pipeline reproductible</span>",
-            "<span class='chip'>Actions cibles</span>",
+            "<span class='chip'>Suivi priorisé</span>",
             "</div>",
             "<div class='story-grid'>",
             (
@@ -389,9 +387,9 @@ def build_closing_slide() -> str:
             "</div>",
             "<div class='closing-banner'>",
             (
-                "<strong>Message final:</strong> la valeur du projet ne vient "
-                "pas seulement du modèle, mais de la capacité à raconter "
-                "pourquoi, pour qui et quand intervenir."
+                "<strong>À retenir:</strong> l'intérêt du projet tient surtout "
+                "à la capacité de repérer, expliquer et prioriser les cas à "
+                "suivre."
             ),
             "</div>",
             "</div>",
@@ -835,7 +833,7 @@ summary.text = "<div class='metric-story'><strong>"
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Slides du dashboard - Projet Data Science</title>
+<title>Présentation du dashboard - Projet Data Science</title>
 $bokeh_resources
 <style>
 :root {
@@ -1508,16 +1506,16 @@ body::before {
     <section class="slide is-active fit-slide" data-title="Ouverture">
         <div class="slide-shell hero-shell">
             <article class="hero-panel">
-                <span class="kicker">Slides du dashboard</span>
-                <h1>Visite guidée du dashboard du risque étudiant</h1>
-                <p class="lede">Le livrable principal est un dashboard interactif autonome. Cette page sert à parcourir ses vues clés et à montrer comment passer d'un score de risque à une décision pédagogique.</p>
+                <span class="kicker">Guide de lecture</span>
+                <h1>Présentation du dashboard du risque étudiant</h1>
+                <p class="lede">Le support principal est le dashboard. Cette page en résume les vues utiles pour présenter les résultats et montrer comment utiliser les filtres.</p>
                 <div class="hero-tags">
-                    <span>Livrable principal : dashboard interactif autonome</span>
-                    <span>Support secondaire : slides de lecture du dashboard</span>
-                    <span>Filtres : programme, métrique, seuil de risque</span>
+                    <span>Support principal : dashboard HTML</span>
+                    <span>Support complémentaire : présentation synthétique</span>
+                    <span>Filtres disponibles : programme, métrique, seuil</span>
                 </div>
                 <div class="hero-actions">
-                    <a class="chip hero-link" href="assets/tp3_student_dashboard.html" target="_blank" rel="noreferrer">Ouvrir le dashboard complet</a>
+                    <a class="chip hero-link" href="assets/tp3_student_dashboard.html" target="_blank" rel="noreferrer">Ouvrir le dashboard</a>
                 </div>
             </article>
             <section class="stat-grid">
@@ -1544,9 +1542,9 @@ body::before {
     <section class="slide fit-slide" data-title="Vue d'ensemble">
         <div class="slide-shell">
             <div class="section-head">
-                <span class="kicker">Livrable principal</span>
-                <h2>Le deck sert à lire le dashboard et à guider sa prise en main</h2>
-                <p>Le dashboard concentre les vues utiles pour comprendre le risque, comparer les modèles et prioriser le suivi. Ces slides servent de parcours guidé quand il faut expliquer rapidement comment utiliser l'interface.</p>
+                <span class="kicker">Vue d'ensemble</span>
+                <h2>Comment lire le dashboard</h2>
+                <p>La lecture conseillée est simple : partir de la cohorte, comparer les modèles, puis finir par la liste des étudiants à suivre.</p>
             </div>
             <div class="story-grid">
                 <article class="story-card">
@@ -1563,9 +1561,9 @@ body::before {
                 </article>
             </div>
             <div class="insight-row">
-                <span class="chip">Panorama</span>
+                <span class="chip">Cohorte et segments</span>
                 <span class="chip">Comparaison des modèles</span>
-                <span class="chip">Priorisation actionnable</span>
+                <span class="chip">Liste prioritaire</span>
             </div>
         </div>
     </section>
@@ -1573,9 +1571,9 @@ body::before {
     <section class="slide fit-slide" data-title="Parcours">
         <div class="slide-shell">
             <div class="section-head">
-                <span class="kicker">Parcours conseillé</span>
-                <h2>Le dashboard se lit comme une chaîne courte: observer, comparer, prioriser</h2>
-                <p>Cette séquence évite de présenter les graphes comme des vignettes isolées. Elle montre comment chaque vue prépare la suivante jusqu'à la liste d'actions.</p>
+                <span class="kicker">Ordre conseillé</span>
+                <h2>Observer, comparer, puis prioriser</h2>
+                <p>Cette séquence évite de commenter les graphes séparément. Chaque vue répond à une question et prépare la suivante.</p>
             </div>
             <div class="story-grid">
                 <article class="story-card">
@@ -1592,9 +1590,9 @@ body::before {
                 </article>
             </div>
             <div class="insight-row">
-                <span class="chip">Le dashboard reste le centre du livrable</span>
-                <span class="chip">Les slides servent de guide rapide</span>
-                <span class="chip">Chaque vue mène à une action</span>
+                <span class="chip">Le dashboard reste le support principal</span>
+                <span class="chip">Les slides résument la lecture</span>
+                <span class="chip">Chaque vue répond à une question</span>
             </div>
         </div>
     </section>
@@ -1602,13 +1600,13 @@ body::before {
     <section class="slide fit-slide" data-title="Programmes">
         <div class="slide-shell">
             <div class="section-head">
-                <span class="kicker">Moment interactif</span>
+                <span class="kicker">Lecture par programme</span>
                 <h2>Où le risque se concentre-t-il vraiment ?</h2>
                 <p>Survolez les barres pour passer du simple taux de risque à la lecture conjointe risque / assiduité / contrôle continu.</p>
             </div>
             <div class="two-col">
                 <article class="narrative-card">
-                    <h3>Ce que ce slide doit faire comprendre</h3>
+                    <h3>Points à retenir</h3>
                     <div class="mini-stats">
                         <div class="mini-stat">
                             Programme le plus exposé
@@ -1635,16 +1633,16 @@ body::before {
     <section class="slide fit-slide" data-title="Modèles">
         <div class="slide-shell">
             <div class="section-head">
-                <span class="kicker">Moment interactif</span>
-                <h2>Quelle métrique voulez-vous piloter dans le dashboard ?</h2>
-                <p>Changez la métrique pour montrer que le meilleur modèle dépend de l'objectif: maximiser la détection, la robustesse ou l'équilibre global.</p>
+                <span class="kicker">Comparaison des modèles</span>
+                <h2>Quelle métrique regarder selon l'objectif ?</h2>
+                <p>Changez la métrique pour montrer qu'un modèle peut être préférable selon qu'on privilégie la détection, l'équilibre global ou la robustesse.</p>
             </div>
             <div class="two-col swap">
                 <div class="stack">
                     <div class="control-card">$metric_controls_div</div>
                     <div class="narrative-card">
-                        <h3>Lecture conseillée</h3>
-                        <p>La régression logistique reste la meilleure base pour une alerte précoce, car elle garde un recall élevé tout en restant interprétable. La Random Forest est utile pour classer les variables explicatives et challenger la robustesse.</p>
+                        <h3>Interprétation</h3>
+                        <p>La régression logistique reste la base la plus lisible pour une alerte précoce. La Random Forest sert surtout à comparer la robustesse et l'ordre des variables importantes.</p>
                     </div>
                     <div class="bokeh-card">$metric_summary_div</div>
                 </div>
@@ -1656,9 +1654,9 @@ body::before {
     <section class="slide fit-slide" data-title="Preuves">
         <div class="slide-shell">
             <div class="section-head">
-                <span class="kicker">Lecture des preuves</span>
-                <h2>Le modèle est défendable parce qu'il reste lisible</h2>
-                <p>Les variables explicatives et les métriques consolident le discours : on ne montre pas seulement un score, on explique pourquoi il est plausible.</p>
+                <span class="kicker">Variables et métriques</span>
+                <h2>Le modèle reste lisible</h2>
+                <p>Les variables explicatives et les métriques permettent de justifier le résultat au-delà du score final.</p>
             </div>
             <div class="two-col">
                 <div class="bokeh-card">$feature_plot_div</div>
@@ -1676,9 +1674,9 @@ body::before {
     <section class="slide fit-slide" data-title="Priorisation">
         <div class="slide-shell">
             <div class="section-head">
-                <span class="kicker">Moment interactif</span>
+                <span class="kicker">Filtre de priorisation</span>
                 <h2>Qui faut-il traiter en priorité selon le segment ?</h2>
-                <p>Choisissez un programme et faites varier le seuil de risque pour obtenir une liste de suivi crédible, sans quitter la visite guidée du dashboard.</p>
+                <p>Choisissez un programme et faites varier le seuil de risque pour obtenir une liste de suivi cohérente avec le contexte observé.</p>
             </div>
             <div class="control-card">$priority_controls_div</div>
             <div class="legend-row">
@@ -1693,9 +1691,9 @@ body::before {
     <section class="slide fit-slide" data-title="Actions">
         <div class="slide-shell">
             <div class="section-head">
-                <span class="kicker">Liste d'actions</span>
-                <h2>Le score devient une file de priorités exploitable</h2>
-                <p>Ce slide résume la sortie la plus opérationnelle du dashboard: combien de profils traiter, qui regarder en premier et quelle logique d'intervention assumer.</p>
+                <span class="kicker">Table finale</span>
+                <h2>La sortie sert à organiser le suivi</h2>
+                <p>Cette vue résume combien de profils dépassent le seuil choisi et quels étudiants regarder en premier.</p>
             </div>
             <div class="story-grid">
                 <article class="story-card compact-card">
@@ -2009,7 +2007,7 @@ def write_interactive_dashboard(
         "<head>",
         "<meta charset='utf-8'>",
         "<meta name='viewport' content='width=device-width, initial-scale=1'>",
-        "<title>Dashboard interactif - Risque etudiant</title>",
+        "<title>Dashboard du risque etudiant</title>",
         "<style>",
         (
             "body { font-family: Arial, sans-serif; margin: 0; background: "
@@ -2057,13 +2055,11 @@ def write_interactive_dashboard(
         "<body>",
         "<div class='page'>",
         "<section class='hero'>",
-        "<h1>Dashboard interactif du risque etudiant</h1>",
+        "<h1>Dashboard du risque etudiant</h1>",
         (
-            "<p>Ce tableau de bord rassemble les indicateurs de performance "
-            "du pipeline tabulaire, la validation croisee stratifiee, les "
-            "variables explicatives majeures et une liste prioritaire "
-            "d'etudiants a "
-            "suivre.</p>"
+            "<p>Ce tableau de bord regroupe les metriques de test, les "
+            "resultats de validation croisee, les variables importantes et "
+            "une table de priorisation des etudiants a suivre.</p>"
         ),
         "</section>",
         f"<section class='metrics-grid'>{''.join(metric_cards)}</section>",
