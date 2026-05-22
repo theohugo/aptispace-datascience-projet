@@ -54,7 +54,7 @@ tasks:
     desc: Compile d'abord les notebooks puis génère le rapport complet dans tous les formats déclarés
     cmds:
       - task: compile
-      - task: check
+      - task: verify
       - quarto render report/rapport.qmd
       - task: sync-readme
 
@@ -62,21 +62,21 @@ tasks:
     desc: Compile les notebooks puis génère le rapport au format HTML uniquement
     cmds:
       - task: compile
-      - task: check
+      - task: verify
       - quarto render report/rapport.qmd --to html
 
   pdf:
     desc: Compile les notebooks puis génère le rapport au format PDF (via Typst) uniquement
     cmds:
       - task: compile
-      - task: check
+      - task: verify
       - quarto render report/rapport.qmd --to typst
 
   gfm:
     desc: Compile les notebooks puis génère le rapport en GFM (Markdown) pour mettre à jour le README.md
     cmds:
       - task: compile
-      - task: check
+      - task: verify
       - quarto render report/rapport.qmd --to gfm
       - task: sync-readme
 
@@ -84,7 +84,7 @@ tasks:
     desc: Compile les notebooks puis démarre le serveur de prévisualisation dynamique Quarto
     cmds:
       - task: compile
-      - task: check
+      - task: verify
       - quarto preview report/rapport.qmd
 
   install-guide:

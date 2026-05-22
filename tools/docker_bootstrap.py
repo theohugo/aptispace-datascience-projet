@@ -64,22 +64,38 @@ STEPS = [
     {
         "title": "Figures et contrôle des artefacts",
         "summary": (
-            "Génère les figures statiques du rapport puis vérifie que les "
-            "sorties tabulaires et HTML principales sont présentes."
+            "Génère les figures statiques qui alimentent le rapport et le "
+            "dashboard HTML."
         ),
-        "logic": [
-            "src/generate_report_figures.py",
-            "tools/verify_project.py",
-        ],
+        "logic": ["src/generate_report_figures.py"],
         "outputs": [
             "report/assets/tp1_missing_values.png",
             "report/assets/tp2_student_profiles.png",
             "report/assets/tp3_feature_importance.png",
             "report/assets/tp3_student_dashboard.html",
         ],
+        "commands": [[sys.executable, "src/generate_report_figures.py"]],
+    },
+    {
+        "title": "Brique CNN et contrôle complet",
+        "summary": (
+            "Génère les artefacts de la démonstration vision, puis vérifie "
+            "que tous les fichiers attendus par le rapport sont présents."
+        ),
+        "logic": [
+            "src/tp4_synthetic_cnn.py",
+            "tools/verify_project.py",
+        ],
+        "outputs": [
+            "data/processed/tp4_cnn_metrics.csv",
+            "data/processed/tp4_cnn_history.csv",
+            "data/processed/tp4_cnn_predictions.csv",
+            "report/assets/tp4_cnn_samples.png",
+            "report/assets/tp4_cnn_history.png",
+        ],
         "commands": [
-            [sys.executable, "src/generate_report_figures.py"],
-            [sys.executable, "tools/verify_project.py"],
+            [sys.executable, "src/tp4_synthetic_cnn.py"],
+            [sys.executable, "tools/verify_project.py", "--include-cnn"],
         ],
     },
     {
@@ -278,7 +294,10 @@ def main() -> int:
 
     emit("## Flux Docker du projet")
     emit("")
-    emit("Ordre suivi : source -> préparation -> analyse -> modèles -> rendu.")
+    emit(
+        "Ordre suivi : source -> préparation -> analyse -> modèles -> "
+        "figures -> vision -> rendu."
+    )
     emit("")
     write_dataset_source_details()
 
