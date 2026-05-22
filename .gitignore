@@ -43,3 +43,4 @@ Thumbs.db
 
 *.pdf
 *.html
+!report/index.html

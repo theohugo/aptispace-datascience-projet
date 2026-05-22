@@ -92,7 +92,7 @@ div.csl-indent {
 <link href="rapport_files/libs/quarto-html/quarto-syntax-highlighting-9582434199d49cc9e91654cdeeb4866b.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="rapport_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="rapport_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="rapport_files/libs/bootstrap/bootstrap-b7f070ff0b1c20fc86114f0fb84d6609.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="rapport_files/libs/bootstrap/bootstrap-423a4936e91be06dc3afaa6be5990e2d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -232,6 +232,7 @@ window.Quarto = {
 <section id="sec-docker" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Exécution avec Docker</h1>
 <p>Si vous ne souhaitez rien installer localement, tout le projet peut être exécuté avec Docker Compose depuis la racine du dépôt. Le dépôt est monté dans le conteneur via <code>./:/workspace</code>, donc les fichiers générés restent directement disponibles dans votre copie locale.</p>
+<<<<<<< HEAD
 <p>Dans cette configuration, le seul prérequis local est Docker avec le plugin Compose: Python, Quarto, Typst et Go-Task sont déjà fournis dans l’image du projet.</p>
 <p>Le parcours recommandé est maintenant simplement:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose up <span class="at">--build</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -285,6 +286,30 @@ window.Quarto = {
 <li>Prévisualiser le rapport Quarto en direct sur <code>http://localhost:4200</code>:</li>
 </ol>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose <span class="at">--profile</span> preview up preview</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+=======
+<section id="parcours-recommandé" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="parcours-recommandé"><span class="header-section-number">1.1</span> Parcours recommandé</h2>
+<ol type="1">
+<li>Construire l’image Docker:</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose build</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li>Rejouer rapidement le pipeline tabulaire et vérifier les artefacts principaux:</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose run <span class="at">--rm</span> datascience task smoke</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="3" type="1">
+<li>Lancer la vérification complète, y compris la brique CNN:</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose run <span class="at">--rm</span> datascience task verify</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="4" type="1">
+<li>Régénérer le rapport Quarto et mettre à jour le README:</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose run <span class="at">--rm</span> datascience task render</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="5" type="1">
+<li>Servir les livrables HTML sur <code>http://localhost:8000</code>:</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose up presentation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+>>>>>>> d6cf6b7b07ff8028a7cc3aad9a1977e4da2ba5f3
 </section>
 <section id="exécution-détaillée-étape-par-étape" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="exécution-détaillée-étape-par-étape"><span class="header-section-number">1.2</span> Exécution détaillée étape par étape</h2>
@@ -292,6 +317,7 @@ window.Quarto = {
 <ol type="1">
 <li>Wrangling des données:</li>
 </ol>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose run <span class="at">--rm</span> datascience python src/tp1_student_wrangling.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="2" type="1">
 <li>Analyse exploratoire:</li>
@@ -317,6 +343,33 @@ window.Quarto = {
 <li>Mise à jour du README uniquement au format Markdown:</li>
 </ol>
 <div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose run <span class="at">--rm</span> datascience task gfm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+=======
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose run <span class="at">--rm</span> datascience python src/tp1_student_wrangling.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li>Analyse exploratoire:</li>
+</ol>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose run <span class="at">--rm</span> datascience python src/tp2_student_eda.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="3" type="1">
+<li>Modélisation tabulaire:</li>
+</ol>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose run <span class="at">--rm</span> datascience python src/tp3_student_modelisation.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="4" type="1">
+<li>Génération des figures du rapport:</li>
+</ol>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose run <span class="at">--rm</span> datascience python src/generate_report_figures.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="5" type="1">
+<li>Exécution de la démonstration CNN:</li>
+</ol>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose run <span class="at">--rm</span> datascience python src/tp4_synthetic_cnn.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="6" type="1">
+<li>Vérification finale des artefacts produits:</li>
+</ol>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose run <span class="at">--rm</span> datascience python tools/verify_project.py <span class="at">--include-cnn</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="7" type="1">
+<li>Mise à jour du README uniquement au format Markdown:</li>
+</ol>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose run <span class="at">--rm</span> datascience task gfm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+>>>>>>> d6cf6b7b07ff8028a7cc3aad9a1977e4da2ba5f3
 </section>
 </section>
 <section id="sec-intro" class="level1" data-number="2">
@@ -713,7 +766,11 @@ window.Quarto = {
 <h1 data-number="8"><span class="header-section-number">8</span> Data Storytelling et Communication</h1>
 <section id="tableau-de-bord-interactif" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="tableau-de-bord-interactif"><span class="header-section-number">8.1</span> Tableau de Bord Interactif</h2>
+<<<<<<< HEAD
 <p>Le livrable principal de restitution est un tableau de bord interactif autonome. Il rassemble dans une même interface les métriques du jeu de test, les résultats de validation croisée, les variables explicatives dominantes, les profils de risque par programme et une liste prioritaire d’étudiants à suivre.</p>
+=======
+<p>Pour compléter les figures statiques du rapport, un tableau de bord interactif autonome a été ajouté au projet. Il rassemble dans une même interface les métriques du jeu de test, les résultats de validation croisée, les variables explicatives dominantes, les profils de risque par programme et une liste prioritaire d’étudiants à suivre.</p>
+>>>>>>> d6cf6b7b07ff8028a7cc3aad9a1977e4da2ba5f3
 <iframe src="assets/tp3_student_dashboard.html" title="Dashboard interactif du risque etudiant" width="100%" height="1600" style="border: 1px solid #d8dee4; border-radius: 12px; background: white;">
 </iframe>
 <p>Un mini-deck complémentaire sert de guide de lecture du dashboard et reste disponible dans <a href="presentation.html">Slides du dashboard</a>.</p>
@@ -781,7 +838,11 @@ window.Quarto = {
 </section>
 <section id="supports-de-restitution" class="level2" data-number="8.5">
 <h2 data-number="8.5" class="anchored" data-anchor-id="supports-de-restitution"><span class="header-section-number">8.5</span> Supports de Restitution</h2>
+<<<<<<< HEAD
 <p>La restitution finale s’appuie sur plusieurs supports complémentaires. Le tableau de bord interactif HTML constitue le livrable principal d’exploration métier. Il est accompagné par le rapport Quarto, qui joue le rôle de document de synthèse et d’interprétation, par un mini-deck HTML de lecture du dashboard, par un schéma Mermaid du pipeline de données, par des jeux intermédiaires et finaux exportés dans <code>data/processed</code>, ainsi que par un ensemble de figures produites dans <code>report/assets</code>. Cet agencement vise à assurer à la fois la lisibilité du raisonnement, la traçabilité des transformations et la cohérence entre les résultats chiffrés et leur interprétation métier.</p>
+=======
+<p>La restitution finale s’appuie sur plusieurs supports complémentaires. Le rapport Quarto constitue le document central de synthèse et d’interprétation. Il est complété par un schéma Mermaid du pipeline de données, par des jeux intermédiaires et finaux exportés dans <code>data/processed</code>, par un ensemble de figures produites dans <code>report/assets</code>, ainsi que par un tableau de bord interactif HTML dédié à l’exploration métier. Cet agencement vise à assurer à la fois la lisibilité du raisonnement, la traçabilité des transformations et la cohérence entre les résultats chiffrés et leur interprétation métier.</p>
+>>>>>>> d6cf6b7b07ff8028a7cc3aad9a1977e4da2ba5f3
 <p>Ce document dynamique a été compilé en Quarto <span class="citation" data-cites="quarto2024">(<a href="#ref-quarto2024" role="doc-biblioref">Team 2024</a>)</span>.</p>
 <hr>
 </section>
@@ -1252,6 +1313,7 @@ Team, Quarto Development. 2024. <span>“Quarto Dynamic Publishing System: Colla
     }
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<<<<<<< HEAD
 <div class="sourceCode" id="cb16" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Mon Projet Data Science"</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Projet Fil Rouge Data Science - Sujet Libre"</span></span>
@@ -1706,6 +1768,421 @@ Team, Quarto Development. 2024. <span>“Quarto Dynamic Publishing System: Colla
 <span id="cb16-452"><a href="#cb16-452" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-453"><a href="#cb16-453" aria-hidden="true" tabindex="-1"></a>::: {#refs}</span>
 <span id="cb16-454"><a href="#cb16-454" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+=======
+<div class="sourceCode" id="cb14" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Mon Projet Data Science"</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Projet Fil Rouge Data Science - Sujet Libre"</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">  - "Étudiant(e) 1 : Hugo RAGUIN"</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">  - "Étudiant(e) 2 : Amine TALEB"</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - "Étudiant(e) 3 : Elliot FIORESE "</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2026-05-18</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">    theme: cosmo</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-depth: 3</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: show</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co">    highlight-style: github</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co">  typst:</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="co">  gfm:</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="co">    output-file: "README.md"</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-depth: 2</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="co">  eval: false</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: false</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> references.bib</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="an">link-citations:</span><span class="co"> true</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="fu"># Exécution avec Docker {#sec-docker}</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>Si vous ne souhaitez rien installer localement, tout le projet peut être exécuté avec Docker Compose depuis la racine du dépôt. Le dépôt est monté dans le conteneur via <span class="in">`./:/workspace`</span>, donc les fichiers générés restent directement disponibles dans votre copie locale.</span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## Parcours recommandé</span></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Construire l'image Docker:</span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>  <span class="in">```bash</span></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>  <span class="ex">docker</span> compose build</span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>  <span class="in">```</span></span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Rejouer rapidement le pipeline tabulaire et vérifier les artefacts principaux:</span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>  <span class="in">```bash</span></span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>  <span class="ex">docker</span> compose run <span class="at">--rm</span> datascience task smoke</span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>  <span class="in">```</span></span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Lancer la vérification complète, y compris la brique CNN:</span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>  <span class="in">```bash</span></span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>  <span class="ex">docker</span> compose run <span class="at">--rm</span> datascience task verify</span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>  <span class="in">```</span></span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Régénérer le rapport Quarto et mettre à jour le README:</span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>  <span class="in">```bash</span></span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a>  <span class="ex">docker</span> compose run <span class="at">--rm</span> datascience task render</span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>  <span class="in">```</span></span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Servir les livrables HTML sur <span class="in">`http://localhost:8000`</span>:</span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a>  <span class="in">```bash</span></span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a>  <span class="ex">docker</span> compose up presentation</span>
+<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a>  <span class="in">```</span></span>
+<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exécution détaillée étape par étape</span></span>
+<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a>Si vous préférez lancer chaque phase séparément, utilisez les commandes suivantes:</span>
+<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Wrangling des données:</span>
+<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a>  <span class="in">```bash</span></span>
+<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a>  <span class="ex">docker</span> compose run <span class="at">--rm</span> datascience python src/tp1_student_wrangling.py</span>
+<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a>  <span class="in">```</span></span>
+<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Analyse exploratoire:</span>
+<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a>  <span class="in">```bash</span></span>
+<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a>  <span class="ex">docker</span> compose run <span class="at">--rm</span> datascience python src/tp2_student_eda.py</span>
+<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a>  <span class="in">```</span></span>
+<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Modélisation tabulaire:</span>
+<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a>  <span class="in">```bash</span></span>
+<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a>  <span class="ex">docker</span> compose run <span class="at">--rm</span> datascience python src/tp3_student_modelisation.py</span>
+<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a>  <span class="in">```</span></span>
+<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Génération des figures du rapport:</span>
+<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a>  <span class="in">```bash</span></span>
+<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a>  <span class="ex">docker</span> compose run <span class="at">--rm</span> datascience python src/generate_report_figures.py</span>
+<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a>  <span class="in">```</span></span>
+<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Exécution de la démonstration CNN:</span>
+<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a>  <span class="in">```bash</span></span>
+<span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a>  <span class="ex">docker</span> compose run <span class="at">--rm</span> datascience python src/tp4_synthetic_cnn.py</span>
+<span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a>  <span class="in">```</span></span>
+<span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-103"><a href="#cb14-103" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>Vérification finale des artefacts produits:</span>
+<span id="cb14-104"><a href="#cb14-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-105"><a href="#cb14-105" aria-hidden="true" tabindex="-1"></a>  <span class="in">```bash</span></span>
+<span id="cb14-106"><a href="#cb14-106" aria-hidden="true" tabindex="-1"></a>  <span class="ex">docker</span> compose run <span class="at">--rm</span> datascience python tools/verify_project.py <span class="at">--include-cnn</span></span>
+<span id="cb14-107"><a href="#cb14-107" aria-hidden="true" tabindex="-1"></a>  <span class="in">```</span></span>
+<span id="cb14-108"><a href="#cb14-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-109"><a href="#cb14-109" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>Mise à jour du README uniquement au format Markdown:</span>
+<span id="cb14-110"><a href="#cb14-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-111"><a href="#cb14-111" aria-hidden="true" tabindex="-1"></a>  <span class="in">```bash</span></span>
+<span id="cb14-112"><a href="#cb14-112" aria-hidden="true" tabindex="-1"></a>  <span class="ex">docker</span> compose run <span class="at">--rm</span> datascience task gfm</span>
+<span id="cb14-113"><a href="#cb14-113" aria-hidden="true" tabindex="-1"></a>  <span class="in">```</span></span>
+<span id="cb14-114"><a href="#cb14-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-115"><a href="#cb14-115" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introduction et Contexte Métier {#sec-intro}</span></span>
+<span id="cb14-116"><a href="#cb14-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-117"><a href="#cb14-117" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="al">![CI Compilation Pipeline](https://github.com/aptitek/aptispace-datascience-projet/actions/workflows/ci.yml/badge.svg)</span><span class="co">](https://github.com/aptitek/aptispace-datascience-projet/actions/workflows/ci.yml)</span></span>
+<span id="cb14-118"><a href="#cb14-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-119"><a href="#cb14-119" aria-hidden="true" tabindex="-1"></a>Le sujet principal retenu pour ce projet est la **prédiction du risque d'abandon scolaire ou d'échec académique**. La problématique métier consiste à identifier le plus tôt possible les étudiants à risque afin de déclencher des actions ciblées: tutorat, suivi pédagogique, accompagnement social ou adaptation du rythme d'apprentissage.</span>
+<span id="cb14-120"><a href="#cb14-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-121"><a href="#cb14-121" aria-hidden="true" tabindex="-1"></a>L'enjeu n'est pas uniquement de prédire une cible binaire. Il s'agit aussi de construire une chaîne analytique défendable, lisible par une équipe pédagogique et exploitable pour l'aide à la décision. Le livrable final doit donc articuler nettoyage de données, exploration explicative, modélisation tabulaire et ouverture vers une brique vision liée à des copies scannées ou à de l'écriture manuscrite.</span>
+<span id="cb14-122"><a href="#cb14-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-123"><a href="#cb14-123" aria-hidden="true" tabindex="-1"></a><span class="fu">## Contexte du Projet</span></span>
+<span id="cb14-124"><a href="#cb14-124" aria-hidden="true" tabindex="-1"></a>Le domaine d'étude est celui de l'**analytics éducatif**. Un établissement d'enseignement ou un service de réussite étudiante dispose souvent de données fragmentées: notes continues, absences, retard dans les remises, temps de connexion à une plateforme pédagogique, participation en classe, statut boursier, parcours antérieur ou indicateurs socio-économiques. Isolément, ces variables sont peu actionnables; combinées, elles permettent de détecter des signaux faibles de décrochage.</span>
+<span id="cb14-125"><a href="#cb14-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-126"><a href="#cb14-126" aria-hidden="true" tabindex="-1"></a>Ce sujet est pertinent scientifiquement et stratégiquement. Il répond à un besoin réel de prévention, mobilise des variables tabulaires hétérogènes, soulève des questions de biais et d'équité, et se prête naturellement à une extension multimodale via l'analyse de copies numérisées, de formulaires pédagogiques ou d'écritures manuscrites.</span>
+<span id="cb14-127"><a href="#cb14-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-128"><a href="#cb14-128" aria-hidden="true" tabindex="-1"></a><span class="fu">## Objectif Analytique</span></span>
+<span id="cb14-129"><a href="#cb14-129" aria-hidden="true" tabindex="-1"></a>La cible principale sera une variable de type <span class="in">`dropout_risk`</span>, <span class="in">`failure_risk`</span> ou <span class="in">`success_status`</span>, selon le jeu de données final retenu. Le problème est donc formulé comme une **classification supervisée**, éventuellement complétée par une analyse de probabilité de risque pour prioriser les interventions pédagogiques.</span>
+<span id="cb14-130"><a href="#cb14-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-131"><a href="#cb14-131" aria-hidden="true" tabindex="-1"></a>Les livrables analytiques sont les suivants:</span>
+<span id="cb14-132"><a href="#cb14-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-133"><a href="#cb14-133" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>un jeu de données nettoyé et un jeu de données prêt pour la modélisation;</span>
+<span id="cb14-134"><a href="#cb14-134" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>des indicateurs descriptifs et des visualisations métier sur l'assiduité, les résultats académiques et l'engagement étudiant;</span>
+<span id="cb14-135"><a href="#cb14-135" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>un modèle de classification de référence comparé à une baseline naïve pour repérer les profils à risque;</span>
+<span id="cb14-136"><a href="#cb14-136" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>une brique CNN documentée, pensée pour être raccordée à des copies scannées, de l'écriture manuscrite ou des documents pédagogiques numérisés.</span>
+<span id="cb14-137"><a href="#cb14-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-138"><a href="#cb14-138" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Note méthodologique: le pipeline tabulaire repose sur le jeu UCI *Predict Students' Dropout and Academic Success*, harmonisé vers le schéma analytique du projet. Un générateur synthétique local est conservé comme solution de repli afin d'assurer l'exécution du pipeline si la source publique devient indisponible.</span></span>
+<span id="cb14-139"><a href="#cb14-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-140"><a href="#cb14-140" aria-hidden="true" tabindex="-1"></a><span class="fu">## Synthèse</span></span>
+<span id="cb14-141"><a href="#cb14-141" aria-hidden="true" tabindex="-1"></a>Le travail mené couvre les deux jalons du projet autour d'un même cas d'usage: la détection précoce du risque de décrochage étudiant. L'ensemble de la démarche articule préparation de données, analyse exploratoire, modélisation supervisée et ouverture vers une composante vision par ordinateur.</span>
+<span id="cb14-142"><a href="#cb14-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-143"><a href="#cb14-143" aria-hidden="true" tabindex="-1"></a>Les principaux résultats obtenus peuvent être résumés ainsi:</span>
+<span id="cb14-144"><a href="#cb14-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-145"><a href="#cb14-145" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>le pipeline aboutit à une base étudiante cohérente, nettoyée et enrichie par des variables dérivées interprétables;</span>
+<span id="cb14-146"><a href="#cb14-146" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>l'analyse exploratoire met en évidence des contrastes nets selon les programmes, le statut boursier et la dynamique semestrielle;</span>
+<span id="cb14-147"><a href="#cb14-147" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>la régression logistique constitue le meilleur compromis pour une logique d'alerte précoce, avec un rappel de **0,806** et un ROC-AUC de **0,909** sur le jeu de test;</span>
+<span id="cb14-148"><a href="#cb14-148" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>la branche CNN, encore démonstrative, confirme la faisabilité technique d'une extension future vers des documents pédagogiques numérisés.</span>
+<span id="cb14-149"><a href="#cb14-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-150"><a href="#cb14-150" aria-hidden="true" tabindex="-1"></a><span class="fu">## Positionnement par Rapport au Cahier des Charges</span></span>
+<span id="cb14-151"><a href="#cb14-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-152"><a href="#cb14-152" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Dimension attendue <span class="pp">|</span> Traitement retenu dans ce rapport <span class="pp">|</span> Supports mobilisés <span class="pp">|</span></span>
+<span id="cb14-153"><a href="#cb14-153" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb14-154"><a href="#cb14-154" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Préparation des données <span class="pp">|</span> Audit des manques, imputation, création de variables dérivées et encodage pour la modélisation <span class="pp">|</span> <span class="co">[</span><span class="ot">src/student_risk_dataset.py</span><span class="co">](../src/student_risk_dataset.py)</span>, <span class="co">[</span><span class="ot">src/tp1_student_wrangling.py</span><span class="co">](../src/tp1_student_wrangling.py)</span> <span class="pp">|</span></span>
+<span id="cb14-155"><a href="#cb14-155" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Analyse exploratoire <span class="pp">|</span> Statistiques descriptives, profils par programme, distributions et corrélations <span class="pp">|</span> <span class="co">[</span><span class="ot">src/tp2_student_eda.py</span><span class="co">](../src/tp2_student_eda.py)</span>, tableaux de <span class="in">`data/processed`</span> <span class="pp">|</span></span>
+<span id="cb14-156"><a href="#cb14-156" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Visualisation <span class="pp">|</span> Figures métier générées à partir du schéma harmonisé du projet <span class="pp">|</span> <span class="co">[</span><span class="ot">src/generate_report_figures.py</span><span class="co">](../src/generate_report_figures.py)</span>, figures du dossier <span class="in">`report/assets`</span> <span class="pp">|</span></span>
+<span id="cb14-157"><a href="#cb14-157" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Modélisation <span class="pp">|</span> Comparaison entre baseline, régression logistique et Random Forest <span class="pp">|</span> <span class="co">[</span><span class="ot">src/tp3_student_modelisation.py</span><span class="co">](../src/tp3_student_modelisation.py)</span> <span class="pp">|</span></span>
+<span id="cb14-158"><a href="#cb14-158" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Évaluation <span class="pp">|</span> Lecture conjointe de l'accuracy, du rappel, du F1-score et du ROC-AUC <span class="pp">|</span> <span class="in">`data/processed/tp3_model_metrics.csv`</span> <span class="pp">|</span></span>
+<span id="cb14-159"><a href="#cb14-159" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Restitution <span class="pp">|</span> Interprétation métier, matrice d'action pédagogique et discussion des limites <span class="pp">|</span> sections d'analyse et de storytelling du présent rapport <span class="pp">|</span></span>
+<span id="cb14-160"><a href="#cb14-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-161"><a href="#cb14-161" aria-hidden="true" tabindex="-1"></a>Cette structuration permet de maintenir une continuité entre les attendus pédagogiques du cours et la progression réelle de l'étude, sans dissocier artificiellement les phases exploratoires, prédictives et de communication.</span>
+<span id="cb14-162"><a href="#cb14-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-163"><a href="#cb14-163" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb14-164"><a href="#cb14-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-165"><a href="#cb14-165" aria-hidden="true" tabindex="-1"></a><span class="fu"># Acquisition et Préparation des Données (Data Wrangling) {#sec-wrangling}</span></span>
+<span id="cb14-166"><a href="#cb14-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-167"><a href="#cb14-167" aria-hidden="true" tabindex="-1"></a>Le succès de tout projet de Data Science repose sur la qualité de la préparation des données <span class="co">[</span><span class="ot">@pandas2020</span><span class="co">]</span>. Cette section documente l'audit de qualité et les étapes de nettoyage appliquées à vos jeux de données bruts.</span>
+<span id="cb14-168"><a href="#cb14-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-169"><a href="#cb14-169" aria-hidden="true" tabindex="-1"></a><span class="fu">## Audit de Qualité</span></span>
+<span id="cb14-170"><a href="#cb14-170" aria-hidden="true" tabindex="-1"></a>Le jeu brut harmonisé retenu par défaut contient **4 424 étudiants** et **16 variables**, avec une cible `dropout_risk` égale à **32,1 %** de la population (**1 421 étudiants à risque** sur 4 424). Les identifiants du projet sont reconstruits lors de l'harmonisation afin de garantir l'unicité locale et la traçabilité du pipeline.</span>
+<span id="cb14-171"><a href="#cb14-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-172"><a href="#cb14-172" aria-hidden="true" tabindex="-1"></a>Sur les variables retenues dans ce schéma harmonisé, aucune valeur manquante structurante n'est observée. Le contrôle de complétude confirme que les colonnes tabulaires conservées sont renseignées sur l'ensemble de la cohorte.</span>
+<span id="cb14-173"><a href="#cb14-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-174"><a href="#cb14-174" aria-hidden="true" tabindex="-1"></a>Le wrangling reste néanmoins indispensable. Il stabilise les types, normalise les booléens, prépare les variables dérivées et conserve une logique d'imputation compatible avec le dataset synthétique de secours ou avec d'autres sources qui seraient moins propres que l'archive UCI.</span>
+<span id="cb14-175"><a href="#cb14-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-176"><a href="#cb14-176" aria-hidden="true" tabindex="-1"></a><span class="al">![Top 10 des valeurs manquantes observées dans le jeu étudiant brut.](assets/tp1_missing_values.png)</span></span>
+<span id="cb14-177"><a href="#cb14-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-178"><a href="#cb14-178" aria-hidden="true" tabindex="-1"></a><span class="fu">## Algorithme de Nettoyage</span></span>
+<span id="cb14-179"><a href="#cb14-179" aria-hidden="true" tabindex="-1"></a>Le pipeline de nettoyage est implémenté dans <span class="co">[</span><span class="ot">src/student_risk_dataset.py</span><span class="co">](../src/student_risk_dataset.py)</span> et <span class="co">[</span><span class="ot">src/tp1_student_wrangling.py</span><span class="co">](../src/tp1_student_wrangling.py)</span>. La logique retenue est la suivante:</span>
+<span id="cb14-180"><a href="#cb14-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-181"><a href="#cb14-181" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>harmonisation d'un dataset public existant quand il est demandé, avec repli automatique vers un dataset brut réaliste généré localement;</span>
+<span id="cb14-182"><a href="#cb14-182" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>normalisation des booléens et conversion robuste des colonnes numériques;</span>
+<span id="cb14-183"><a href="#cb14-183" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>création de drapeaux de non-réponse pour <span class="in">`attendance_rate`</span>, <span class="in">`prior_average`</span> et <span class="in">`continuous_assessment`</span>;</span>
+<span id="cb14-184"><a href="#cb14-184" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>imputation médiane sur les variables quantitatives, <span class="in">`False`</span> sur les booléens et <span class="in">`Unknown`</span> sur les catégories;</span>
+<span id="cb14-185"><a href="#cb14-185" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>création de variables dérivées interprétables: <span class="in">`engagement_score`</span>, <span class="in">`grade_trend_gap`</span> et <span class="in">`academic_pressure_index`</span>;</span>
+<span id="cb14-186"><a href="#cb14-186" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>encodage one-hot des variables catégorielles pour obtenir une table directement exploitable par Scikit-Learn.</span>
+<span id="cb14-187"><a href="#cb14-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-188"><a href="#cb14-188" aria-hidden="true" tabindex="-1"></a>Le pipeline ne supprime aucune ligne: la cohorte complète de **4 424 étudiants** est conservée. La sortie wranglée contient **22 colonnes** et la table `model_ready` **37 colonnes**.</span>
+<span id="cb14-189"><a href="#cb14-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-190"><a href="#cb14-190" aria-hidden="true" tabindex="-1"></a><span class="fu">## Travaux Pratiques de Wrangling</span></span>
+<span id="cb14-191"><a href="#cb14-191" aria-hidden="true" tabindex="-1"></a>Le script de wrangling génère deux sorties versionnées:</span>
+<span id="cb14-192"><a href="#cb14-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-193"><a href="#cb14-193" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`data/processed/tp1_student_risk_wrangled.csv`</span> pour l'analyse métier;</span>
+<span id="cb14-194"><a href="#cb14-194" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`data/processed/tp1_student_risk_model_ready.csv`</span> pour la modélisation supervisée.</span>
+<span id="cb14-195"><a href="#cb14-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-196"><a href="#cb14-196" aria-hidden="true" tabindex="-1"></a>Cette séparation est particulièrement importante dans un contexte éducatif, car les enseignants et responsables de formation doivent pouvoir relire les données et comprendre les transformations appliquées.</span>
+<span id="cb14-197"><a href="#cb14-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-198"><a href="#cb14-198" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb14-199"><a href="#cb14-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-200"><a href="#cb14-200" aria-hidden="true" tabindex="-1"></a><span class="fu"># Analyse Exploratoire des Données (EDA) {#sec-eda}</span></span>
+<span id="cb14-201"><a href="#cb14-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-202"><a href="#cb14-202" aria-hidden="true" tabindex="-1"></a>Dans cette section, nous analysons les relations statistiques fondamentales qui régissent votre domaine d'étude au sein du jeu de données.</span>
+<span id="cb14-203"><a href="#cb14-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-204"><a href="#cb14-204" aria-hidden="true" tabindex="-1"></a><span class="fu">## Statistiques Descriptives</span></span>
+<span id="cb14-205"><a href="#cb14-205" aria-hidden="true" tabindex="-1"></a>Le profil moyen observé est celui d'un étudiant de **23,27 ans**, travaillant **17,01 heures par semaine**, se connectant **14,77 fois par semaine** au LMS, avec un **taux d'assiduité moyen de 78,74 %** et un **délai moyen de remise de 1,42 jour**. La note antérieure moyenne est de **13,26/20** et l'évaluation continue moyenne de **10,75/20**.</span>
+<span id="cb14-206"><a href="#cb14-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-207"><a href="#cb14-207" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Programme (exemples contrastés) <span class="pp">|</span> Assiduité moyenne <span class="pp">|</span> Évaluation continue moyenne <span class="pp">|</span> Taux de risque <span class="pp">|</span></span>
+<span id="cb14-208"><a href="#cb14-208" aria-hidden="true" tabindex="-1"></a><span class="pp">|--------|--------:|--------:|--------:|</span></span>
+<span id="cb14-209"><a href="#cb14-209" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Nursing <span class="pp">|</span> 86.24 % <span class="pp">|</span> 12.52 <span class="pp">|</span> 15.4 % <span class="pp">|</span></span>
+<span id="cb14-210"><a href="#cb14-210" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Social Service <span class="pp">|</span> 83.93 % <span class="pp">|</span> 11.35 <span class="pp">|</span> 18.3 % <span class="pp">|</span></span>
+<span id="cb14-211"><a href="#cb14-211" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Informatics Engineering <span class="pp">|</span> 66.57 % <span class="pp">|</span> 9.38 <span class="pp">|</span> 54.1 % <span class="pp">|</span></span>
+<span id="cb14-212"><a href="#cb14-212" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Biofuel Production Technologies <span class="pp">|</span> 66.63 % <span class="pp">|</span> 10.19 <span class="pp">|</span> 66.7 % <span class="pp">|</span></span>
+<span id="cb14-213"><a href="#cb14-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-214"><a href="#cb14-214" aria-hidden="true" tabindex="-1"></a>Le contraste métier est net: <span class="in">`Nursing`</span> et <span class="in">`Social Service`</span> restent relativement protégés, alors que <span class="in">`Informatics Engineering`</span> et surtout <span class="in">`Biofuel Production Technologies`</span> concentrent les niveaux de risque les plus élevés. Cette hétérogénéité plaide pour une lecture segmentée par programme, et non pour une politique uniforme de prévention.</span>
+<span id="cb14-215"><a href="#cb14-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-216"><a href="#cb14-216" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ingénierie de Variables (Feature Engineering)</span></span>
+<span id="cb14-217"><a href="#cb14-217" aria-hidden="true" tabindex="-1"></a>L'ingénierie de variables transforme ici les traces brutes en signaux pédagogiques exploitables. Trois variables ont été construites explicitement:</span>
+<span id="cb14-218"><a href="#cb14-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-219"><a href="#cb14-219" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`engagement_score`</span>, qui combine assiduité, temps de travail, activité LMS et retards de remise;</span>
+<span id="cb14-220"><a href="#cb14-220" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`grade_trend_gap`</span>, qui mesure l'écart entre l'évaluation continue et la moyenne antérieure;</span>
+<span id="cb14-221"><a href="#cb14-221" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`academic_pressure_index`</span>, qui agrège stress, retards et dégradation d'assiduité.</span>
+<span id="cb14-222"><a href="#cb14-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-223"><a href="#cb14-223" aria-hidden="true" tabindex="-1"></a>Ces variables dérivées ont deux avantages. Elles améliorent la capacité prédictive du modèle, mais surtout elles restent compréhensibles par les équipes éducatives. Une alerte fondée sur la baisse des notes, la chute d'engagement et la hausse de pression académique est plus défendable qu'un score opaque.</span>
+<span id="cb14-224"><a href="#cb14-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-225"><a href="#cb14-225" aria-hidden="true" tabindex="-1"></a><span class="fu">## Travaux Pratiques d'Exploration Visuelle (EDA)</span></span>
+<span id="cb14-226"><a href="#cb14-226" aria-hidden="true" tabindex="-1"></a>L'exploration visuelle est calculée dans <span class="co">[</span><span class="ot">src/tp2_student_eda.py</span><span class="co">](../src/tp2_student_eda.py)</span> et mise en forme dans <span class="co">[</span><span class="ot">src/generate_report_figures.py</span><span class="co">](../src/generate_report_figures.py)</span>. Les visuels générés dans <span class="in">`report/assets`</span> documentent le cas d'étude étudiant retenu dans ce rapport.</span>
+<span id="cb14-227"><a href="#cb14-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-228"><a href="#cb14-228" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb14-229"><a href="#cb14-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-230"><a href="#cb14-230" aria-hidden="true" tabindex="-1"></a><span class="fu"># Visualisation Multidimensionnelle (Insights) {#sec-viz}</span></span>
+<span id="cb14-231"><a href="#cb14-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-232"><a href="#cb14-232" aria-hidden="true" tabindex="-1"></a>Nous présentons ici les visualisations cibles du projet et la manière dont elles doivent être interprétées pour une cellule de réussite étudiante.</span>
+<span id="cb14-233"><a href="#cb14-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-234"><a href="#cb14-234" aria-hidden="true" tabindex="-1"></a>L'EDA montre que le risque académique n'est pas aléatoire. Il se concentre sur quelques dimensions stables: performance récente, assiduité, engagement numérique et contexte socio-éducatif.</span>
+<span id="cb14-235"><a href="#cb14-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-236"><a href="#cb14-236" aria-hidden="true" tabindex="-1"></a><span class="fu">## Profils et Distributions Caractéristiques</span></span>
+<span id="cb14-237"><a href="#cb14-237" aria-hidden="true" tabindex="-1"></a><span class="al">![Taux de risque selon le statut boursier et évolution par semestre.](assets/tp2_student_profiles.png)</span></span>
+<span id="cb14-238"><a href="#cb14-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-239"><a href="#cb14-239" aria-hidden="true" tabindex="-1"></a>Trois insights ressortent immédiatement:</span>
+<span id="cb14-240"><a href="#cb14-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-241"><a href="#cb14-241" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>le statut boursier joue un rôle protecteur marqué dans ce dataset: **38,71 %** des non-boursiers sont classés à risque contre **12,19 %** des boursiers;</span>
+<span id="cb14-242"><a href="#cb14-242" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>le risque n'est pas homogène selon les programmes: <span class="in">`Biofuel Production Technologies`</span> atteint **66,7 %** contre **15,4 %** pour <span class="in">`Nursing`</span>;</span>
+<span id="cb14-243"><a href="#cb14-243" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>la structure du jeu UCI met surtout en évidence les deux premiers semestres observés, avec **42,78 %** de risque au semestre 1 contre **31,67 %** au semestre 2.</span>
+<span id="cb14-244"><a href="#cb14-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-245"><a href="#cb14-245" aria-hidden="true" tabindex="-1"></a>Ces contrastes justifient le recours à un score de risque multicritère, plutôt qu'à une lecture limitée à la moyenne générale.</span>
+<span id="cb14-246"><a href="#cb14-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-247"><a href="#cb14-247" aria-hidden="true" tabindex="-1"></a><span class="fu">## Corrélations Globales</span></span>
+<span id="cb14-248"><a href="#cb14-248" aria-hidden="true" tabindex="-1"></a><span class="al">![Matrice de corrélation entre engagement, notes et assiduité.](assets/tp2_learning_correlation.png)</span></span>
+<span id="cb14-249"><a href="#cb14-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-250"><a href="#cb14-250" aria-hidden="true" tabindex="-1"></a>La matrice de corrélation met en évidence plusieurs relations structurantes. La plus forte corrélation observée est celle entre <span class="in">`prior_average`</span> et <span class="in">`continuous_assessment`</span> (**0,756**), ce qui est cohérent avec la continuité du niveau académique. À l'inverse, `assignment_delay_days` est négativement corrélé à `continuous_assessment` (**-0,386**) et à `prior_average` (**-0,360**), ce qui renforce l'idée que les retards de remise sont un bon proxy de fragilité.</span>
+<span id="cb14-251"><a href="#cb14-251" aria-hidden="true" tabindex="-1"></a>La matrice de corrélation met en évidence plusieurs relations structurantes. La plus forte corrélation observée est logiquement celle entre <span class="in">`study_hours_per_week`</span> et <span class="in">`engagement_score`</span> (**0,920**), puisque ce score intègre explicitement le volume de travail. Parmi les relations plus interprétables, `attendance_rate` est fortement corrélée à `continuous_assessment` (**0,771**) et négativement à `stress_index` (**-0,776**). À l'inverse, `assignment_delay_days` reste négativement corrélé à `attendance_rate` (**-0,387**) et à `engagement_score` (**-0,424**), ce qui renforce l'idée que les retards de remise capturent une fragilité organisationnelle.</span>
+<span id="cb14-252"><a href="#cb14-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-253"><a href="#cb14-253" aria-hidden="true" tabindex="-1"></a>L'objectif n'est donc pas seulement descriptif. Cette lecture permet aussi d'identifier les variables redondantes, les dépendances fortes et les agrégations utiles pour la modélisation.</span>
+<span id="cb14-254"><a href="#cb14-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-255"><a href="#cb14-255" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb14-256"><a href="#cb14-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-257"><a href="#cb14-257" aria-hidden="true" tabindex="-1"></a><span class="fu"># Modélisation et Apprentissage {#sec-modelling}</span></span>
+<span id="cb14-258"><a href="#cb14-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-259"><a href="#cb14-259" aria-hidden="true" tabindex="-1"></a><span class="fu">## Schéma Global du Pipeline de Données</span></span>
+<span id="cb14-260"><a href="#cb14-260" aria-hidden="true" tabindex="-1"></a>Le pipeline complet intègre à la fois la branche analytique tabulaire (Machine Learning) et la branche d'analyse visuelle ou de signaux complexes (Deep Learning CNN) :</span>
+<span id="cb14-261"><a href="#cb14-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-262"><a href="#cb14-262" aria-hidden="true" tabindex="-1"></a><span class="in">```mermaid</span></span>
+<span id="cb14-263"><a href="#cb14-263" aria-hidden="true" tabindex="-1"></a>graph TD</span>
+<span id="cb14-264"><a href="#cb14-264" aria-hidden="true" tabindex="-1"></a>  A[Notes absences LMS contexte social] --&gt;|Jointure et anonymisation| B[Table etudiante brute]</span>
+<span id="cb14-265"><a href="#cb14-265" aria-hidden="true" tabindex="-1"></a>  B --&gt;|Nettoyage et harmonisation| C[Table nettoyee]</span>
+<span id="cb14-266"><a href="#cb14-266" aria-hidden="true" tabindex="-1"></a>  C --&gt;|Feature engineering pedagogique| D[Table model-ready]</span>
+<span id="cb14-267"><a href="#cb14-267" aria-hidden="true" tabindex="-1"></a>  D --&gt;|Split temporel ou stratifie| E[Modele tabulaire]</span>
+<span id="cb14-268"><a href="#cb14-268" aria-hidden="true" tabindex="-1"></a>  E --&gt;|Score de risque + importances| F[Tableau de bord pedagogique]</span>
+<span id="cb14-269"><a href="#cb14-269" aria-hidden="true" tabindex="-1"></a>  G[Copies scannees / ecriture manuscrite] --&gt;|CNN TensorFlow| H[Variables visuelles complementaires]</span>
+<span id="cb14-270"><a href="#cb14-270" aria-hidden="true" tabindex="-1"></a>  H --&gt; F</span>
+<span id="cb14-271"><a href="#cb14-271" aria-hidden="true" tabindex="-1"></a>  F --&gt; I[Rapport Quarto et restitution]</span>
+<span id="cb14-272"><a href="#cb14-272" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-273"><a href="#cb14-273" aria-hidden="true" tabindex="-1"></a>  style C fill:<span class="co">#e0f2fe,stroke:#0284c7,stroke-width:2px</span></span>
+<span id="cb14-274"><a href="#cb14-274" aria-hidden="true" tabindex="-1"></a>  style I fill:<span class="co">#f0fdf4,stroke:#16a34a,stroke-width:2px</span></span>
+<span id="cb14-275"><a href="#cb14-275" aria-hidden="true" tabindex="-1"></a>  style E fill:<span class="co">#fef3c7,stroke:#d97706,stroke-width:2px</span></span>
+<span id="cb14-276"><a href="#cb14-276" aria-hidden="true" tabindex="-1"></a>  style H fill:<span class="co">#fef3c7,stroke:#d97706,stroke-width:2px</span></span>
+<span id="cb14-277"><a href="#cb14-277" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-278"><a href="#cb14-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-279"><a href="#cb14-279" aria-hidden="true" tabindex="-1"></a><span class="fu">## Modélisation Tabulaire (Machine Learning)</span></span>
+<span id="cb14-280"><a href="#cb14-280" aria-hidden="true" tabindex="-1"></a>La branche tabulaire est implémentée dans <span class="co">[</span><span class="ot">src/tp3_student_modelisation.py</span><span class="co">](../src/tp3_student_modelisation.py)</span>. Trois modèles sont comparés:</span>
+<span id="cb14-281"><a href="#cb14-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-282"><a href="#cb14-282" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>une baseline majoritaire, pour mesurer le niveau minimal de référence;</span>
+<span id="cb14-283"><a href="#cb14-283" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>une régression logistique, plus adaptée à une lecture opérationnelle centrée sur le rappel;</span>
+<span id="cb14-284"><a href="#cb14-284" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>une forêt aléatoire, utilisée ici pour sa robustesse et pour le classement des variables explicatives.</span>
+<span id="cb14-285"><a href="#cb14-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-286"><a href="#cb14-286" aria-hidden="true" tabindex="-1"></a>Le protocole retenu combine deux niveaux d'évaluation complémentaires. Un **split stratifié en 80/20** est conservé pour estimer la performance finale sur un jeu de test indépendant. En parallèle, une **validation croisée stratifiée à 5 plis** est réalisée sur l'échantillon d'entraînement afin de comparer les modèles sur plusieurs sous-échantillons et de réduire la dépendance à un découpage unique. Sur un dataset réel multi-semestres, ce protocole devrait ensuite évoluer vers un découpage chronologique ou par cohorte.</span>
+<span id="cb14-287"><a href="#cb14-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-288"><a href="#cb14-288" aria-hidden="true" tabindex="-1"></a><span class="al">![Top 10 des variables explicatives du risque étudiant.](assets/tp3_feature_importance.png)</span></span>
+<span id="cb14-289"><a href="#cb14-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-290"><a href="#cb14-290" aria-hidden="true" tabindex="-1"></a>Les variables les plus influentes dans la forêt aléatoire sont <span class="in">`attendance_rate`</span> (**0,167**), `academic_pressure_index` (**0,145**), `engagement_score` (**0,112**), `stress_index` (**0,099**) et `study_hours_per_week` (**0,081**). Le modèle capture donc un mélange cohérent d'**assiduité**, de **pression académique** et d'**engagement pédagogique**.</span>
+<span id="cb14-291"><a href="#cb14-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-292"><a href="#cb14-292" aria-hidden="true" tabindex="-1"></a><span class="fu">### Travaux Pratiques de Modélisation Tabulaire</span></span>
+<span id="cb14-293"><a href="#cb14-293" aria-hidden="true" tabindex="-1"></a>La modélisation produit trois sorties clés dans <span class="in">`data/processed`</span>:</span>
+<span id="cb14-294"><a href="#cb14-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-295"><a href="#cb14-295" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`tp3_model_metrics.csv`</span> pour les scores comparatifs;</span>
+<span id="cb14-296"><a href="#cb14-296" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`tp3_cross_validation_metrics.csv`</span> pour la synthèse de validation croisée stratifiée;</span>
+<span id="cb14-297"><a href="#cb14-297" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`tp3_feature_importance.csv`</span> pour le classement des variables;</span>
+<span id="cb14-298"><a href="#cb14-298" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`tp3_predictions_sample.csv`</span> pour un échantillon de prédictions individuelles.</span>
+<span id="cb14-299"><a href="#cb14-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-300"><a href="#cb14-300" aria-hidden="true" tabindex="-1"></a><span class="fu">## Modélisation Vision / Deep Learning (Analyse d'Images ou Signaux)</span></span>
+<span id="cb14-301"><a href="#cb14-301" aria-hidden="true" tabindex="-1"></a>La branche Deep Learning est implémentée dans <span class="co">[</span><span class="ot">src/tp4_synthetic_cnn.py</span><span class="co">](../src/tp4_synthetic_cnn.py)</span>. À ce stade, elle sert de **preuve de faisabilité technique** pour l'intégration d'une chaîne vision dans le même environnement reproductible que la branche tabulaire.</span>
+<span id="cb14-302"><a href="#cb14-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-303"><a href="#cb14-303" aria-hidden="true" tabindex="-1"></a>Le script génère aujourd'hui **120 images RGB synthétiques** de taille $64 \times 64$ réparties en deux classes simples. Cette approche n'est pas la finalité métier du projet; elle prépare plutôt l'étape suivante, dans laquelle le CNN pourra être appliqué à des copies scannées, à de l'écriture manuscrite, à des formulaires pédagogiques ou à des traces visuelles issues d'un environnement d'apprentissage.</span>
+<span id="cb14-304"><a href="#cb14-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-305"><a href="#cb14-305" aria-hidden="true" tabindex="-1"></a>L'architecture CNN reste volontairement compacte:</span>
+<span id="cb14-306"><a href="#cb14-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-307"><a href="#cb14-307" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>bloc <span class="in">`Conv2D(16)`</span> + <span class="in">`MaxPooling2D`</span>;</span>
+<span id="cb14-308"><a href="#cb14-308" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>bloc <span class="in">`Conv2D(32)`</span> + <span class="in">`MaxPooling2D`</span>;</span>
+<span id="cb14-309"><a href="#cb14-309" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`Flatten`</span>, <span class="in">`Dense(32)`</span>, <span class="in">`Dropout(0.2)`</span>, puis sortie sigmoïde.</span>
+<span id="cb14-310"><a href="#cb14-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-311"><a href="#cb14-311" aria-hidden="true" tabindex="-1"></a><span class="al">![Exemples d'images synthétiques générées pour la brique CNN.](assets/tp4_cnn_samples.png)</span></span>
+<span id="cb14-312"><a href="#cb14-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-313"><a href="#cb14-313" aria-hidden="true" tabindex="-1"></a><span class="al">![Courbes d'apprentissage du CNN sur 5 époques.](assets/tp4_cnn_history.png)</span></span>
+<span id="cb14-314"><a href="#cb14-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-315"><a href="#cb14-315" aria-hidden="true" tabindex="-1"></a>Le modèle est entraîné sur **96 images** et validé sur **24 images**. Il atteint une **accuracy de validation de 1,00** et une <span class="in">`validation_loss`</span> finale très faible lors des exécutions Docker du projet. Ce score est cohérent avec la simplicité du problème visuel utilisé comme démonstrateur. Il valide la chaîne TensorFlow, mais ne constitue pas encore un résultat métier sur des documents éducatifs réels.</span>
+<span id="cb14-316"><a href="#cb14-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-317"><a href="#cb14-317" aria-hidden="true" tabindex="-1"></a><span class="fu">### Travaux Pratiques de Vision par Ordinateur (CNN)</span></span>
+<span id="cb14-318"><a href="#cb14-318" aria-hidden="true" tabindex="-1"></a>Les sorties de cette branche sont exportées dans <span class="in">`data/processed/tp4_cnn_history.csv`</span>, <span class="in">`data/processed/tp4_cnn_metrics.csv`</span> et <span class="in">`data/processed/tp4_cnn_predictions.csv`</span>, ainsi que dans deux figures du dossier <span class="in">`report/assets`</span>.</span>
+<span id="cb14-319"><a href="#cb14-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-320"><a href="#cb14-320" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb14-321"><a href="#cb14-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-322"><a href="#cb14-322" aria-hidden="true" tabindex="-1"></a><span class="fu"># Évaluation Métrique et Validation {#sec-evaluation}</span></span>
+<span id="cb14-323"><a href="#cb14-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-324"><a href="#cb14-324" aria-hidden="true" tabindex="-1"></a><span class="fu">## Stratégie de Validation</span></span>
+<span id="cb14-325"><a href="#cb14-325" aria-hidden="true" tabindex="-1"></a>La validation de la branche tabulaire repose ici sur un protocole en deux temps. D'abord, les modèles sont comparés par **validation croisée stratifiée à 5 plis** sur l'échantillon d'entraînement, ce qui permet d'observer la stabilité des métriques sur plusieurs découpages. Ensuite, le modèle retenu est réévalué sur un **jeu de test hold-out stratifié 80/20**, conservé à l'écart de la phase de sélection.</span>
+<span id="cb14-326"><a href="#cb14-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-327"><a href="#cb14-327" aria-hidden="true" tabindex="-1"></a>Ce choix est cohérent avec le jeu UCI harmonisé par défaut, qui agrège des informations d'inscription et de performance sur les deux premiers semestres au sein d'un même établissement. Dans un cadre réel multi-cohortes, il faudrait néanmoins renforcer encore le protocole en privilégiant un découpage chronologique, par cohorte ou par groupe pédagogique afin d'éviter toute fuite d'information entre périodes d'observation.</span>
+<span id="cb14-328"><a href="#cb14-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-329"><a href="#cb14-329" aria-hidden="true" tabindex="-1"></a>Pour la branche CNN, le démonstrateur actuel repose sur un hold-out 80/20. Dans un contexte éducatif réel, cette brique devra être évaluée soit par validation croisée, soit sur un jeu de documents réellement séparé par session, matière ou promotion.</span>
+<span id="cb14-330"><a href="#cb14-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-331"><a href="#cb14-331" aria-hidden="true" tabindex="-1"></a><span class="fu">## Validation Croisée Stratifiée</span></span>
+<span id="cb14-332"><a href="#cb14-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-333"><a href="#cb14-333" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Modèle <span class="pp">|</span> Accuracy CV <span class="pp">|</span> Recall CV <span class="pp">|</span> F1 CV <span class="pp">|</span> ROC-AUC CV <span class="pp">|</span></span>
+<span id="cb14-334"><a href="#cb14-334" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---:|---:|---:|---:|</span></span>
+<span id="cb14-335"><a href="#cb14-335" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Baseline majoritaire <span class="pp">|</span> 0.679 <span class="pp">|</span> 0.000 <span class="pp">|</span> 0.000 <span class="pp">|</span> 0.500 <span class="pp">|</span></span>
+<span id="cb14-336"><a href="#cb14-336" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Régression logistique <span class="pp">|</span> 0.849 <span class="pp">|</span> 0.806 <span class="pp">|</span> 0.774 <span class="pp">|</span> 0.903 <span class="pp">|</span></span>
+<span id="cb14-337"><a href="#cb14-337" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Random Forest <span class="pp">|</span> 0.855 <span class="pp">|</span> 0.703 <span class="pp">|</span> 0.757 <span class="pp">|</span> 0.900 <span class="pp">|</span></span>
+<span id="cb14-338"><a href="#cb14-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-339"><a href="#cb14-339" aria-hidden="true" tabindex="-1"></a>La validation croisée confirme un arbitrage plus serré que sur la version synthétique du projet. La régression logistique reste la mieux alignée avec une logique d'alerte précoce, car elle maintient un **rappel moyen de 0,806** tout en conservant un **ROC-AUC de 0,903**. La forêt aléatoire est compétitive en accuracy moyenne (**0,855** contre **0,849**), mais son rappel moyen descend à **0,703**, ce qui reste moins favorable si l'objectif prioritaire est de détecter le maximum d'étudiants fragiles.</span>
+<span id="cb14-340"><a href="#cb14-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-341"><a href="#cb14-341" aria-hidden="true" tabindex="-1"></a><span class="fu">## Résultats et Interprétation</span></span>
+<span id="cb14-342"><a href="#cb14-342" aria-hidden="true" tabindex="-1"></a>Les métriques prioritaires sont la **précision**, le **rappel**, le **F1-score** et le **ROC-AUC**, car le coût d'une erreur n'est pas symétrique. Un faux négatif signifie qu'un étudiant à risque n'est pas détecté; un faux positif signifie qu'un étudiant reçoit un suivi inutile.</span>
+<span id="cb14-343"><a href="#cb14-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-344"><a href="#cb14-344" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Modèle <span class="pp">|</span> Accuracy <span class="pp">|</span> Rappel <span class="pp">|</span> F1-score <span class="pp">|</span> ROC-AUC <span class="pp">|</span></span>
+<span id="cb14-345"><a href="#cb14-345" aria-hidden="true" tabindex="-1"></a><span class="pp">|--------|--------:|--------:|--------:|--------:|</span></span>
+<span id="cb14-346"><a href="#cb14-346" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Baseline majoritaire <span class="pp">|</span> 0.679 <span class="pp">|</span> 0.000 <span class="pp">|</span> 0.000 <span class="pp">|</span> N/A <span class="pp">|</span></span>
+<span id="cb14-347"><a href="#cb14-347" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Régression logistique <span class="pp">|</span> 0.851 <span class="pp">|</span> 0.806 <span class="pp">|</span> 0.776 <span class="pp">|</span> 0.909 <span class="pp">|</span></span>
+<span id="cb14-348"><a href="#cb14-348" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Random Forest <span class="pp">|</span> 0.856 <span class="pp">|</span> 0.715 <span class="pp">|</span> 0.762 <span class="pp">|</span> 0.909 <span class="pp">|</span></span>
+<span id="cb14-349"><a href="#cb14-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-350"><a href="#cb14-350" aria-hidden="true" tabindex="-1"></a>Le résultat clé est que **la régression logistique reste le meilleur choix opérationnel** pour un système d'alerte précoce. Elle offre le meilleur rappel (**0,806**) tout en conservant un **ROC-AUC de 0,909**, ce qui signifie qu'elle détecte davantage d'étudiants à risque. La forêt aléatoire obtient une accuracy légèrement supérieure (**0,856**) ainsi qu'une précision plus élevée (**0,815**), mais son rappel (**0,715**) laisse échapper davantage d'étudiants fragiles.</span>
+<span id="cb14-351"><a href="#cb14-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-352"><a href="#cb14-352" aria-hidden="true" tabindex="-1"></a>Ce compromis est cohérent avec le métier: un système d'alerte précoce supporte souvent un rappel élevé, quitte à assumer davantage de faux positifs, parce que le coût d'une intervention pédagogique légère reste inférieur au coût d'un abandon non détecté.</span>
+<span id="cb14-353"><a href="#cb14-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-354"><a href="#cb14-354" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb14-355"><a href="#cb14-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-356"><a href="#cb14-356" aria-hidden="true" tabindex="-1"></a><span class="fu"># Data Storytelling et Communication {#sec-storytelling}</span></span>
+<span id="cb14-357"><a href="#cb14-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-358"><a href="#cb14-358" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tableau de Bord Interactif</span></span>
+<span id="cb14-359"><a href="#cb14-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-360"><a href="#cb14-360" aria-hidden="true" tabindex="-1"></a>Pour compléter les figures statiques du rapport, un tableau de bord interactif autonome a été ajouté au projet. Il rassemble dans une même interface les métriques du jeu de test, les résultats de validation croisée, les variables explicatives dominantes, les profils de risque par programme et une liste prioritaire d'étudiants à suivre.</span>
+<span id="cb14-361"><a href="#cb14-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-362"><a href="#cb14-362" aria-hidden="true" tabindex="-1"></a>::: {.content-visible when-format="html"}</span>
+<span id="cb14-363"><a href="#cb14-363" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">iframe</span></span>
+<span id="cb14-364"><a href="#cb14-364" aria-hidden="true" tabindex="-1"></a><span class="ot">  src</span><span class="op">=</span><span class="st">"assets/tp3_student_dashboard.html"</span></span>
+<span id="cb14-365"><a href="#cb14-365" aria-hidden="true" tabindex="-1"></a><span class="ot">  title</span><span class="op">=</span><span class="st">"Dashboard interactif du risque etudiant"</span></span>
+<span id="cb14-366"><a href="#cb14-366" aria-hidden="true" tabindex="-1"></a><span class="ot">  width</span><span class="op">=</span><span class="st">"100%"</span></span>
+<span id="cb14-367"><a href="#cb14-367" aria-hidden="true" tabindex="-1"></a><span class="ot">  height</span><span class="op">=</span><span class="st">"1600"</span></span>
+<span id="cb14-368"><a href="#cb14-368" aria-hidden="true" tabindex="-1"></a><span class="ot">  style</span><span class="op">=</span><span class="st">"border: 1px solid #d8dee4; border-radius: 12px; background: white;"</span></span>
+<span id="cb14-369"><a href="#cb14-369" aria-hidden="true" tabindex="-1"></a><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;</span></span>
+<span id="cb14-370"><a href="#cb14-370" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-371"><a href="#cb14-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-372"><a href="#cb14-372" aria-hidden="true" tabindex="-1"></a>::: {.content-visible unless-format="html"}</span>
+<span id="cb14-373"><a href="#cb14-373" aria-hidden="true" tabindex="-1"></a>Le tableau de bord interactif est disponible dans le fichier suivant: <span class="co">[</span><span class="ot">Dashboard interactif</span><span class="co">](assets/tp3_student_dashboard.html)</span>.</span>
+<span id="cb14-374"><a href="#cb14-374" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-375"><a href="#cb14-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-376"><a href="#cb14-376" aria-hidden="true" tabindex="-1"></a><span class="fu">## Matrice d'Action Pédagogique</span></span>
+<span id="cb14-377"><a href="#cb14-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-378"><a href="#cb14-378" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Niveau de risque <span class="pp">|</span> Signaux dominants <span class="pp">|</span> Action recommandée <span class="pp">|</span> Indicateur de suivi <span class="pp">|</span></span>
+<span id="cb14-379"><a href="#cb14-379" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|</span></span>
+<span id="cb14-380"><a href="#cb14-380" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Élevé <span class="pp">|</span> Assiduité en baisse, retard de remise, chute du contrôle continu <span class="pp">|</span> Entretien sous 7 jours, tutorat ciblé, revue du plan de charge <span class="pp">|</span> Retour d'assiduité, remise des travaux, évolution du contrôle continu <span class="pp">|</span></span>
+<span id="cb14-381"><a href="#cb14-381" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Modéré <span class="pp">|</span> Engagement LMS irrégulier, stress élevé, notes encore récupérables <span class="pp">|</span> Coaching méthodologique, point hebdomadaire, soutien organisationnel <span class="pp">|</span> Reprise des connexions, stabilisation des retards <span class="pp">|</span></span>
+<span id="cb14-382"><a href="#cb14-382" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Faible <span class="pp">|</span> Bon engagement et résultats stables <span class="pp">|</span> Suivi léger et prévention standard <span class="pp">|</span> Maintien de la dynamique académique <span class="pp">|</span></span>
+<span id="cb14-383"><a href="#cb14-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-384"><a href="#cb14-384" aria-hidden="true" tabindex="-1"></a><span class="fu">## Recommandations Stratégiques / Métier</span></span>
+<span id="cb14-385"><a href="#cb14-385" aria-hidden="true" tabindex="-1"></a>Les résultats suggèrent plusieurs pistes opérationnelles:</span>
+<span id="cb14-386"><a href="#cb14-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-387"><a href="#cb14-387" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>construire un score d'alerte précoce fondé sur les absences, les notes récentes, la participation et les retards de remise;</span>
+<span id="cb14-388"><a href="#cb14-388" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>segmenter les actions de prévention par profil étudiant afin de distinguer les difficultés académiques, sociales et organisationnelles;</span>
+<span id="cb14-389"><a href="#cb14-389" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>privilégier des modèles explicables et des tableaux de bord simples, pour que les équipes pédagogiques puissent justifier les interventions;</span>
+<span id="cb14-390"><a href="#cb14-390" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>relier l'analyse prédictive à des actions concrètes: tutorat, rendez-vous de suivi, aide méthodologique, soutien social ou adaptation de charge.</span>
+<span id="cb14-391"><a href="#cb14-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-392"><a href="#cb14-392" aria-hidden="true" tabindex="-1"></a><span class="fu">## Limites et Perspectives</span></span>
+<span id="cb14-393"><a href="#cb14-393" aria-hidden="true" tabindex="-1"></a>Le projet conserve plusieurs limites explicites:</span>
+<span id="cb14-394"><a href="#cb14-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-395"><a href="#cb14-395" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>le dataset tabulaire principal est public et réel, mais il reste **mono-institutionnel** et déjà agrégé, ce qui limite la généralisation immédiate à d'autres établissements;</span>
+<span id="cb14-396"><a href="#cb14-396" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>le schéma harmonisé du projet simplifie certaines variables originales de la source UCI afin de conserver une chaîne cohérente avec le fallback synthétique;</span>
+<span id="cb14-397"><a href="#cb14-397" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>les questions d'équité, de confidentialité et de biais socio-économiques devront être traitées explicitement avant tout usage réel;</span>
+<span id="cb14-398"><a href="#cb14-398" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>le modèle tabulaire n'a pas encore bénéficié d'une recherche systématique d'hyperparamètres ni d'une comparaison avec des modèles de boosting;</span>
+<span id="cb14-399"><a href="#cb14-399" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>la branche CNN repose pour l'instant sur un jeu d'images synthétiques simple, avant intégration de documents pédagogiques réels.</span>
+<span id="cb14-400"><a href="#cb14-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-401"><a href="#cb14-401" aria-hidden="true" tabindex="-1"></a>Les prolongements naturels sont donc la validation externe sur d'autres établissements ou cohortes, l'ajout de variables longitudinales par semestre ou par période d'évaluation, la comparaison entre régression logistique, Random Forest et gradient boosting, la mise en place d'un découpage plus strict par cohorte et l'ajout d'une source visuelle réelle pour remplacer la démonstration synthétique du CNN.</span>
+<span id="cb14-402"><a href="#cb14-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-403"><a href="#cb14-403" aria-hidden="true" tabindex="-1"></a><span class="fu">## Supports de Restitution</span></span>
+<span id="cb14-404"><a href="#cb14-404" aria-hidden="true" tabindex="-1"></a>La restitution finale s'appuie sur plusieurs supports complémentaires. Le rapport Quarto constitue le document central de synthèse et d'interprétation. Il est complété par un schéma Mermaid du pipeline de données, par des jeux intermédiaires et finaux exportés dans <span class="in">`data/processed`</span>, par un ensemble de figures produites dans <span class="in">`report/assets`</span>, ainsi que par un tableau de bord interactif HTML dédié à l'exploration métier. Cet agencement vise à assurer à la fois la lisibilité du raisonnement, la traçabilité des transformations et la cohérence entre les résultats chiffrés et leur interprétation métier.</span>
+<span id="cb14-405"><a href="#cb14-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-406"><a href="#cb14-406" aria-hidden="true" tabindex="-1"></a>Ce document dynamique a été compilé en Quarto <span class="co">[</span><span class="ot">@quarto2024</span><span class="co">]</span>.</span>
+<span id="cb14-407"><a href="#cb14-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-408"><a href="#cb14-408" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb14-409"><a href="#cb14-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-410"><a href="#cb14-410" aria-hidden="true" tabindex="-1"></a><span class="fu"># Bibliographie {.unnumbered}</span></span>
+<span id="cb14-411"><a href="#cb14-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-412"><a href="#cb14-412" aria-hidden="true" tabindex="-1"></a>::: {#refs}</span>
+<span id="cb14-413"><a href="#cb14-413" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+>>>>>>> d6cf6b7b07ff8028a7cc3aad9a1977e4da2ba5f3
 </div></div></div></div></div>
 </div> <!-- /content -->
 

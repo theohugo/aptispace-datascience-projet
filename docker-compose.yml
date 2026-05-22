@@ -54,4 +54,4 @@ services:
       - http.server
       - "8000"
       - --directory
-      - /workspace
+      - /workspace/report
