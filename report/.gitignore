@@ -11,6 +11,11 @@
 # Fichiers de notebooks compilés
 notebooks/*.qmd
 
+# Assets générés du rapport et du dashboard
+assets/*.html
+assets/*.png
+!assets/.gitkeep
+
 # Conserver les fichiers sources importants
 !rapport.qmd
 !sujet.qmd

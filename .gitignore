@@ -37,10 +37,18 @@ data/processed/*
 *_files/
 *_cache/
 
+# Livrables générés du projet
+log.md
+report/index.html
+report/presentation.html
+report/rapport.html
+report/rapport.pdf
+report/installation.html
+report/assets/*.html
+report/assets/*.png
+!report/assets/.gitkeep
+report/notebooks/*.qmd
+
 # Fichiers OS
 .DS_Store
 Thumbs.db
-
-*.pdf
-*.html
-!report/index.html
